@@ -1,20 +1,56 @@
 import json
 import librosa, numpy as np
 
+class Partition:
+    def __init__(self, position, length):
+        self.position = position
+        self.length = length
+
+# Generates a list of Parititions for the given track
+# In:
+# - num_of_partitions: how many partitions we want
+# - partition_length: the length of each partition
+# Out:
+# - partitions: list of partitions of the given track
+def generate_partitions(track, num_of_partitions, partition_length):
+    partitions = []
+    trackLength = int(track["length"])
+    
+    # figure out step size from usable amount of the track
+    # we don't want the partition to extend past the end of the track
+    usable_length = trackLength - partition_length
+    step_size = usable_length / (num_of_partitions - 1)
+    for i in range(num_of_partitions):
+        pos = i * step_size
+        partitions.append(Partition(pos, partition_length))
+    return partitions
+
+# Calculates the mel spectogram of several partitions of an audio file
+# In:
+# - track: loaded JSON from tracks.json
+# - partitions: list of Partition objects denoting which segments of the track to load
+# - target_width: desired width of the mel spectogram
+# Out:
+# - mels: list of calculated mel spectograms (maps 1:1 to partitions)
+def load_mels(track, partitions, target_width=938):
+    mels = []
+    for partition in partitions:
+        mels.append(load_mel(track,
+                             partition.position,
+                             partition.length,
+                             target_width))
+    return mels
+
 # Calculate the mel spectrogram of an audio file
 # In:
 # - track: loaded JSON from tracks.json
 # - target_width: desired width of the mel spectrogram
-def load_mel(track, target_width=938):
-    # calculate offset so we load a part of the song that's active
-    trackLength = int(track["length"])
-    offset = 60 if 60+10 < trackLength else max(trackLength/2-10, 0)
-
+def load_mel(track, offset, duration=10, target_width=938):
     # load 10 second segment of audio track at offset calculated above
     y, sr = librosa.load(path=track["path"],
                          sr=float(track["sampleRate"]),
                          offset=offset,
-                         duration=10)
+                         duration=duration)
     
     # compute and normalize mel spectogram
     mel = librosa.feature.melspectrogram(y=y,

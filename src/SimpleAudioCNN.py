@@ -24,16 +24,31 @@ class SimpleAudioCNN(nn.Module):
 def train_epoch(model, loader, optimizer, criterion):
     model.train()
     total_loss = 0
-    for x, y in loader:
+    for batch_idx, (x, y) in enumerate(loader):
+        # x shape: (batch_size, num_partitions, 1, height, width)
+        # reshape to: (batch_size * num_partitions, 1, height, width)
+        batch_size, num_partitions = x.shape[0], x.shape[1]
+        x = x.view(-1, x.shape[2], x.shape[3], x.shape[4])
+
         x, y = x.to(torch.device("cpu")), y.to(torch.device("cpu"))
 
         optimizer.zero_grad()
-        logits = model(x)
+        logits = model(x) # Shape: (batch_size * num_partitions, num_classes)
+
+        logits = logits.view(batch_size, num_partitions, -1).mean(dim=1) # Shape: (batch_size, num_classes)
+
         loss = criterion(logits, y)
         loss.backward()
         optimizer.step()
 
         total_loss += loss.item()
+
+        # Clean up memory and perform garbage collection every 10 batches
+        del x, y, logits, loss
+        if batch_idx % 10 == 0:
+            import gc
+            gc.collect()
+
     return total_loss / len(loader)
 
 def evaluate(model ,loader, criterion):
@@ -42,9 +57,18 @@ def evaluate(model ,loader, criterion):
     all_preds, all_labels = [], []
     with torch.no_grad():
         for x, y in loader:
+            # x shape: (batch_size, num_partitions, 1, height, width)
+            # reshape to: (batch_size * num_partitions, 1, height, width)
+            batch_size, num_partitions = x.shape[0], x.shape[1]
+            x = x.view(-1, x.shape[2], x.shape[3], x.shape[4])
+
             x, y = x.to(torch.device("cpu")), y.to(torch.device("cpu"))
 
-            logits = model(x)
+            logits = model(x) # Shape: (batch_size * num_partitions, num_classes)
+
+            # Reshape back and average across partitions
+            logits = logits.view(batch_size, num_partitions, -1).mean(dim=1)  # Shape: (batch_size, num_classes)
+
             loss = criterion(logits, y)
             total_loss += loss.item()
 
@@ -108,7 +132,7 @@ def save(model, base_path='D:\\projects\\music-ml\\out', filename='model.pth'):
             return numbered_filename
         counter += 1
 
-def train_eval_test_save_model(ds):
+def train_eval_test_save_model(ds:PlaylistDataset):
     # Train: 80%
     # Validate: 10%
     # Test: 10%
@@ -120,9 +144,10 @@ def train_eval_test_save_model(ds):
           f"Val Size: {val_size} | "
           f"Test Size: {test_size}")
 
-    train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
-    val_loader = DataLoader(val_ds, batch_size=32)
-    test_loader = DataLoader(test_ds, batch_size=32)
+    batch_size = 16
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_ds, batch_size=batch_size)
+    test_loader = DataLoader(test_ds, batch_size=batch_size)
 
     # prep model
     device = torch.device("cpu")
@@ -162,15 +187,24 @@ def train_eval_test_save_model(ds):
     saved_filename = save(model)
     print(f"Training complete! Model saved as: {saved_filename}")
 
-if __name__ == "__main__":
-    # Use this to train a new model
-    # train_eval_test_save_model()
-
-    ds = PlaylistDataset.from_json('D:\\projects\\music-ml\\out\\tracks.json')
-    tracksDB = ds.find_tracks("Riddim")
-
-    model = torch.load('D:\\projects\\music-ml\\out\\model.pth', weights_only=False)
-
+def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
+    tracksDB = ds.find_tracks(track_filter)
+    model = torch.load(model_path, weights_only=False)
     for trackJSON in tracksDB:
         result = predict(trackJSON, model, ds.playlists())
         print_results_table(trackJSON, result)
+
+if __name__ == "__main__":
+    ds = PlaylistDataset.from_json('D:\\projects\\music-ml\\out\\tracks.json')
+    ds.setPartitionConfig(num_of_partitions=5,
+                          partition_length=10)
+    
+    # Use this to predict a set of tracks using 
+    #   model_path = 'D:\\projects\\music-ml\\out\\model.pth'
+    #   track_filter = "Riddim"
+    #   predict_tracks(model_path, ds, track_filter)
+
+    # Use this to train a new model
+    train_eval_test_save_model(ds)
+    
+    
