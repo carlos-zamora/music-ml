@@ -1,6 +1,11 @@
 import xml.etree.ElementTree as ET, json
 from urllib.parse import unquote
 
+# Normalizes rekordbox file URLs/paths into local decoded paths.
+# In:
+# - path: raw path from rekordbox XML.
+# Out:
+# - normalized and URL-decoded file path.
 def normalize_filepath(path: str):
     if path.startswith("file://localhost/"):
         path = path.removeprefix("file://localhost/")
@@ -80,7 +85,7 @@ def parse_rekordbox(xmlPath, outJsonPath, allowedFolders):
                 'playlists': find_matching_playlists(id, playlists)
             })
     
-    with open(outJsonPath,'w') as f:
+    with open(outJsonPath,'w', encoding='utf-8') as f:
         outJson = {'tracks': tracks, 'playlists': playlists}
         json.dump(outJson, f, indent=2)
 

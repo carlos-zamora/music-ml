@@ -1,7 +1,15 @@
 import json
 import librosa, numpy as np
 
+DEFAULT_TARGET_WIDTH = 938
+DEFAULT_PARTITION_DURATION = 10
+DEFAULT_N_MELS = 128
+
 class Partition:
+    # Creates a segment descriptor for loading one section of audio.
+    # In:
+    # - position: offset in seconds where the segment starts.
+    # - length: duration in seconds for the segment.
     def __init__(self, position, length):
         self.position = position
         self.length = length
@@ -32,7 +40,7 @@ def generate_partitions(track, num_of_partitions, partition_length):
 # - target_width: desired width of the mel spectogram
 # Out:
 # - mels: list of calculated mel spectograms (maps 1:1 to partitions)
-def load_mels(track, partitions, target_width=938):
+def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH):
     mels = []
     for partition in partitions:
         mels.append(load_mel(track,
@@ -44,8 +52,10 @@ def load_mels(track, partitions, target_width=938):
 # Calculate the mel spectrogram of an audio file
 # In:
 # - track: loaded JSON from tracks.json
+# - offset: start time of the segment in seconds.
+# - duration: segment length in seconds.
 # - target_width: desired width of the mel spectrogram
-def load_mel(track, offset, duration=10, target_width=938):
+def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DEFAULT_TARGET_WIDTH):
     # load 10 second segment of audio track at offset calculated above
     y, sr = librosa.load(path=track["path"],
                          sr=float(track["sampleRate"]),
@@ -55,7 +65,7 @@ def load_mel(track, offset, duration=10, target_width=938):
     # compute and normalize mel spectogram
     mel = librosa.feature.melspectrogram(y=y,
                                          sr=sr,
-                                         n_mels=128,
+                                         n_mels=DEFAULT_N_MELS,
                                          n_fft=2048,
                                          hop_length=512)
     mel_db = librosa.power_to_db(mel, ref=np.max)

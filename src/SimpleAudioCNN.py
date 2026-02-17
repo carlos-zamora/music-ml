@@ -8,6 +8,9 @@ from PlaylistDataset import PlaylistDataset
 from load_mel import load_mel
 
 class SimpleAudioCNN(nn.Module):
+    # Defines a simple CNN for mel-spectrogram multi-label classification.
+    # In:
+    # - num_classes: number of playlist labels to predict.
     def __init__(self, num_classes):
         super().__init__()
         self.conv = nn.Sequential(
@@ -17,10 +20,23 @@ class SimpleAudioCNN(nn.Module):
         )
         self.head = nn.Sequential(nn.Flatten(), nn.Dropout(0.3), nn.Linear(128, num_classes))
     
+    # Runs a forward pass through the network.
+    # In:
+    # - x: tensor shaped (batch, 1, mel_height, mel_width).
+    # Out:
+    # - logits shaped (batch, num_classes).
     def forward(self,x):
         return self.head(self.conv(x))
     
 
+# Trains the model for one epoch.
+# In:
+# - model: model to train.
+# - loader: training DataLoader.
+# - optimizer: optimizer for model parameters.
+# - criterion: loss function.
+# Out:
+# - average training loss.
 def train_epoch(model, loader, optimizer, criterion):
     model.train()
     total_loss = 0
@@ -51,6 +67,13 @@ def train_epoch(model, loader, optimizer, criterion):
 
     return total_loss / len(loader)
 
+# Evaluates the model on a validation/test split.
+# In:
+# - model: model to evaluate.
+# - loader: evaluation DataLoader.
+# - criterion: loss function.
+# Out:
+# - tuple(loss, micro_f1).
 def evaluate(model ,loader, criterion):
     model.eval()
     total_loss = 0
@@ -83,6 +106,13 @@ def evaluate(model ,loader, criterion):
     f1 = f1_score(all_labels, all_preds, average="micro")
     return total_loss / len(loader), f1
 
+# Predicts playlist probabilities for one track.
+# In:
+# - trackJson: single track JSON object from tracks.json.
+# - model: trained model instance.
+# - labels: ordered playlist labels.
+# Out:
+# - sorted list of (playlist, probability), descending by probability.
 def predict(trackJson, model, labels):
     model.eval()
     mel = load_mel(trackJson)
@@ -95,8 +125,11 @@ def predict(trackJson, model, labels):
     results = [(labels[i], float(p)) for i, p in enumerate(probs)]
     return sorted(results, key=lambda x: -x[1])
 
+# Prints prediction scores in a simple table.
+# In:
+# - trackJSON: track metadata used for title/artist.
+# - results: list of (playlist, probability) tuples.
 def print_results_table(trackJSON, results):
-    """Print prediction results in a simple table format"""
     print(f"\nPrediction Results for: {trackJSON['name']}")
     print(f"\tBy: {trackJSON['artist']}")
     print("=" * 50)
@@ -107,6 +140,10 @@ def print_results_table(trackJSON, results):
     print("=" * 50)
 
 # Save the model with automatic filename fallback - model.pth, model_1.pth, model2.pth, etc.
+# In:
+# - model: trained model to save.
+# - base_path: output directory.
+# - filename: preferred output filename.
 # Out:
 # - the filename
 def save(model, base_path='D:\\projects\\music-ml\\out', filename='model.pth'):
@@ -132,6 +169,9 @@ def save(model, base_path='D:\\projects\\music-ml\\out', filename='model.pth'):
             return numbered_filename
         counter += 1
 
+# Splits dataset, trains model, evaluates test set, then saves model.
+# In:
+# - ds: dataset of track features and playlist labels.
 def train_eval_test_save_model(ds:PlaylistDataset):
     # Train: 80%
     # Validate: 10%
@@ -187,6 +227,11 @@ def train_eval_test_save_model(ds:PlaylistDataset):
     saved_filename = save(model)
     print(f"Training complete! Model saved as: {saved_filename}")
 
+# Runs prediction for tracks matching a regex filter.
+# In:
+# - model_path: path to a saved model file.
+# - ds: dataset for track search and labels.
+# - track_filter: regex filter for track names.
 def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     tracksDB = ds.find_tracks(track_filter)
     model = torch.load(model_path, weights_only=False)
