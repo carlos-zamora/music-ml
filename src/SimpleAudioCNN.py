@@ -1,3 +1,4 @@
+import argparse
 from PlaylistDataset import PlaylistDataset
 from evaluation import (
     EvalConfig,
@@ -149,7 +150,10 @@ def write_single_split_reports(labels, val_details, test_details, out_root='D:\\
 # Splits dataset, trains model, evaluates test set, then saves model.
 # In:
 # - ds: dataset of track features and playlist labels.
-def train_eval_test_save_model(ds:PlaylistDataset):
+# - epochs: number of training epochs.
+# - batch_size: dataloader batch size.
+# - report_dir: output directory for evaluation artifacts.
+def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int=16, report_dir:str='out/eval'):
     # Train: 80%
     # Validate: 10%
     # Test: 10%
@@ -161,7 +165,6 @@ def train_eval_test_save_model(ds:PlaylistDataset):
           f"Val Size: {val_size} | "
           f"Test Size: {test_size}")
 
-    batch_size = 16
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_ds, batch_size=batch_size)
     test_loader = DataLoader(test_ds, batch_size=batch_size)
@@ -174,14 +177,13 @@ def train_eval_test_save_model(ds:PlaylistDataset):
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     # training
-    EPOCHS = 20
     print("Starting training...")
     training_start_time = time.time()
     val_details = None
-    
-    for epoch in range(EPOCHS):
+
+    for epoch in range(epochs):
         epoch_start_time = time.time()
-        
+
         train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device)
         val_details = evaluate(
             model,
@@ -195,20 +197,20 @@ def train_eval_test_save_model(ds:PlaylistDataset):
         val_loss = val_details["loss"]
         val_f1 = val_details["metrics"]["micro_f1"]
         val_macro_f1 = val_details["metrics"]["macro_f1"]
-        
+
         epoch_time = time.time() - epoch_start_time
         ds.resetCount()
-        
-        print(f"Epoch {epoch+1}/{EPOCHS} | "
+
+        print(f"Epoch {epoch+1}/{epochs} | "
               f"Train Loss: {train_loss:.4f} | "
               f"Val Loss: {val_loss:.4f} | "
               f"Val Micro F1: {val_f1:.4f} | "
               f"Val Macro F1: {val_macro_f1:.4f} | "
               f"Time: {epoch_time:.2f}s")
-    
+
     total_training_time = time.time() - training_start_time
     print(f"\nTraining completed in {total_training_time:.2f} seconds ({total_training_time/60:.2f} minutes)")
-    
+
     print("\nEvaluating on test set...")
     test_start_time = time.time()
     test_details = evaluate(
@@ -226,9 +228,9 @@ def train_eval_test_save_model(ds:PlaylistDataset):
     test_time = time.time() - test_start_time
     print(f"Test Loss: {test_loss:.4f}, Test Micro F1: {test_f1:.4f}, Test Macro F1: {test_macro_f1:.4f} | Test Time: {test_time:.2f}s")
 
-    reports_dir = write_single_split_reports(labels, val_details, test_details)
+    reports_dir = write_single_split_reports(labels, val_details, test_details, out_root=report_dir)
     print(f"Evaluation reports saved to: {reports_dir}")
-    
+
     # Save the trained model
     saved_filename = save(model)
     print(f"Training complete! Model saved as: {saved_filename}")
@@ -246,24 +248,60 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
         print_results_table(trackJSON, result)
 
 if __name__ == "__main__":
-    ds = PlaylistDataset.from_json('D:\\projects\\music-ml\\out\\tracks.json')
-    ds.setPartitionConfig(num_of_partitions=5,
-                          partition_length=10)
-    
-    # Use this to predict a set of tracks using 
-    #   model_path = 'D:\\projects\\music-ml\\out\\model.pth'
-    #   track_filter = "Riddim"
-    #   predict_tracks(model_path, ds, track_filter)
+    parent = argparse.ArgumentParser(add_help=False)
+    parent.add_argument("--tracks", default="out/tracks.json")
+    parent.add_argument("--num-partitions", type=int, default=5)
+    parent.add_argument("--partition-length", type=int, default=10)
 
-    # Use this to train a new model with single train/val/test split
-    # train_eval_test_save_model(ds)
+    parser = argparse.ArgumentParser(parents=[parent])
+    sub = parser.add_subparsers(dest="subcommand", required=True)
 
-    # Use this to run k-fold cross-validation with threshold tuning + recall guard.
-    kfold_summary = run_kfold_evaluation(
-        model_factory=lambda num_classes: SimpleAudioCNN(num_classes),
-        ds=ds,
-        config=EvalConfig(),
-        device=torch.device("cpu"),
-    )
-    
-    
+    p_kfold = sub.add_parser("kfold", parents=[parent])
+    p_kfold.add_argument("--epochs", type=int, default=5)
+    p_kfold.add_argument("--n-splits", type=int, default=3)
+    p_kfold.add_argument("--batch-size", type=int, default=16)
+    p_kfold.add_argument("--learning-rate", type=float, default=1e-3)
+    p_kfold.add_argument("--random-seed", type=int, default=42)
+    p_kfold.add_argument("--recall-guard-min", type=float, default=0.65)
+    p_kfold.add_argument("--report-dir", default="out/eval")
+
+    p_train = sub.add_parser("train", parents=[parent])
+    p_train.add_argument("--epochs", type=int, default=20)
+    p_train.add_argument("--batch-size", type=int, default=16)
+    p_train.add_argument("--report-dir", default="out/eval")
+
+    p_pred = sub.add_parser("predict", parents=[parent])
+    p_pred.add_argument("--model-path", required=True)
+    p_pred.add_argument("--track-filter", required=True)
+
+    args = parser.parse_args()
+
+    ds = PlaylistDataset.from_json(args.tracks)
+    ds.setPartitionConfig(num_of_partitions=args.num_partitions,
+                          partition_length=args.partition_length)
+
+    if args.subcommand == "kfold":
+        config = EvalConfig(
+            epochs=args.epochs,
+            n_splits=args.n_splits,
+            batch_size=args.batch_size,
+            learning_rate=args.learning_rate,
+            random_seed=args.random_seed,
+            recall_guard_min=args.recall_guard_min,
+            report_dir=args.report_dir,
+        )
+        run_kfold_evaluation(
+            model_factory=lambda num_classes: SimpleAudioCNN(num_classes),
+            ds=ds,
+            config=config,
+            device=torch.device("cpu"),
+        )
+    elif args.subcommand == "train":
+        train_eval_test_save_model(
+            ds,
+            epochs=args.epochs,
+            batch_size=args.batch_size,
+            report_dir=args.report_dir,
+        )
+    elif args.subcommand == "predict":
+        predict_tracks(args.model_path, ds, args.track_filter)

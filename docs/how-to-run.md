@@ -30,9 +30,13 @@ python -c "import json; j=json.load(open('out/tracks.json','r',encoding='utf-8')
 - Run:
 
 ```powershell
-python src\SimpleAudioCNN.py
+python src/SimpleAudioCNN.py train
 ```
 
+- Options (all optional):
+  - `--epochs` (default: `20`)
+  - `--batch-size` (default: `16`)
+  - `--report-dir` (default: `out/eval`)
 - Outputs:
   - Model file in `out\` (`model.pth`, `model_1.pth`, etc.)
   - Evaluation reports in `out\eval\<timestamp>_single\`
@@ -40,12 +44,23 @@ python src\SimpleAudioCNN.py
     - `per_playlist_metrics.csv` (includes TP/FP/TN/FN per playlist)
 
 ## 5) Optional: K-Fold Evaluation
-- In `src/SimpleAudioCNN.py`, uncomment the `run_kfold_evaluation(...)` block in `__main__`.
-- Run again:
+- Run:
 
 ```powershell
-python src\SimpleAudioCNN.py
+python src/SimpleAudioCNN.py kfold
 ```
+
+- Options (all optional):
+
+| Option | Default | Description |
+|---|---|---|
+| `--epochs` | `5` | Training epochs per fold |
+| `--n-splits` | `3` | Number of CV folds |
+| `--batch-size` | `16` | Dataloader batch size |
+| `--learning-rate` | `1e-3` | Optimizer learning rate |
+| `--random-seed` | `42` | Seed for deterministic splits |
+| `--recall-guard-min` | `0.65` | Minimum recall for guarded playlists |
+| `--report-dir` | `out/eval` | Output directory for reports |
 
 - K-fold outputs go to `out\eval\<timestamp>\`.
 
@@ -136,9 +151,14 @@ How to use it:
 - Compare `validation` vs `test` rows (single split) or per-fold vs `aggregate` rows (k-fold) to spot instability.
 
 ## 6) Predict Playlists for Specific Tracks
-- In `src/SimpleAudioCNN.py`, comment the training call and use:
-  - `predict_tracks(model_path, ds, track_filter)`
-- Example filter: `"Riddim"`.
+- Run:
+
+```powershell
+python src/SimpleAudioCNN.py predict --model-path out/model.pth --track-filter "Riddim"
+```
+
+- `--model-path`: path to a saved `.pth` model file (required)
+- `--track-filter`: regex string matched against track names (required)
 
 ## 7) Typical Update Cycle
 1. Export Rekordbox XML.
