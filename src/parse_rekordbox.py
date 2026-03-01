@@ -1,5 +1,5 @@
-import xml.etree.ElementTree as ET, json
 from urllib.parse import unquote
+import xml.etree.ElementTree as ET, json
 
 # Normalizes rekordbox file URLs/paths into local decoded paths.
 # In:

@@ -1,0 +1,148 @@
+# How To Run
+
+Use this workflow from `D:\projects\music-ml` when you add new Rekordbox music.
+
+## 1) Export or Update Rekordbox XML
+- In Rekordbox, make sure your latest collection/playlists are included in your XML export.
+- Confirm the XML file path used in `src/parse_rekordbox.py` (`rekordboxXMLPath`) is correct.
+
+## 2) Register New Music Into This Project
+- In `src/parse_rekordbox.py`, check:
+  - `rekordboxXMLPath`
+  - `outJSONPath`
+  - `allowedFolders` (which top-level folders to import)
+- Run:
+
+```powershell
+python src\parse_rekordbox.py
+```
+
+- This regenerates `out/tracks.json` with updated tracks and playlist memberships.
+
+## 3) Quick Dataset Sanity Check
+- Optional: check number of tracks and playlists
+
+```powershell
+python -c "import json; j=json.load(open('out/tracks.json','r',encoding='utf-8')); print('tracks=',len(j['tracks']),'playlists=',len(j['playlists']))"
+```
+
+## 4) Train Model (Single Split Default Path)
+- Run:
+
+```powershell
+python src\SimpleAudioCNN.py
+```
+
+- Outputs:
+  - Model file in `out\` (`model.pth`, `model_1.pth`, etc.)
+  - Evaluation reports in `out\eval\<timestamp>_single\`
+    - `summary.json`
+    - `per_playlist_metrics.csv` (includes TP/FP/TN/FN per playlist)
+
+## 5) Optional: K-Fold Evaluation
+- In `src/SimpleAudioCNN.py`, uncomment the `run_kfold_evaluation(...)` block in `__main__`.
+- Run again:
+
+```powershell
+python src\SimpleAudioCNN.py
+```
+
+- K-fold outputs go to `out\eval\<timestamp>\`.
+
+## 5a) Understanding Evaluation Output
+
+Both single-split and k-fold runs write evaluation artifacts under `out\eval\...`.
+
+### `summary.json`
+
+This file contains the high-level run summary.
+
+- In a single-split run (`..._single\summary.json`), the structure is:
+  - `mode`: identifies the run type (`"single_split"`). Expected value here is fixed text.
+  - `labels`: ordered list of playlist labels used by the model. Informational only.
+  - `validation`:
+    - `loss`: model error from the loss function. Range: `>= 0`. Lower is better.
+    - `metrics`:
+      - `micro_f1`: F1 across all label decisions pooled together. Range: `0..1`. Higher is better.
+      - `macro_f1`: average F1 across playlists, weighting each playlist equally. Range: `0..1`. Higher is better.
+      - `micro_precision`: fraction of predicted positives that were correct across all labels pooled together. Range: `0..1`. Higher is better.
+      - `macro_precision`: average precision across playlists. Range: `0..1`. Higher is better.
+      - `micro_recall`: fraction of true positives found across all labels pooled together. Range: `0..1`. Higher is better.
+      - `macro_recall`: average recall across playlists. Range: `0..1`. Higher is better.
+  - `test`:
+    - `loss`: test-set loss. Range: `>= 0`. Lower is better.
+    - `metrics`: same metric fields as validation.
+
+- In a k-fold run (`<timestamp>\summary.json`), the structure is broader:
+  - `config`: evaluation settings used for the run.
+    - includes fold count, epoch count, batch size, threshold tuning settings, recall guard, and output directory. Informational only.
+  - `guarded_playlists`: the top playlists currently protected by the recall guard. Informational only.
+  - `folds`: one entry per fold
+    - `fold`: fold number. Informational only.
+    - `train_size`: number of training tracks in that fold. Informational only.
+    - `val_size`: number of validation tracks in that fold. Informational only.
+    - `test_size`: number of test tracks in that fold. Informational only.
+    - `thresholds`: per-playlist thresholds selected for that fold. Each value is typically `0..1`; lower predicts more often, higher predicts more conservatively.
+    - `validation`:
+      - `epoch`: best validation epoch selected. Range: positive integer. Informational only.
+      - `train_loss`: training loss at selected epoch. Range: `>= 0`. Lower is better.
+      - `val_loss`: validation loss at selected epoch. Range: `>= 0`. Lower is better.
+      - `metrics`: validation metrics
+      - `per_playlist`: per-playlist validation stats. See CSV column meanings below.
+      - `guard_satisfied`: whether recall guard passed. `true` is better.
+      - `guard_recalls`: recall values for guarded playlists. Each value is `0..1`; higher is better.
+    - `test`:
+      - `loss`: test loss for that fold. Range: `>= 0`. Lower is better.
+      - `metrics`
+  - `aggregate_metrics`: mean and standard deviation across folds for:
+    - `micro_f1`: mean/std of pooled F1 across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+    - `macro_f1`: mean/std of equal-weighted playlist F1 across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+    - `micro_precision`: mean/std of pooled precision across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+    - `macro_precision`: mean/std of average playlist precision across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+    - `micro_recall`: mean/std of pooled recall across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+    - `macro_recall`: mean/std of average playlist recall across folds. Mean range: `0..1`; higher is better. Std range: `>= 0`; lower is better.
+
+### `per_playlist_metrics.csv`
+
+This file contains one row per playlist evaluation result.
+
+- In a single-split run:
+  - rows are tagged by `fold`:
+    - `validation`
+    - `test`
+
+- In a k-fold run:
+  - rows are tagged by `fold`:
+    - numeric fold index (`1`, `2`, etc.) for per-fold test results
+    - `aggregate` for totals combined across all folds
+
+Columns:
+- `playlist`: playlist name. Informational only.
+- `fold`: which split/fold this row belongs to. Informational only.
+- `support`: number of ground-truth positive tracks for that playlist in the evaluated split. Range: integer `>= 0`. More support means the metric is more statistically stable.
+- `threshold`: decision threshold used for that playlist. Typical range: `0..1`. Lower predicts more often; higher predicts more conservatively.
+- `precision`: `TP / (TP + FP)`. Of the songs predicted into the playlist, how many were correct. Range: `0..1`. Higher is better.
+- `recall`: `TP / (TP + FN)`. Of the songs that belong in the playlist, how many the model found. Range: `0..1`. Higher is better.
+- `f1`: harmonic mean of precision and recall. Range: `0..1`. Higher is better.
+- `tp`: true positives. Correct positive predictions. Range: integer `>= 0`. Higher is better.
+- `fp`: false positives. Songs incorrectly predicted into the playlist. Range: integer `>= 0`. Lower is better.
+- `tn`: true negatives. Correct negative predictions. Range: integer `>= 0`. Higher is generally better, but less useful than `tp/fp/fn` when classes are imbalanced.
+- `fn`: false negatives. Songs that belonged in the playlist but were missed. Range: integer `>= 0`. Lower is better.
+
+How to use it:
+- High `fp` means the model is over-predicting that playlist.
+- High `fn` means the model is missing songs that belong in that playlist.
+- Low `support` means the playlist is sparse, so metric swings may be noisy.
+- Compare `validation` vs `test` rows (single split) or per-fold vs `aggregate` rows (k-fold) to spot instability.
+
+## 6) Predict Playlists for Specific Tracks
+- In `src/SimpleAudioCNN.py`, comment the training call and use:
+  - `predict_tracks(model_path, ds, track_filter)`
+- Example filter: `"Riddim"`.
+
+## 7) Typical Update Cycle
+1. Export Rekordbox XML.
+2. Run `parse_rekordbox.py`.
+3. Train/evaluate.
+4. Compare `out\eval` reports to prior runs.
+5. Keep best model in `out\` and track notes in GitHub issues.

@@ -1,10 +1,21 @@
+from PlaylistDataset import PlaylistDataset
+from evaluation import (
+    EvalConfig,
+    evaluate,
+    get_metric_definitions,
+    run_kfold_evaluation,
+    train_epoch,
+    write_eval_schema_json,
+    write_eval_summary_json,
+    write_per_playlist_csv,
+)
+from torch.utils.data import DataLoader, random_split
+from datetime import datetime
+from pathlib import Path
+import os
+import time
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, random_split
-from sklearn.metrics import f1_score
-import time
-import os
-from PlaylistDataset import PlaylistDataset
 from load_mel import load_mel
 
 class SimpleAudioCNN(nn.Module):
@@ -28,83 +39,6 @@ class SimpleAudioCNN(nn.Module):
     def forward(self,x):
         return self.head(self.conv(x))
     
-
-# Trains the model for one epoch.
-# In:
-# - model: model to train.
-# - loader: training DataLoader.
-# - optimizer: optimizer for model parameters.
-# - criterion: loss function.
-# Out:
-# - average training loss.
-def train_epoch(model, loader, optimizer, criterion):
-    model.train()
-    total_loss = 0
-    for batch_idx, (x, y) in enumerate(loader):
-        # x shape: (batch_size, num_partitions, 1, height, width)
-        # reshape to: (batch_size * num_partitions, 1, height, width)
-        batch_size, num_partitions = x.shape[0], x.shape[1]
-        x = x.view(-1, x.shape[2], x.shape[3], x.shape[4])
-
-        x, y = x.to(torch.device("cpu")), y.to(torch.device("cpu"))
-
-        optimizer.zero_grad()
-        logits = model(x) # Shape: (batch_size * num_partitions, num_classes)
-
-        logits = logits.view(batch_size, num_partitions, -1).mean(dim=1) # Shape: (batch_size, num_classes)
-
-        loss = criterion(logits, y)
-        loss.backward()
-        optimizer.step()
-
-        total_loss += loss.item()
-
-        # Clean up memory and perform garbage collection every 10 batches
-        del x, y, logits, loss
-        if batch_idx % 10 == 0:
-            import gc
-            gc.collect()
-
-    return total_loss / len(loader)
-
-# Evaluates the model on a validation/test split.
-# In:
-# - model: model to evaluate.
-# - loader: evaluation DataLoader.
-# - criterion: loss function.
-# Out:
-# - tuple(loss, micro_f1).
-def evaluate(model ,loader, criterion):
-    model.eval()
-    total_loss = 0
-    all_preds, all_labels = [], []
-    with torch.no_grad():
-        for x, y in loader:
-            # x shape: (batch_size, num_partitions, 1, height, width)
-            # reshape to: (batch_size * num_partitions, 1, height, width)
-            batch_size, num_partitions = x.shape[0], x.shape[1]
-            x = x.view(-1, x.shape[2], x.shape[3], x.shape[4])
-
-            x, y = x.to(torch.device("cpu")), y.to(torch.device("cpu"))
-
-            logits = model(x) # Shape: (batch_size * num_partitions, num_classes)
-
-            # Reshape back and average across partitions
-            logits = logits.view(batch_size, num_partitions, -1).mean(dim=1)  # Shape: (batch_size, num_classes)
-
-            loss = criterion(logits, y)
-            total_loss += loss.item()
-
-            probs = torch.sigmoid(logits)
-            preds = (probs > 0.5).float()
-
-            all_preds.append(preds.cpu())
-            all_labels.append(y.cpu())
-    all_preds = torch.cat(all_preds).numpy()
-    all_labels = torch.cat(all_labels).numpy()
-
-    f1 = f1_score(all_labels, all_preds, average="micro")
-    return total_loss / len(loader), f1
 
 # Predicts playlist probabilities for one track.
 # In:
@@ -169,6 +103,49 @@ def save(model, base_path='D:\\projects\\music-ml\\out', filename='model.pth'):
             return numbered_filename
         counter += 1
 
+# Writes evaluation artifacts for a single split run.
+# In:
+# - labels: ordered playlist names.
+# - val_details: validation detailed evaluation payload.
+# - test_details: test detailed evaluation payload.
+# - out_root: output root folder path.
+# Out:
+# - path to report directory.
+def write_single_split_reports(labels, val_details, test_details, out_root='D:\\projects\\music-ml\\out\\eval'):
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S_single")
+    out_dir = Path(out_root) / run_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_eval_schema_json(out_dir / "summary.schema.json")
+
+    summary = {
+        "$schema": "./summary.schema.json",
+        "mode": "single_split",
+        "labels": labels,
+        "metric_definitions": get_metric_definitions(),
+        "validation": {
+            "loss": val_details["loss"],
+            "metrics": val_details["metrics"],
+        },
+        "test": {
+            "loss": test_details["loss"],
+            "metrics": test_details["metrics"],
+        },
+    }
+    write_eval_summary_json(out_dir / "summary.json", summary)
+
+    rows = []
+    for row in val_details["per_playlist"]:
+        csv_row = dict(row)
+        csv_row["fold"] = "validation"
+        rows.append(csv_row)
+    for row in test_details["per_playlist"]:
+        csv_row = dict(row)
+        csv_row["fold"] = "test"
+        rows.append(csv_row)
+    write_per_playlist_csv(out_dir / "per_playlist_metrics.csv", rows)
+    return str(out_dir)
+
+
 # Splits dataset, trains model, evaluates test set, then saves model.
 # In:
 # - ds: dataset of track features and playlist labels.
@@ -191,7 +168,8 @@ def train_eval_test_save_model(ds:PlaylistDataset):
 
     # prep model
     device = torch.device("cpu")
-    model = SimpleAudioCNN(len(ds.playlists())).to(device)
+    labels = ds.playlists()
+    model = SimpleAudioCNN(len(labels)).to(device)
     criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
@@ -199,19 +177,33 @@ def train_eval_test_save_model(ds:PlaylistDataset):
     EPOCHS = 20
     print("Starting training...")
     training_start_time = time.time()
+    val_details = None
     
     for epoch in range(EPOCHS):
         epoch_start_time = time.time()
         
-        train_loss = train_epoch(model, train_loader, optimizer, criterion)
-        val_loss, val_f1 = evaluate(model, val_loader, criterion)
+        train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device)
+        val_details = evaluate(
+            model,
+            val_loader,
+            criterion,
+            labels=labels,
+            thresholds=0.5,
+            return_details=True,
+            device=device,
+        )
+        val_loss = val_details["loss"]
+        val_f1 = val_details["metrics"]["micro_f1"]
+        val_macro_f1 = val_details["metrics"]["macro_f1"]
         
         epoch_time = time.time() - epoch_start_time
+        ds.resetCount()
         
         print(f"Epoch {epoch+1}/{EPOCHS} | "
               f"Train Loss: {train_loss:.4f} | "
               f"Val Loss: {val_loss:.4f} | "
-              f"Val F1: {val_f1:.4f} | "
+              f"Val Micro F1: {val_f1:.4f} | "
+              f"Val Macro F1: {val_macro_f1:.4f} | "
               f"Time: {epoch_time:.2f}s")
     
     total_training_time = time.time() - training_start_time
@@ -219,9 +211,23 @@ def train_eval_test_save_model(ds:PlaylistDataset):
     
     print("\nEvaluating on test set...")
     test_start_time = time.time()
-    test_loss, test_f1 = evaluate(model, test_loader, criterion)
+    test_details = evaluate(
+        model,
+        test_loader,
+        criterion,
+        labels=labels,
+        thresholds=0.5,
+        return_details=True,
+        device=device,
+    )
+    test_loss = test_details["loss"]
+    test_f1 = test_details["metrics"]["micro_f1"]
+    test_macro_f1 = test_details["metrics"]["macro_f1"]
     test_time = time.time() - test_start_time
-    print(f"Test Loss: {test_loss:.4f}, Test F1: {test_f1:.4f} | Test Time: {test_time:.2f}s")
+    print(f"Test Loss: {test_loss:.4f}, Test Micro F1: {test_f1:.4f}, Test Macro F1: {test_macro_f1:.4f} | Test Time: {test_time:.2f}s")
+
+    reports_dir = write_single_split_reports(labels, val_details, test_details)
+    print(f"Evaluation reports saved to: {reports_dir}")
     
     # Save the trained model
     saved_filename = save(model)
@@ -249,7 +255,15 @@ if __name__ == "__main__":
     #   track_filter = "Riddim"
     #   predict_tracks(model_path, ds, track_filter)
 
-    # Use this to train a new model
-    train_eval_test_save_model(ds)
+    # Use this to train a new model with single train/val/test split
+    # train_eval_test_save_model(ds)
+
+    # Use this to run k-fold cross-validation with threshold tuning + recall guard.
+    kfold_summary = run_kfold_evaluation(
+        model_factory=lambda num_classes: SimpleAudioCNN(num_classes),
+        ds=ds,
+        config=EvalConfig(),
+        device=torch.device("cpu"),
+    )
     
     

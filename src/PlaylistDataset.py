@@ -1,8 +1,8 @@
+from load_mel import generate_partitions, load_mels
+from torch.utils.data import Dataset
 import re
 import time
-from load_mel import generate_partitions, load_mels
 import torch, json
-from torch.utils.data import Dataset
 
 class PlaylistDataset(Dataset):
     # Initializes dataset state from parsed library JSON.
@@ -12,6 +12,9 @@ class PlaylistDataset(Dataset):
         # idx: simple track ID
         # val: track info JSON
         self.trackList = libraryJson['tracks']
+
+        # cache of track mel spectograms, maps 1:1 to trackList
+        self.mels = [None] * len(self.trackList)
 
         # idx: simple playlist ID
         # val: playlist name
@@ -72,6 +75,10 @@ class PlaylistDataset(Dataset):
         self.num_of_partitions = num_of_partitions
         self.partition_length = partition_length
     
+    # Resets the getCount tracker to 0.
+    def resetCount(self):
+        self.getCount = 0
+    
     # Loads features and labels for one track index.
     # In:
     # - i: track index in the dataset.
@@ -86,9 +93,14 @@ class PlaylistDataset(Dataset):
 
         print(f"\t[{self.getCount}] {trackInfo['name']}", end='')
 
-        # load track's mel spectograms
-        partitions = generate_partitions(trackInfo, self.num_of_partitions, self.partition_length)
-        mels = load_mels(trackInfo, partitions)
+        # load and cache track's mel spectograms
+        wasCached = True
+        mels = self.mels[i]
+        if mels is None:
+            partitions = generate_partitions(trackInfo, self.num_of_partitions, self.partition_length)
+            mels = load_mels(trackInfo, partitions)
+            self.mels[i] = mels
+            wasCached = False
 
         # generate tensors from mel spectograms
         melTensors = []
@@ -104,7 +116,10 @@ class PlaylistDataset(Dataset):
                 label[self._getPlaylistId(playlistName)] = 1.0
 
         time_span = time.time() - start_time
-        print(f"\t\t{time_span:.2f} seconds")
+        if wasCached:
+            print(f"\t\t{time_span:.2f} seconds (cached)")
+        else:
+            print(f"\t\t{time_span:.2f} seconds")
         return stacked_mels, label
 
 if __name__ == "__main__":

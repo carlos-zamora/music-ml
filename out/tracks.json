@@ -1821,7 +1821,7 @@
       "name": "Into Pieces (feat. Grabbitz) (Original Mix)",
       "artist": "Subtronics, Grabbitz",
       "path": "C:/Users/carlo/Music/_CentralizedLibrary/Into_Pieces_(feat._Grabbitz)_(Original_Mix)_Subtronics,_Grabbitz.aiff",
-      "bpm": "85.00",
+      "bpm": "170.00",
       "key": "10A",
       "length": "211",
       "sampleRate": "44100",
@@ -4884,6 +4884,7 @@
       "length": "188",
       "sampleRate": "44100",
       "playlists": [
+        "Riddim - Deep Dub",
         "Wubzstep"
       ]
     },
@@ -5325,6 +5326,7 @@
       "length": "185",
       "sampleRate": "44100",
       "playlists": [
+        "Riddim - High Hat",
         "Wubzstep"
       ]
     },
@@ -5352,6 +5354,7 @@
       "length": "221",
       "sampleRate": "44100",
       "playlists": [
+        "Riddim - High Hat",
         "Riddim - Wubz"
       ]
     },
@@ -5475,6 +5478,7 @@
       "length": "219",
       "sampleRate": "44100",
       "playlists": [
+        "Riddim - Deep Dub",
         "Riddim - Chill",
         "Riddim - Wubz"
       ]
@@ -5531,6 +5535,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "192642527",
+      "name": "EMPYRE, Pt. 2",
+      "artist": "CloZee, LSDREAM",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/CloZee, LSDREAM - LSZEE - 02 EMPYRE, Pt. 2.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "299",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -7546,6 +7563,20 @@
       ]
     },
     {
+      "id": "19518118",
+      "name": "Levels (Acyan Flip)",
+      "artist": "Avicii, Acyan",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Avicii - Levels (Acyan Flip) (Master).aif",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "224",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "216957420",
       "name": "Cocoa Butter Kisses (Levity Remix) EXTENDED MIX",
       "artist": "Chance the Rapper, Levity",
@@ -7582,6 +7613,7 @@
       "length": "145",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -7951,6 +7983,32 @@
       ]
     },
     {
+      "id": "17053371",
+      "name": "Goblin (Hamdi Remix)",
+      "artist": "Coki, Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Goblin_(Hamdi_Remix)_Coki,_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "171",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "166090795",
+      "name": "Havana (Original Mix)",
+      "artist": "Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Havana_(Original_Mix)_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "75311831",
       "name": "LETHAL STRAIN (Original Mix)",
       "artist": "Stoned Level, MUERTE",
@@ -7961,6 +8019,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "16179398",
+      "name": "Mellow Man (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Mellow_Man_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "5B",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -7987,6 +8058,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "79445051",
+      "name": "Papi Riddim (Original Mix)",
+      "artist": "Casey Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Papi_Riddim_(Original_Mix)_Casey_Club.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "222",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -8073,6 +8157,19 @@
       ]
     },
     {
+      "id": "44378651",
+      "name": "Selecta (Original Mix)",
+      "artist": "Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Selecta_(Original_Mix)_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "253",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "131495123",
       "name": "SMOKESHOW (Original Mix)",
       "artist": "Stoned Level, MUERTE",
@@ -8120,6 +8217,19 @@
       ]
     },
     {
+      "id": "56039261",
+      "name": "Swing King (Original Mix)",
+      "artist": "Cesco, Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Swing_King_(Original_Mix)_Cesco,_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "269",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "96142433",
       "name": "Tetris (Dirt Monkey Remix)",
       "artist": "Doctor P",
@@ -8158,6 +8268,19 @@
       "playlists": [
         "Dubstep",
         "Headbanger"
+      ]
+    },
+    {
+      "id": "37179667",
+      "name": "UK Ting (Original Mix)",
+      "artist": "P Money, TroyBoi, Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/UK_Ting_(Original_Mix)_P_Money,_TroyBoi,_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "5A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -8735,6 +8858,19 @@
       ]
     },
     {
+      "id": "164495623",
+      "name": "Second Mouse (Original Mix)",
+      "artist": "Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Second_Mouse_(Original_Mix)_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "221",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "224727066",
       "name": "Special Delivery (Original Mix)",
       "artist": "Space Wizard",
@@ -9301,6 +9437,19 @@
       ]
     },
     {
+      "id": "123841596",
+      "name": "Tetris (Phrva Flip)",
+      "artist": "Doctor P",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Doctor P - Tetris (Phrva Flip).aif",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "178",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "206593434",
       "name": "ANXIETY (WHALES REMIX)",
       "artist": "DOECHII, Whales",
@@ -9310,6 +9459,7 @@
       "length": "135",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -9494,6 +9644,7 @@
       "length": "132",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -9521,6 +9672,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "141210666",
+      "name": "Skrillex - Scary Monster and Nice Sprites (Hellrazer Remix)",
+      "artist": "Skrillex, Hellrazer",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Skrillex - Scary Monster and Nice Sprites (Hellrazer Remix) M2.aif",
+      "bpm": "140.00",
+      "key": "6A",
+      "length": "207",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -10225,6 +10389,19 @@
       ]
     },
     {
+      "id": "264946336",
+      "name": "Hitz (Original Mix)",
+      "artist": "LYNY",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hitz_(Original_Mix)_LYNY.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "168",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "242744409",
       "name": "Hysteria (Original Mix)",
       "artist": "Effin",
@@ -10340,6 +10517,32 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "126781637",
+      "name": "Orchid (Original Mix)",
+      "artist": "Hamdi, LYNY",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Orchid_(Original_Mix)_Hamdi,_LYNY.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "240",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "42286378",
+      "name": "Damager (Hamdi Edit)",
+      "artist": "Sammy Virji, Interplanetary Criminal",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Sammy Virji x Interplanetary Criminal - Damager (Hamdi Edit).wav",
+      "bpm": "140.00",
+      "key": "9B",
+      "length": "171",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -10758,6 +10961,32 @@
       ]
     },
     {
+      "id": "165255785",
+      "name": "Hellish (Original Mix)",
+      "artist": "Himalia",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hellish_(Original_Mix)_Himalia.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "288",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "254169973",
+      "name": "Warriah (Original Mix)",
+      "artist": "Chad Dubz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Warriah_(Original_Mix)_Chad_Dubz.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "233",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "11058626",
       "name": "Transformation (Original Mix)",
       "artist": "Lumasi",
@@ -10795,6 +11024,20 @@
       "sampleRate": "44100",
       "playlists": [
         "Funkstep"
+      ]
+    },
+    {
+      "id": "109199993",
+      "name": "Poison (Original Mix)",
+      "artist": "Viperactive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Poison_(Original_Mix)_Viperactive.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "128",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -10923,6 +11166,19 @@
       ]
     },
     {
+      "id": "214024746",
+      "name": "Basic Shapes (Original Mix)",
+      "artist": "Pierce, Space Wizard",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Basic_Shapes_(Original_Mix)_Pierce,_Space_Wizard.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "191",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "74674142",
       "name": "Daily Routine (Original Mix)",
       "artist": "GRiZ, Big Gigantic, ProbCause",
@@ -10961,6 +11217,19 @@
         "Riddim - Medium",
         "Riddim - Womps",
         "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "216997192",
+      "name": "Skanka (VIP Mix)",
+      "artist": "Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Skanka_(VIP_Mix)_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "228",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -11031,6 +11300,20 @@
       ]
     },
     {
+      "id": "263232752",
+      "name": "Hamburg (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hamburg_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "6A",
+      "length": "286",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "58058462",
       "name": "The Feeling (Original Mix)",
       "artist": "Seth David",
@@ -11041,6 +11324,32 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "162514154",
+      "name": "Watchin You (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Watchin_You_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "251",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "221480511",
+      "name": "Shake Junt (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Shake_Junt_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "253",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -11457,6 +11766,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Funkstep"
+      ]
+    },
+    {
+      "id": "159552124",
+      "name": "Abomination (Original Mix)",
+      "artist": "Hamdi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Abomination_(Original_Mix)_Hamdi.aiff",
+      "bpm": "140.00",
+      "key": "1A",
+      "length": "168",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -12024,6 +12346,19 @@
       ]
     },
     {
+      "id": "228005290",
+      "name": "OSCILLATOR (Extended)",
+      "artist": "Zoey808",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/OSCILLATOR_(Extended)_Zoey808.aiff",
+      "bpm": "135.00",
+      "key": "2A",
+      "length": "206",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "125999857",
       "name": "Comprehension Barrier (Prosecute Remix)",
       "artist": "Svdden Death",
@@ -12260,6 +12595,7 @@
       "length": "168",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -12342,6 +12678,7 @@
       "length": "220",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -12435,6 +12772,7 @@
       "length": "138",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Jazzstep",
         "Wubzstep"
       ]
@@ -12477,6 +12815,7 @@
       "length": "171",
       "sampleRate": "44100",
       "playlists": [
+        "Clubstep",
         "Wubzstep"
       ]
     },
@@ -12795,6 +13134,19 @@
       ]
     },
     {
+      "id": "87517619",
+      "name": "INFATUNE (Original Mix)",
+      "artist": "Blurrd Vzn",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/INFATUNE_(Original_Mix)_Blurrd_Vzn.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "164",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "22618387",
       "name": "LEVELS (Casey Club Remix)",
       "artist": "Fuzion, Casey Club",
@@ -12833,6 +13185,19 @@
       "playlists": [
         "Riddim - Vocals",
         "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "94627091",
+      "name": "Section (Original Mix)",
+      "artist": "LYNY",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Section_(Original_Mix)_LYNY.aiff",
+      "bpm": "140.00",
+      "key": "5A",
+      "length": "174",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -12905,6 +13270,19 @@
       ]
     },
     {
+      "id": "221947323",
+      "name": "Drop In (Original Mix)",
+      "artist": "Mary Droppinz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Drop_In_(Original_Mix)_Mary_Droppinz.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "149",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "135068462",
       "name": "Fantasy (Original Mix)",
       "artist": "HEYZ",
@@ -12930,6 +13308,19 @@
         "Riddim - Womps",
         "Dubstep",
         "Jazzstep"
+      ]
+    },
+    {
+      "id": "33150232",
+      "name": "Fight (Original Mix)",
+      "artist": "Mary Droppinz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Fight_(Original_Mix)_Mary_Droppinz.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "171",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -13084,6 +13475,32 @@
       ]
     },
     {
+      "id": "117099918",
+      "name": "Cyanide (Original Mix)",
+      "artist": "NGHTMRE, JT Roach, Viperactive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cyanide_(Original_Mix)_NGHTMRE,_JT_Roach,_Viperactive.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "89377383",
+      "name": "Descent (Original Mix)",
+      "artist": "Simula",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Descent_(Original_Mix)_Simula.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "335",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "245883001",
       "name": "Dingus (Original Mix)",
       "artist": "LEVEL UP, Subtronics, Wooli",
@@ -13126,6 +13543,19 @@
       ]
     },
     {
+      "id": "146883778",
+      "name": "Alert (Original Mix)",
+      "artist": "En:vy",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Alert_(Original_Mix)_En_vy.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "14261575",
       "name": "All My Demons (Original Mix)",
       "artist": "Kai Wachi",
@@ -13136,6 +13566,19 @@
       "sampleRate": "44100",
       "playlists": [
         "Headbanger"
+      ]
+    },
+    {
+      "id": "187776419",
+      "name": "B.U.F.U (Original Mix)",
+      "artist": "Gordo Dubz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/B.U.F.U_(Original_Mix)_Gordo_Dubz.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "281",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -13238,6 +13681,32 @@
       ]
     },
     {
+      "id": "145464759",
+      "name": "DOOM (Original Mix)",
+      "artist": "D:Form",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/DOOM_(Original_Mix)_D_Form.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "192",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "236868799",
+      "name": "Echo Chamber (Original Mix)",
+      "artist": "Tonez",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Echo_Chamber_(Original_Mix)_Tonez.aiff",
+      "bpm": "139.99",
+      "key": "2A",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "222058898",
       "name": "End of Us (Original Mix)",
       "artist": "Sullivan King",
@@ -13249,6 +13718,19 @@
       "playlists": [
         "Riddim - Heavy",
         "Metalstep"
+      ]
+    },
+    {
+      "id": "245675262",
+      "name": "Friendly Fire  (Original Mix)",
+      "artist": "Thematic, Blocklab",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Friendly_Fire__(Original_Mix)_Thematic,_Blocklab.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "241",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -13266,6 +13748,19 @@
       ]
     },
     {
+      "id": "5626868",
+      "name": "Level 1 (Original Mix)",
+      "artist": "Casey Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Level_1_(Original_Mix)_Casey_Club.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "169",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "94373543",
       "name": "Lockdown (Original Mix)",
       "artist": "Excision, Wooli",
@@ -13277,6 +13772,19 @@
       "playlists": [
         "Riddim - Medium",
         "Headbanger"
+      ]
+    },
+    {
+      "id": "90105379",
+      "name": "Make Some Noise (Original Mix)",
+      "artist": "Criso",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Make_Some_Noise_(Original_Mix)_Criso.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "254",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -13294,6 +13802,19 @@
       ]
     },
     {
+      "id": "187681511",
+      "name": "Real Talk (Original Mix)",
+      "artist": "ColtCuts",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Real_Talk_(Original_Mix)_ColtCuts.aiff",
+      "bpm": "139.99",
+      "key": "9A",
+      "length": "301",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "257975365",
       "name": "REWIND (Original Mix)",
       "artist": "Ray Volpe, Sullivan King",
@@ -13305,6 +13826,19 @@
       "playlists": [
         "Riddim - Heavy",
         "Metalstep"
+      ]
+    },
+    {
+      "id": "133290719",
+      "name": "Selective (Original Mix)",
+      "artist": "Noah Baine",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Selective_(Original_Mix)_Noah_Baine.aiff",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "172",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -13338,6 +13872,19 @@
       ]
     },
     {
+      "id": "11762897",
+      "name": "Tigris Riddim  (Original Mix)",
+      "artist": "Peaky Beats",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Tigris_Riddim__(Original_Mix)_Peaky_Beats.aiff",
+      "bpm": "144.00",
+      "key": "6A",
+      "length": "315",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
       "id": "212777206",
       "name": "TROLLZ (Original Mix)",
       "artist": "Gardella, Zingara",
@@ -13348,6 +13895,32 @@
       "sampleRate": "44100",
       "playlists": [
         "Wubzstep"
+      ]
+    },
+    {
+      "id": "118533618",
+      "name": "Warriors (Original Mix)",
+      "artist": "Nika D, Livsey, Ferguson, Van Wilder",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Warriors_(Original_Mix)_Nika_D,_Livsey,_Ferguson,_Van_Wilder.aiff",
+      "bpm": "140.00",
+      "key": "6A",
+      "length": "202",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "242987123",
+      "name": "What I Can Do (Abstrakt Sonance Remix)",
+      "artist": "Contra, Saturna",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/What_I_Can_Do_(Abstrakt_Sonance_Remix)_Contra,_Saturna.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "238",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
       ]
     },
     {
@@ -13362,6 +13935,20 @@
       "playlists": [
         "Riddim - Chill",
         "Riddim - GWN/BT Style"
+      ]
+    },
+    {
+      "id": "150162093",
+      "name": "White Claw Wobbler (Original Mix)",
+      "artist": "Casey Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/White_Claw_Wobbler_(Original_Mix)_Casey_Club.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
       ]
     },
     {
@@ -13665,6 +14252,19 @@
       ]
     },
     {
+      "id": "142146051",
+      "name": "Running Laps (Original Mix)",
+      "artist": "Alexis B",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Running_Laps_(Original_Mix)_Alexis_B.aiff",
+      "bpm": "140.00",
+      "key": "3A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
       "id": "107669753",
       "name": "SEVEN NATiON ARMY (Original Mix)",
       "artist": "YOOKIE",
@@ -13746,9 +14346,2692 @@
       "playlists": [
         "Dubstep"
       ]
+    },
+    {
+      "id": "194754255",
+      "name": "Back To Black (Tape B & Effin Flip)",
+      "artist": "Amy Winehouse, Tape B, Effin",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Back To Black (Tape B & Effin Flip).mp3",
+      "bpm": "124.00",
+      "key": "7A",
+      "length": "259",
+      "sampleRate": "44100",
+      "playlists": [
+        "Jazzstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "158679645",
+      "name": "Rollo (Original Mix)",
+      "artist": "Ganja White Night",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Rollo_(Original_Mix)_Ganja_White_Night.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "277",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - GWN/BT Style"
+      ]
+    },
+    {
+      "id": "4291295",
+      "name": "SO DAMN GOOD (Original Mix)",
+      "artist": "ALLEYCVT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/SO_DAMN_GOOD_(Original_Mix)_ALLEYCVT.aiff",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Medium",
+        "Dubstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "181641394",
+      "name": "Speechless (Original Mix)",
+      "artist": "Jkyl & Hyde",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Speechless_(Original_Mix)_Jkyl_&_Hyde.aiff",
+      "bpm": "145.00",
+      "key": "4A",
+      "length": "218",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "56032327",
+      "name": "STOMP OUT (Original Mix)",
+      "artist": "Wiley, Ravenscoon",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/STOMP_OUT_(Original_Mix)_Wiley,_Ravenscoon.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "174",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "46986403",
+      "name": "Dazed And Confused (Original Mix)",
+      "artist": "Shanghai Doom",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Dazed_And_Confused_(Original_Mix)_Shanghai_Doom.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "154",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "140766837",
+      "name": "Funk You Up! (Original Mix)",
+      "artist": "GRiZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Funk_You_Up!_(Original_Mix)_GRiZ.aiff",
+      "bpm": "190.00",
+      "key": "6A",
+      "length": "151",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "196953008",
+      "name": "Scream From Venus (Original Mix)",
+      "artist": "WonkyWilla",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Scream_From_Venus_(Original_Mix)_WonkyWilla.aiff",
+      "bpm": "150.00",
+      "key": "2A",
+      "length": "166",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "43397749",
+      "name": "Sedona  (Original Mix)",
+      "artist": "Truth",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Sedona__(Original_Mix)_Truth.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "233",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "240335646",
+      "name": "Spooky Wonk (Original Mix)",
+      "artist": "WonkyWilla",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Spooky_Wonk_(Original_Mix)_WonkyWilla.aiff",
+      "bpm": "150.00",
+      "key": "2A",
+      "length": "140",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "185935038",
+      "name": "The Action (WonkyWilla Remix) (Original Mix)",
+      "artist": "Ahee, WonkyWilla",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Action_(WonkyWilla_Remix)_(Original_Mix)_Ahee,_WonkyWilla.aiff",
+      "bpm": "173.00",
+      "key": "12A",
+      "length": "172",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "152820738",
+      "name": "The Phoenix (Original Mix)",
+      "artist": "Shanghai Doom, Ren Zukii",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Phoenix_(Original_Mix)_Shanghai_Doom,_Ren_Zukii.aiff",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "171177786",
+      "name": "Wind Up (Original Mix)",
+      "artist": "The Widdler",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Wind_Up_(Original_Mix)_The_Widdler.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "193",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "59140277",
+      "name": "10K (Original Mix)",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/10K_(Original_Mix)_Finnuh.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "261",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "234734607",
+      "name": "Arise (Original Mix)",
+      "artist": "Black Tiger Sex Machine, Stoned Level",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Arise_(Original_Mix)_Black_Tiger_Sex_Machine,_Stoned_Level.aiff",
+      "bpm": "145.00",
+      "key": "12A",
+      "length": "184",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "219173585",
+      "name": "By My Side (Extended Mix)",
+      "artist": "Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/By_My_Side_(Extended_Mix)_Levity.aiff",
+      "bpm": "141.00",
+      "key": "6A",
+      "length": "245",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Funkstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "14804109",
+      "name": "Cash Only (Original Mix)",
+      "artist": "SFAM, Snuffy",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cash_Only_(Original_Mix)_SFAM,_Snuffy.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "154",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "140634343",
+      "name": "Check It Out (Original Mix)",
+      "artist": "Criso",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Check_It_Out_(Original_Mix)_Criso.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "274",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "189660938",
+      "name": "Cruciatus (Original Mix)",
+      "artist": "ENiGMA Dubz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cruciatus_(Original_Mix)_ENiGMA_Dubz.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "250",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "214497045",
+      "name": "Cry (DJ Intro)",
+      "artist": "Adventure Club, AVELLO",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cry_(DJ_Intro)_Adventure_Club,_AVELLO.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "186",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Dubstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "8897788",
+      "name": "Drugs I Like  (AVELLO Remix)",
+      "artist": "AVELLO, nate band",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Drugs_I_Like__(AVELLO_Remix)_AVELLO,_nate_band.aiff",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "145",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "145839502",
+      "name": "Freaks (Original Mix)",
+      "artist": "Klinical",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Freaks_(Original_Mix)_Klinical.aiff",
+      "bpm": "140.00",
+      "key": "5A",
+      "length": "356",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "218510998",
+      "name": "Frequencies  (Original Mix)",
+      "artist": "Truth",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Frequencies__(Original_Mix)_Truth.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "226",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "256638395",
+      "name": "Full Power (Original Mix)",
+      "artist": "ENiGMA Dubz, Pushloop",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Full_Power_(Original_Mix)_ENiGMA_Dubz,_Pushloop.aiff",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "208",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "86808032",
+      "name": "Into the Darkness (Original Mix)",
+      "artist": "ENiGMA Dubz, Criso",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Into_the_Darkness_(Original_Mix)_ENiGMA_Dubz,_Criso.aiff",
+      "bpm": "140.00",
+      "key": "6A",
+      "length": "279",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "201839549",
+      "name": "Jabba Wars (Original Mix)",
+      "artist": "ENiGMA Dubz, Sling Wave",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Jabba_Wars_(Original_Mix)_ENiGMA_Dubz,_Sling_Wave.aiff",
+      "bpm": "136.00",
+      "key": "2A",
+      "length": "259",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "221055290",
+      "name": "KEEP THA PIECE (feat. highrollr) (Original Mix)",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/KEEP_THA_PIECE_(feat._highrollr)_(Original_Mix)_Finnuh.aiff",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "162",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "167953442",
+      "name": "Killa (Original Mix)",
+      "artist": "Bianca, SIPPY",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Killa_(Original_Mix)_Bianca,_SIPPY.aiff",
+      "bpm": "145.00",
+      "key": "5A",
+      "length": "191",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "241933792",
+      "name": "Lost In The Sauce (Original Mix)",
+      "artist": "Liquid Stranger, Ganja White Night",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Lost_In_The_Sauce_(Original_Mix)_Liquid_Stranger,_Ganja_White_Night.aiff",
+      "bpm": "145.00",
+      "key": "4A",
+      "length": "264",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - GWN/BT Style",
+        "Riddim - Womps",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "192696188",
+      "name": "Ouroboros (Original Mix)",
+      "artist": "Detoor",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Ouroboros_(Original_Mix)_Detoor.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "164",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "142007105",
+      "name": "POURIN FOURS (Original Mix)",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/POURIN_FOURS_(Original_Mix)_Finnuh.aiff",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "167",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 8s"
+      ]
+    },
+    {
+      "id": "20643074",
+      "name": "Regulatin (Original Mix)",
+      "artist": "Siskiyou, Kali",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Regulatin_(Original_Mix)_Siskiyou,_Kali.aiff",
+      "bpm": "140.00",
+      "key": "1A",
+      "length": "277",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "117361962",
+      "name": "Enigma",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Enigma FINAL.wav",
+      "bpm": "145.02",
+      "key": "2A",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "224979418",
+      "name": "Hyperdrive",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Hyperdrive FINAL.wav",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "234",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "21290906",
+      "name": "Inside Out",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Inside Out.wav",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "177",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "51902779",
+      "name": "Singularity",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Singularity.wav",
+      "bpm": "150.00",
+      "key": "9A",
+      "length": "207",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "156746377",
+      "name": "The Alchemist",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - The Alchemist FINALLLL.wav",
+      "bpm": "145.00",
+      "key": "12A",
+      "length": "175",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "187349313",
+      "name": "Wormhole",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Wormhole.wav",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "164",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "123057735",
+      "name": "Zero-G",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Zero-G FINAL.wav",
+      "bpm": "139.97",
+      "key": "8A",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "177649003",
+      "name": "EPTIC & LYNY - LIGHT UP (FINNUH BOOTLEG)",
+      "artist": "Eptic, Lyny, FINNUH",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EPTIC & LYNY - LIGHT UP (FINNUH BOOTLEG).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "231",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "10244707",
+      "name": "COME GET SOME",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FINNUH - COME GET SOME.wav",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "287",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "1803219",
+      "name": "MONKEY BALLZ",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FINNUH - MONKEY BALLZ.wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "167",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "201041082",
+      "name": "WHAT YALL KNOW",
+      "artist": "Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FINNUH - WHAT YALL KNOW.wav",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "218",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s",
+        "Riddim - 8s"
+      ]
+    },
+    {
+      "id": "83991868",
+      "name": "DO IT",
+      "artist": "Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FLOZONE - DO IT.wav",
+      "bpm": "145.00",
+      "key": "9A",
+      "length": "210",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub",
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "15077006",
+      "name": "Fred again... x Skepta - Victory Lap (RAVENSCOON FLIP)",
+      "artist": "Fred again..., Skepta, Ravenscoon",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Fred again... x Skepta - Victory Lap (RAVENSCOON FLIP).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "145",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - Deep Dub",
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "177653749",
+      "name": "GA - HEAT WAVES (FLOZONE FLIP)",
+      "artist": "Glass Animals, FLOZONE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/GA - HEAT WAVES (FLOZONE FLIP).wav",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "115917529",
+      "name": "KENDRICK LAMAR - M.A.A.D CITY [RZRKT'D MIX]",
+      "artist": "Kendrick Lamar, RZRKT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/KENDRICK LAMAR - M.A.A.D CITY [RZRKT'D MIX].wav",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "207",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "242823274",
+      "name": "KNOCK2 - DASHSTAR_ (FINNUH EDIT VIP)",
+      "artist": "Knock2, FINNUH",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/KNOCK2 - DASHSTAR_ (FINNUH EDIT VIP).wav",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "130",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "121928452",
+      "name": "mac miller - loud (tape b x stvsh flip) final",
+      "artist": "Tape B, STVSH",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/mac miller - loud (tape b x stvsh flip) final.wav",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "200",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "227119729",
+      "name": "MalFunktion - Riddim no. 5 Flip FINAL",
+      "artist": "MalFunktion",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/MalFunktion - Riddim no. 5 Flip FINAL.wav",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "211811233",
+      "name": "Sam Lamar & Filthy - DoubleDash",
+      "artist": "Sam Lamar, Filthy",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Sam Lamar & Filthy - DoubleDash.wav",
+      "bpm": "145.00",
+      "key": "9A",
+      "length": "287",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "253762286",
+      "name": "Sisto - Dead Champions (Noizon remix) finished",
+      "artist": "Sisto, Noizon",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Sisto - Dead Champions (Noizon remix) finished.wav",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "225",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Womps",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "17708678",
+      "name": "SLUGZY X FONT BASS - ECLIPSE",
+      "artist": "SLUGZY, FONT BASS",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/SLUGZY X FONT BASS - ECLIPSE.wav",
+      "bpm": "142.00",
+      "key": "7A",
+      "length": "243",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Womps",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "67633730",
+      "name": "SPACE LACES - DOMINATE (FINNUH BOOTLEG)",
+      "artist": "Space Laces, Finnuh",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/SPACE LACES - DOMINATE (FINNUH BOOTLEG).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "254",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - Womps",
+        "Riddim - 8s"
+      ]
+    },
+    {
+      "id": "172345826",
+      "name": "Taylor Swift - The Fate of Ophelia (HEYZ Flip)",
+      "artist": "Taylor Swift, HEYZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Taylor Swift - The Fate of Ophelia (HEYZ Flip).wav",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Dubstep",
+        "Jazzstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "70157040",
+      "name": "Technologic (Tazu Remix) FINAL",
+      "artist": "Tazu",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Technologic (Tazu Remix) FINAL.wav",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "165",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "248360982",
+      "name": "Hozier - Too Sweet (fang shui flip)",
+      "artist": "Hozier, Fang Shui",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/too sweet fang shui flip.wav",
+      "bpm": "122.00",
+      "key": "6A",
+      "length": "224",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "150714592",
+      "name": "Tove Lo - Habits (Boogard Flip) (TLDM Mstr)",
+      "artist": "Tove Lo, Boogard",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Tove Lo - Habits (Boogard Flip) (TLDM Mstr).wav",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "204",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium",
+        "Riddim - Heavy"
+      ]
+    },
+    {
+      "id": "29669394",
+      "name": "Waka Flocka Flame - Round of Applause (Gunpoint Reload) FINAL v3",
+      "artist": "Waka Flocka Flame, Gunpoint",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Waka Flocka Flame - Round of Applause (Gunpoint Reload) FINAL v3.wav",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "226",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "41228154",
+      "name": "Imagination",
+      "artist": "Whales",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Whales - Imagination.mp3",
+      "bpm": "135.00",
+      "key": "7A",
+      "length": "106",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "183751171",
+      "name": "YVM3 - ECHOES (FINNUH BOOTLEG)",
+      "artist": "YVM3, FINNUH",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/YVM3 - ECHOES (FINNUH BOOTLEG).wav",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "281",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "261716332",
+      "name": "Zeds Dead - Blame (BLOOM REMIX)",
+      "artist": "Zeds Dead, BLOOM",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Zeds Dead - Blame (BLOOM REMIX) final fr.wav",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "203",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "229333866",
+      "name": "Hide and Seek (HEYZ Flip)",
+      "artist": "Imogen Heap, HEYZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Imogen Heap - Hide and Seek (HEYZ Flip).wav",
+      "bpm": "145.00",
+      "key": "11A",
+      "length": "172",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "194378583",
+      "name": "AINT NO REST (Know Good x Evalution Flip)",
+      "artist": "Cage the Elephant, Know Good, Evalution",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/AINT NO REST (Know Good x Evalution Flip).wav",
+      "bpm": "150.00",
+      "key": "11A",
+      "length": "223",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "122517770",
+      "name": "Filthy",
+      "artist": "Bassgazm",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Bassgazm - Filthy.wav",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "226",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Chill",
+        "Riddim - Medium",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "76603533",
+      "name": "Desiigner - Panda (Capochino Flip)",
+      "artist": "Desiigner, Capochino",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Desiigner - Panda (Capochino Flip).wav",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "92",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "248595783",
+      "name": "Arcane Trickster",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Arcane Trickster FINALLL.wav",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "181",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "173797402",
+      "name": "I RUN (HERSHE x ROTO FLIP) HAVEN",
+      "artist": "Haven, HERSHE, ROTO",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/I RUN (HERSHE x ROTO FLIP) HAVEN.wav",
+      "bpm": "138.00",
+      "key": "2A",
+      "length": "186",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "23112437",
+      "name": "WRONG NUMBER DUB (FINAL MASTER)",
+      "artist": "Sarge",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/WRONG NUMBER DUB (FINAL MASTER).wav",
+      "bpm": "145.00",
+      "key": "9A",
+      "length": "197",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "170484510",
+      "name": "groovininininin (Original Mix)",
+      "artist": "Izadi, TYNAN",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/groovininininin_(Original_Mix)_Izadi,_TYNAN.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "155",
+      "sampleRate": "44100",
+      "playlists": [
+        "Headbanger"
+      ]
+    },
+    {
+      "id": "223688932",
+      "name": "NEW LORDS (Original Mix)",
+      "artist": "High Zombie, Bainbridge",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/NEW_LORDS_(Original_Mix)_High_Zombie,_Bainbridge.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "164",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "14089486",
+      "name": "Ordinary (DJ Intro)",
+      "artist": "Adventure Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Ordinary_(DJ_Intro)_Adventure_Club.aiff",
+      "bpm": "112.00",
+      "key": "10A",
+      "length": "175",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep"
+      ]
+    },
+    {
+      "id": "208893483",
+      "name": "Problem (Original Mix)",
+      "artist": "FRAXURE, Hostage Situation, Dream Takers",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Problem_(Original_Mix)_FRAXURE,_Hostage_Situation,_Dream_Takers.aiff",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "200",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Chill",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "122054785",
+      "name": "Racks (Original Mix)",
+      "artist": "Eater, Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Racks_(Original_Mix)_Eater,_Flozone.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "154",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep"
+      ]
+    },
+    {
+      "id": "105724279",
+      "name": "Sofa Soup (Original Mix)",
+      "artist": "Mary Droppinz, Casey Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Sofa_Soup_(Original_Mix)_Mary_Droppinz,_Casey_Club.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "169",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "234325046",
+      "name": "SYSTEM CONTROL (Original Mix)",
+      "artist": "Future Exit",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/SYSTEM_CONTROL_(Original_Mix)_Future_Exit.aiff",
+      "bpm": "142.00",
+      "key": "12A",
+      "length": "215",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "89085064",
+      "name": "Triumph (Original Mix)",
+      "artist": "LYNY, Cozy Kev",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Triumph_(Original_Mix)_LYNY,_Cozy_Kev.aiff",
+      "bpm": "140.00",
+      "key": "5A",
+      "length": "141",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "93473585",
+      "name": "Wonkestra (Original Mix)",
+      "artist": "Wolfie, LIU KANG",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Wonkestra_(Original_Mix)_Wolfie,_LIU_KANG.aiff",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "204",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "240826593",
+      "name": "Dog Bed Riddim (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Dog_Bed_Riddim_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "248",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "127443889",
+      "name": "Droner (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Droner_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "278",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "44612759",
+      "name": "Energy (Original Mix)",
+      "artist": "Flava D, Stush",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Energy_(Original_Mix)_Flava_D,_Stush.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "212",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "61308264",
+      "name": "Feel Alright (Original Mix)",
+      "artist": "Jantsen",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Feel_Alright_(Original_Mix)_Jantsen.aiff",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "236",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "88913920",
+      "name": "Hot (Original Mix)",
+      "artist": "Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hot_(Original_Mix)_Flozone.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "157",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "185995132",
+      "name": "K9 Bassline (Original Mix)",
+      "artist": "Ganja White Night, Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/K9_Bassline_(Original_Mix)_Ganja_White_Night,_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "1A",
+      "length": "184",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill"
+      ]
+    },
+    {
+      "id": "1562776",
+      "name": "Lose It (Original Mix)",
+      "artist": "Liquid Stranger, Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Lose_It_(Original_Mix)_Liquid_Stranger,_Flozone.aiff",
+      "bpm": "164.00",
+      "key": "4A",
+      "length": "190",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "199403614",
+      "name": "OTHER SIDE (Original Mix)",
+      "artist": "ALLEYCVT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/OTHER_SIDE_(Original_Mix)_ALLEYCVT.aiff",
+      "bpm": "147.00",
+      "key": "7A",
+      "length": "146",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Womps",
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "258848455",
+      "name": "Stomper (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Stomper_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "387",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "6627794",
+      "name": "Supa Fly (Dirt Monkey x Jantsen Remix)",
+      "artist": "GRiZ, Boogie T",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Supa_Fly_(Dirt_Monkey_x_Jantsen_Remix)_GRiZ,_Boogie_T.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "218",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Womps",
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "172507611",
+      "name": "The Beat (Original Mix)",
+      "artist": "Jantsen, Dirt Monkey",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Beat_(Original_Mix)_Jantsen,_Dirt_Monkey.aiff",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "252",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Womps",
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "125394990",
+      "name": "Badfellas (Original Mix)",
+      "artist": "Felmax, Blaize",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Badfellas_(Original_Mix)_Felmax,_Blaize.aiff",
+      "bpm": "145.00",
+      "key": "4A",
+      "length": "158",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium",
+        "Riddim - 8s"
+      ]
+    },
+    {
+      "id": "250523390",
+      "name": "Bark Mode (Original Mix)",
+      "artist": "Ganja White Night, Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Bark_Mode_(Original_Mix)_Ganja_White_Night,_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "212",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "93036604",
+      "name": "Blue (Original Mix)",
+      "artist": "Hairitage",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Blue_(Original_Mix)_Hairitage.aiff",
+      "bpm": "150.00",
+      "key": "2A",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep"
+      ]
+    },
+    {
+      "id": "132734729",
+      "name": "Break Up Song (Original Mix)",
+      "artist": "Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Break_Up_Song_(Original_Mix)_Flozone.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "181",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep"
+      ]
+    },
+    {
+      "id": "16023461",
+      "name": "crystallized feat. In\u00e9z (Subtronics Remix)",
+      "artist": "Inez, John Summit",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/crystallized_feat._In\u00e9z_(Subtronics_Remix)_Inez,_John_Summit.aiff",
+      "bpm": "135.00",
+      "key": "4A",
+      "length": "215",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "243868375",
+      "name": "Emperors (Original Mix)",
+      "artist": "Calcium, MAD DUBZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Emperors_(Original_Mix)_Calcium,_MAD_DUBZ.aiff",
+      "bpm": "150.00",
+      "key": "2A",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "146242676",
+      "name": "GOOME (Original Mix)",
+      "artist": "SampliFire",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/GOOME_(Original_Mix)_SampliFire.aiff",
+      "bpm": "145.00",
+      "key": "12A",
+      "length": "191",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "69276450",
+      "name": "By A Thread (feat. Jem Cooke) (Original Mix)",
+      "artist": "Jem Cooke, Subtronics",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/By_A_Thread_(feat._Jem_Cooke)_(Original_Mix)_Jem_Cooke,_Subtronics.aiff",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "55678116",
+      "name": "Can't Get Enough (Original Mix)",
+      "artist": "Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Can_t_Get_Enough_(Original_Mix)_Levity.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "257",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "113468740",
+      "name": "CVNTSTEP (Original Mix)",
+      "artist": "TINYKVT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/CVNTSTEP_(Original_Mix)_TINYKVT.aiff",
+      "bpm": "150.00",
+      "key": "9A",
+      "length": "147",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "25162582",
+      "name": "Danger (Original Mix)",
+      "artist": "Gentlemens Club",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Danger_(Original_Mix)_Gentlemens_Club.aiff",
+      "bpm": "145.00",
+      "key": "4A",
+      "length": "179",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "244377164",
+      "name": "Fizzy Dub (Original Mix)",
+      "artist": "YAANO, latesleeper",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Fizzy_Dub_(Original_Mix)_YAANO,_latesleeper.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "239",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "110836361",
+      "name": "Fuck Up (Original Mix)",
+      "artist": "Subtronics",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Fuck_Up_(Original_Mix)_Subtronics.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "155",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - Womps",
+        "Dubstep",
+        "Headbanger"
+      ]
+    },
+    {
+      "id": "8808328",
+      "name": "Gangstas (Original Mix)",
+      "artist": "Subtronics",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Gangstas_(Original_Mix)_Subtronics.aiff",
+      "bpm": "165.00",
+      "key": "9A",
+      "length": "190",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "214361752",
+      "name": "Got Away (feat. Royal & the Serpent) (Original Mix)",
+      "artist": "Subtronics, ILLENIUM, Royal & the Serpent",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Got_Away_(feat._Royal_&_the_Serpent)_(Original_Mix)_Subtronics,_ILLENIUM,_Royal_&_the_Serpent.aiff",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "214",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "89658671",
+      "name": "Hitman (Original Mix)",
+      "artist": "Blurrd Vzn",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hitman_(Original_Mix)_Blurrd_Vzn.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "177118884",
+      "name": "Infinity (feat. Grabbitz) (Original Mix)",
+      "artist": "Subtronics, Grabbitz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Infinity_(feat._Grabbitz)_(Original_Mix)_Subtronics,_Grabbitz.aiff",
+      "bpm": "129.00",
+      "key": "10A",
+      "length": "196",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "79975927",
+      "name": "JA MAN! (Original Mix)",
+      "artist": "Arya",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/JA_MAN!_(Original_Mix)_Arya.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "144",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "146324707",
+      "name": "Beautiful & Filthy (Original Mix)",
+      "artist": "Mersiv, Chill Bobby",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Beautiful_&_Filthy_(Original_Mix)_Mersiv,_Chill_Bobby.aiff",
+      "bpm": "170.00",
+      "key": "9A",
+      "length": "263",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "60782808",
+      "name": "Blueberry (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Blueberry_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "193",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "140700521",
+      "name": "Burn (feat. Gisto) (Original Mix)",
+      "artist": "Minnesota, Gisto, Stylust",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Burn_(feat._Gisto)_(Original_Mix)_Minnesota,_Gisto,_Stylust.aiff",
+      "bpm": "150.00",
+      "key": "11A",
+      "length": "191",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "241629810",
+      "name": "Mango Vip (Original Mix)",
+      "artist": "Ganja White Night",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Mango_Vip_(Original_Mix)_Ganja_White_Night.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "225",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill"
+      ]
+    },
+    {
+      "id": "258611122",
+      "name": "Mini (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Mini_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "335",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "248985234",
+      "name": "Nothing Between (Original Mix)",
+      "artist": "Subtronics",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Nothing_Between_(Original_Mix)_Subtronics.aiff",
+      "bpm": "132.00",
+      "key": "7A",
+      "length": "246",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "130057374",
+      "name": "Soundkilla (Original Mix)",
+      "artist": "rSUN",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Soundkilla_(Original_Mix)_rSUN.aiff",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "193",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "12333280",
+      "name": "The M.F. (Original Mix)",
+      "artist": "Cool Customer",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_M.F._(Original_Mix)_Cool_Customer.aiff",
+      "bpm": "180.00",
+      "key": "9A",
+      "length": "213",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "256830391",
+      "name": "Wallace VIP  (Original Mix)",
+      "artist": "Distinct Motive, Wraz.",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Wallace_VIP__(Original_Mix)_Distinct_Motive,_Wraz..aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "251",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "23720201",
+      "name": "Hot Mic (Original Mix)",
+      "artist": "Big Gigantic, Effin",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hot_Mic_(Original_Mix)_Big_Gigantic,_Effin.aiff",
+      "bpm": "180.00",
+      "key": "9A",
+      "length": "209",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "203146078",
+      "name": "Light You Up ft. CREG (Original Mix)",
+      "artist": "GRiZ, Tape B, Creg",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Light_You_Up_ft._CREG_(Original_Mix)_GRiZ,_Tape_B,_Creg.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "188",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "149020737",
+      "name": "Nobody Else (with Kaleena Zanders)",
+      "artist": "GRiZ, Kaleena Zanders",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Nobody_Else_(with_Kaleena_Zanders)_(with_Kaleena_Zanders)_GRiZ,_Kaleena_Zanders.aiff",
+      "bpm": "145.00",
+      "key": "8A",
+      "length": "191",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Jazzstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "52625662",
+      "name": "ON JOB (Original Mix)",
+      "artist": "Zero",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/ON_JOB_(Original_Mix)_Zero.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "198",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "132943508",
+      "name": "OUT OF MY MIND (Original Mix)",
+      "artist": "LEVEL UP, Kai Wachi",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/OUT_OF_MY_MIND_(Original_Mix)_LEVEL_UP,_Kai_Wachi.aiff",
+      "bpm": "150.00",
+      "key": "7A",
+      "length": "159",
+      "sampleRate": "44100",
+      "playlists": [
+        "Headbanger"
+      ]
+    },
+    {
+      "id": "153626924",
+      "name": "SAN DIEGO VIP (Original Mix)",
+      "artist": "Skrillex",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/SAN_DIEGO_VIP_(Original_Mix)_Skrillex.aiff",
+      "bpm": "174.00",
+      "key": "11A",
+      "length": "100",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "190495987",
+      "name": "Wait a Minute (Original Mix)",
+      "artist": "Distinct Motive",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Wait_a_Minute_(Original_Mix)_Distinct_Motive.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "329",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "38773809",
+      "name": "Wanna Go (Original Mix)",
+      "artist": "Phrva",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Wanna_Go_(Original_Mix)_Phrva.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "138",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "102072430",
+      "name": "BAD MOFO (Original Mix)",
+      "artist": "MYSTRVS, BRASIVE, Big Florida",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/BAD_MOFO_(Original_Mix)_MYSTRVS,_BRASIVE,_Big_Florida.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "201",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "91985353",
+      "name": "Candy Shop Remix (feat. Olivia) (Original Mix)",
+      "artist": "Olivia, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Candy_Shop_Remix_(feat._Olivia)_(Original_Mix)_Olivia,_Crankdat.aiff",
+      "bpm": "190.00",
+      "key": "11A",
+      "length": "186",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Funkstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "38302876",
+      "name": "Cocaine Inside My Blunts  (Tape B Remix)",
+      "artist": "Tape B, Disco Lines",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cocaine_Inside_My_Blunts__(Tape_B_Remix)_Tape_B,_Disco_Lines.aiff",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "171",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "5059140",
+      "name": "Hustle (Original Mix)",
+      "artist": "Saint Miller, Gunpoint",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Hustle_(Original_Mix)_Saint_Miller,_Gunpoint.aiff",
+      "bpm": "130.00",
+      "key": "4A",
+      "length": "236",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "153297225",
+      "name": "The Crossroads (Original Mix)",
+      "artist": "Zingara",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Crossroads_(Original_Mix)_Zingara.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "168",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "17356394",
+      "name": "The Other Side (Original Mix)",
+      "artist": "LEVEL UP",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Other_Side_(Original_Mix)_LEVEL_UP.aiff",
+      "bpm": "145.00",
+      "key": "7A",
+      "length": "181",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "109787118",
+      "name": "Angel (Original Mix)",
+      "artist": "AVELLO",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Angel_(Original_Mix)_AVELLO.aiff",
+      "bpm": "150.00",
+      "key": "11A",
+      "length": "164",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "102150064",
+      "name": "BELIEVE (Original Mix)",
+      "artist": "LEVEL UP, ALLEYCVT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/BELIEVE_(Original_Mix)_LEVEL_UP,_ALLEYCVT.aiff",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "161",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "65607289",
+      "name": "Chrome Keyblade  (Original Mix)",
+      "artist": "Blunts & Blondes",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Chrome_Keyblade__(Original_Mix)_Blunts_&_Blondes.aiff",
+      "bpm": "125.00",
+      "key": "7A",
+      "length": "188",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "51882593",
+      "name": "Cry For You (AVELLO Remix)",
+      "artist": "AVELLO, SIDEPIECE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Cry_For_You_(AVELLO_Remix)_AVELLO,_SIDEPIECE.aiff",
+      "bpm": "132.00",
+      "key": "12B",
+      "length": "178",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "249050871",
+      "name": "Heartbreak (Original Mix)",
+      "artist": "Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Heartbreak_(Original_Mix)_Levity.aiff",
+      "bpm": "143.00",
+      "key": "7A",
+      "length": "154",
+      "sampleRate": "44100",
+      "playlists": [
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "192420740",
+      "name": "Interfered (Original Mix)",
+      "artist": "Criso",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Interfered_(Original_Mix)_Criso.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "226",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "112555401",
+      "name": "Movement (Original Mix)",
+      "artist": "Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Movement_(Original_Mix)_Crankdat.aiff",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "187",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "135688903",
+      "name": "Oh Ya (Original Mix)",
+      "artist": "Gunpoint",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Oh_Ya_(Original_Mix)_Gunpoint.aiff",
+      "bpm": "145.00",
+      "key": "2A",
+      "length": "230",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "164849754",
+      "name": "Poltergeist (Original Mix)",
+      "artist": "Pretty Sweet",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Poltergeist_(Original_Mix)_Pretty_Sweet.aiff",
+      "bpm": "143.50",
+      "key": "9A",
+      "length": "187",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Wubz"
+      ]
+    },
+    {
+      "id": "201115576",
+      "name": "The Ends (Original Mix)",
+      "artist": "Seth David",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Ends_(Original_Mix)_Seth_David.aiff",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "178",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "252979695",
+      "name": "The Medium (Original Mix)",
+      "artist": "LEVEL UP, Zingara",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Medium_(Original_Mix)_LEVEL_UP,_Zingara.aiff",
+      "bpm": "145.00",
+      "key": "9A",
+      "length": "221",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "175691061",
+      "name": "Vibes (Original Mix)",
+      "artist": "Seth David",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Vibes_(Original_Mix)_Seth_David.aiff",
+      "bpm": "140.00",
+      "key": "10A",
+      "length": "200",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "46524995",
+      "name": "Want A Piece  (Original Mix)",
+      "artist": "Blunts & Blondes",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Want_A_Piece__(Original_Mix)_Blunts_&_Blondes.aiff",
+      "bpm": "140.00",
+      "key": "4A",
+      "length": "178",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "133633773",
+      "name": "BASS CANNON (CRANKDAT REMIX)",
+      "artist": "Flux Pavillion, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - BASS CANNON (CRANKDAT REMIX).wav",
+      "bpm": "142.00",
+      "key": "2A",
+      "length": "106",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "103151751",
+      "name": "FANTASIZE (CRANKDAT REMIX)",
+      "artist": "Ariana Grande, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - FANTASIZE (CRANKDAT REMIX).wav",
+      "bpm": "190.00",
+      "key": "8A",
+      "length": "183",
+      "sampleRate": "48000",
+      "playlists": [
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "68241313",
+      "name": "GAS PEDAL (CRANKDAT REMIX)",
+      "artist": "Summit, Subtronics, Tape B, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - GAS PEDAL (CRANKDAT REMIX).wav",
+      "bpm": "140.00",
+      "key": "12A",
+      "length": "131",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "196229584",
+      "name": "SPITFIRE (CRANKDAT REMIX)",
+      "artist": "Skrillex, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - SPITFIRE (CRANKDAT REMIX).wav",
+      "bpm": "170.00",
+      "key": "4A",
+      "length": "142",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep",
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "265173464",
+      "name": "TREMOR (CRANKDAT REMIX)",
+      "artist": "Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - TREMOR (CRANKDAT REMIX).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "164",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "175481157",
+      "name": "VICTORY LAP (CRANKDAT REMIX)",
+      "artist": "Fred again..., Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat - VICTORY LAP (CRANKDAT REMIX).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "154",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "30140586",
+      "name": "NO BROKE BOYS (CRANKDAT & ALLEYCVT REMIX)",
+      "artist": "Crankdat, ALLEYCVT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat x ALLEYCVT - NO BROKE BOYS (CRANKDAT & ALLEYCVT REMIX).wav",
+      "bpm": "138.00",
+      "key": "8A",
+      "length": "222",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Chill",
+        "Riddim - Medium",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "42213997",
+      "name": "GOIN' DOWN (CRANKDAT & BIG FLORIDA REMIX)",
+      "artist": "Crankdat, Big Florida ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat x Big Florida - GOIN' DOWN (CRANKDAT & BIG FLORIDA REMIX).wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "138",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "250479591",
+      "name": "DAMAGER (CRANKDAT & GORILLA T REMIX)",
+      "artist": "Crankdat, GorillaT",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat x GorillaT - DAMAGER (CRANKDAT & GORILLA T REMIX).wav",
+      "bpm": "142.00",
+      "key": "2A",
+      "length": "131",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "2315121",
+      "name": "MOVE B-TCH (CRANKDAT & KOMPANY REMIX)",
+      "artist": "Crankdat, Kompany",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/01 - Crankdat x Kompany - MOVE B-TCH (CRANKDAT & KOMPANY REMIX).wav",
+      "bpm": "175.00",
+      "key": "7A",
+      "length": "153",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "144013086",
+      "name": "Adventure Club - Gold (Rest N Piecez Remix) Extended Version",
+      "artist": "Adventure Club, Rest N Piecez",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Adventure Club - Gold (Rest N Piecez Remix) Extended Version.wav",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "233",
+      "sampleRate": "44100",
+      "playlists": [
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "219765217",
+      "name": "EKLYPSE - Portal Walk FINALLL",
+      "artist": "EKLYPSE",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/EKLYPSE - Portal Walk FINALLL.wav",
+      "bpm": "140.00",
+      "key": "8A",
+      "length": "168",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "178367469",
+      "name": "FREE BIRD (CRANKDAT REMIX)",
+      "artist": "Lynyrd Skynyrd, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FREE BIRD (CRANKDAT REMIX).wav",
+      "bpm": "144.00",
+      "key": "1A",
+      "length": "156",
+      "sampleRate": "48000",
+      "playlists": [
+        "Clubstep",
+        "Dubstep",
+        "Metalstep"
+      ]
+    },
+    {
+      "id": "1074865",
+      "name": "FRESCH TAPES - SHOOK ONES 4.0",
+      "artist": "Tape B, Dr. Fresch",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FRESCH TAPES - SHOOK ONES 4.0.wav",
+      "bpm": "196.00",
+      "key": "3A",
+      "length": "230",
+      "sampleRate": "44100",
+      "playlists": [
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "78251042",
+      "name": "Haven - I Run (Malfunktion Flip) FINAL",
+      "artist": "Haven, Malfunktion",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Haven - I Run (Malfunktion Flip) FINAL.wav",
+      "bpm": "140.00",
+      "key": "2A",
+      "length": "150",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium",
+        "Riddim - Womps"
+      ]
+    },
+    {
+      "id": "174100691",
+      "name": "Kendrick Lamar - m.A.A.d city (Ft. MC Eiht) (VEROS FLIP) (fin) (1)",
+      "artist": "Kendrick Lamar, VEROS",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Kendrick Lamar - m.A.A.d city (Ft. MC Eiht) (VEROS FLIP) (fin) (1).wav",
+      "bpm": "140.00",
+      "key": "7A",
+      "length": "79",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "110363126",
+      "name": "Let's Get It Started (Levity x Crankdat Remix) OFFICIAL EXTENDED MIX",
+      "artist": "Black Eyed Peas, Levity, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Let's Get It Started (Levity x Crankdat Remix) OFFICIAL EXTENDED MIX.wav",
+      "bpm": "100.00",
+      "key": "10A",
+      "length": "235",
+      "sampleRate": "48000",
+      "playlists": [
+        "Clubstep",
+        "Dubstep",
+        "Funkstep"
+      ]
+    },
+    {
+      "id": "149528741",
+      "name": "Ludacris - What's Your Fantasy (Moceans & RANKZ Flip) MASTER",
+      "artist": "Ludacris, Moceans, RANKZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Ludacris - What's Your Fantasy (Moceans & RANKZ Flip) MASTER.wav",
+      "bpm": "140.00",
+      "key": "11A",
+      "length": "158",
+      "sampleRate": "48000",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "222512314",
+      "name": "MGMT - Electric Feel (Levity Remix) EXTENDED MIX (no bpm automation 106bpm)",
+      "artist": "MGMT, Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/MGMT - Electric Feel (Levity Remix) EXTENDED MIX (no bpm automation 106bpm).wav",
+      "bpm": "106.00",
+      "key": "5B",
+      "length": "193",
+      "sampleRate": "48000",
+      "playlists": [
+        "Dubstep",
+        "Funkstep",
+        "Jazzstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "57748380",
+      "name": "Subtronics - Gangstas (Wolfie x Goat Dubz Remix) [FINAL]",
+      "artist": "Subtronics, Wolfie, Goat Dubz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Subtronics - Gangstas (Wolfie x Goat Dubz Remix) [FINAL].wav",
+      "bpm": "150.00",
+      "key": "9A",
+      "length": "150",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Vocals",
+        "Riddim - Medium",
+        "Riddim - Heavy"
+      ]
+    },
+    {
+      "id": "38921719",
+      "name": "Obsessed remix (extended mix)",
+      "artist": "Tape B, Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Tape B x Levity - Obsessed remix (extended mix).wav",
+      "bpm": "173.00",
+      "key": "5A",
+      "length": "199",
+      "sampleRate": "48000",
+      "playlists": [
+        "Clubstep",
+        "Funkstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "226546170",
+      "name": "Work Remix (Crankdat Remix)",
+      "artist": "A$AP FERG, Crankdat",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Work Remix (Crankdat Remix) 11-25-2025 v2.1.wav",
+      "bpm": "140.00",
+      "key": "9A",
+      "length": "198",
+      "sampleRate": "48000",
+      "playlists": [
+        "Clubstep",
+        "Dubstep"
+      ]
+    },
+    {
+      "id": "209569449",
+      "name": "Aerosmith - Dream On (Effin Flip)",
+      "artist": "Aerosmith, Effin",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Aerosmith - Dream On (Effin Flip).mp3",
+      "bpm": "150.00",
+      "key": "4A",
+      "length": "144",
+      "sampleRate": "44100",
+      "playlists": [
+        "Metalstep"
+      ]
+    },
+    {
+      "id": "161562535",
+      "name": "FACEDOWN (Original Mix)",
+      "artist": "Kai Wachi, Tisoki",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/FACEDOWN_(Original_Mix)_Kai_Wachi,_Tisoki.aiff",
+      "bpm": "150.00",
+      "key": "C#m",
+      "length": "156",
+      "sampleRate": "44100",
+      "playlists": [
+        "Headbanger"
+      ]
+    },
+    {
+      "id": "64714628",
+      "name": "I WANNA SHOW YOU (Original Mix)",
+      "artist": "San Holo, RJ Pasin, Alice Aera",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/I_WANNA_SHOW_YOU_(Original_Mix)_San_Holo,_RJ_Pasin,_Alice_Aera.aiff",
+      "bpm": "150.00",
+      "key": "Em",
+      "length": "182",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Chill"
+      ]
+    },
+    {
+      "id": "38208663",
+      "name": "Jazz Cabbage (Original Mix)",
+      "artist": "Cyclops, Wooli",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Jazz_Cabbage_(Original_Mix)_Cyclops,_Wooli.aiff",
+      "bpm": "145.00",
+      "key": "Dm",
+      "length": "172",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "131632632",
+      "name": "War (Original Mix)",
+      "artist": "ILLENIUM, L\u00f8 Spirit",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/War_(Original_Mix)_ILLENIUM,_L\u00f8_Spirit.aiff",
+      "bpm": "160.00",
+      "key": "C#m",
+      "length": "185",
+      "sampleRate": "44100",
+      "playlists": [
+        "Metalstep"
+      ]
+    },
+    {
+      "id": "237881896",
+      "name": "What's In Your Heart (Original Mix)",
+      "artist": "Effin",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/What_s_In_Your_Heart_(Original_Mix)_Effin.aiff",
+      "bpm": "176.00",
+      "key": "Gm",
+      "length": "242",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "131495474",
+      "name": "Animalistic (Original Mix)",
+      "artist": "Milano, Daggz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Animalistic_(Original_Mix)_Milano,_Daggz.aiff",
+      "bpm": "143.00",
+      "key": "D#m",
+      "length": "142",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub",
+        "Riddim - Wubz"
+      ]
+    },
+    {
+      "id": "77779875",
+      "name": "BANGA (Original Mix)",
+      "artist": "HOL!",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/BANGA_(Original_Mix)_HOL!.aiff",
+      "bpm": "145.00",
+      "key": "Dm",
+      "length": "195",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Wubz",
+        "Riddim - 8s"
+      ]
+    },
+    {
+      "id": "214795744",
+      "name": "Beast Mode (Original Mix)",
+      "artist": "Tvboo, Flozone",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Beast_Mode_(Original_Mix)_Tvboo,_Flozone.aiff",
+      "bpm": "140.00",
+      "key": "D#m",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub",
+        "Riddim - Chill",
+        "Riddim - Wubz",
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "262164856",
+      "name": "Bounce (Original Mix)",
+      "artist": "Tvboo",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Bounce_(Original_Mix)_Tvboo.aiff",
+      "bpm": "150.00",
+      "key": "Em",
+      "length": "179",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Wubz",
+        "Clubstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "228728410",
+      "name": "DISTORTED DISCO (Bonus) (Original Mix)",
+      "artist": "HOL!",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/DISTORTED_DISCO_(Bonus)_(Original_Mix)_HOL!.aiff",
+      "bpm": "145.00",
+      "key": "D#m",
+      "length": "79",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - Womps",
+        "Riddim - 4s",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "159805816",
+      "name": "HORSEPOWER (Extended Mix)",
+      "artist": "Jkyl & Hyde, Nikita, the Wicked, Creg",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/HORSEPOWER_(Extended_Mix)_Jkyl_&_Hyde,_Nikita,_the_Wicked,_Creg.aiff",
+      "bpm": "135.00",
+      "key": "Em",
+      "length": "215",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat"
+      ]
+    },
+    {
+      "id": "104577855",
+      "name": "Magicians (Original Mix)",
+      "artist": "Comisar, Daggz, Chmura",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Magicians_(Original_Mix)_Comisar,_Daggz,_Chmura.aiff",
+      "bpm": "132.00",
+      "key": "Fm",
+      "length": "192",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "47442352",
+      "name": "MALFUNCTION (Original Mix)",
+      "artist": "Eptic, HOL!",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/MALFUNCTION_(Original_Mix)_Eptic,_HOL!.aiff",
+      "bpm": "145.00",
+      "key": "Dm",
+      "length": "232",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium",
+        "Riddim - 4s"
+      ]
+    },
+    {
+      "id": "186912238",
+      "name": "Mask Off (Original Mix)",
+      "artist": "Ganja White Night, Mr. Bill",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Mask_Off_(Original_Mix)_Ganja_White_Night,_Mr._Bill.aiff",
+      "bpm": "140.00",
+      "key": "Em",
+      "length": "274",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "196563174",
+      "name": "No Mercy (Original Mix)",
+      "artist": "HVDES, Hostage Situation",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/No_Mercy_(Original_Mix)_HVDES,_Hostage_Situation.aiff",
+      "bpm": "140.00",
+      "key": "G#m",
+      "length": "219",
+      "sampleRate": "44100",
+      "playlists": [
+        "Dubstep",
+        "Jazzstep",
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "194107445",
+      "name": "NO PHONE (Original Mix)",
+      "artist": "HOL!",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/NO_PHONE_(Original_Mix)_HOL!.aiff",
+      "bpm": "144.00",
+      "key": "D#m",
+      "length": "178",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Wubz",
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "248261879",
+      "name": "Open Your Mind (Original Mix)",
+      "artist": "Chef Boyarbeatz, Daggz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Open_Your_Mind_(Original_Mix)_Chef_Boyarbeatz,_Daggz.aiff",
+      "bpm": "140.00",
+      "key": "D#m",
+      "length": "246",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - High Hat",
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "185177063",
+      "name": "Pop Off (Extended Mix)",
+      "artist": "GRiZ, Levity",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Pop_Off_(Extended_Mix)_GRiZ,_Levity.aiff",
+      "bpm": "142.00",
+      "key": "Em",
+      "length": "216",
+      "sampleRate": "44100",
+      "playlists": [
+        "Funkstep",
+        "Jazzstep"
+      ]
+    },
+    {
+      "id": "80861309",
+      "name": "Space Boat (Original Mix)",
+      "artist": "Ahee, Tvboo",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Space_Boat_(Original_Mix)_Ahee,_Tvboo.aiff",
+      "bpm": "150.00",
+      "key": "C#m",
+      "length": "241",
+      "sampleRate": "44100",
+      "playlists": [
+        "Wubzstep"
+      ]
+    },
+    {
+      "id": "243786898",
+      "name": "The Darkness (Original Mix)",
+      "artist": "Daggz",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/The_Darkness_(Original_Mix)_Daggz.aiff",
+      "bpm": "120.00",
+      "key": "Cm",
+      "length": "166",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Deep Dub"
+      ]
+    },
+    {
+      "id": "86900017",
+      "name": "Train Tune (Original Mix)",
+      "artist": "Wooli, MAD DUBZ",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/Train_Tune_(Original_Mix)_Wooli,_MAD_DUBZ.aiff",
+      "bpm": "140.00",
+      "key": "Dm",
+      "length": "229",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Medium"
+      ]
+    },
+    {
+      "id": "72288821",
+      "name": "A.F.B.1. (Original Mix)",
+      "artist": "Excision, Subtronics",
+      "path": "C:/Users/carlo/Music/_CentralizedLibrary/A.F.B.1._(Original_Mix)_Excision,_Subtronics.aiff",
+      "bpm": "140.00",
+      "key": "D#m",
+      "length": "210",
+      "sampleRate": "44100",
+      "playlists": [
+        "Riddim - Wubz",
+        "Riddim - Medium",
+        "Riddim - Womps",
+        "Dubstep",
+        "Headbanger"
+      ]
     }
   ],
   "playlists": [
+    {
+      "name": "Riddim - High Hat",
+      "tracks": [
+        "118510962",
+        "124514490",
+        "19518118",
+        "17053371",
+        "166090795",
+        "79445051",
+        "44378651",
+        "56039261",
+        "37179667",
+        "164495623",
+        "123841596",
+        "141210666",
+        "264946336",
+        "126781637",
+        "42286378",
+        "165255785",
+        "254169973",
+        "109199993",
+        "216997192",
+        "263232752",
+        "159552124",
+        "228005290",
+        "94627091",
+        "33150232",
+        "117099918",
+        "89377383",
+        "146883778",
+        "245675262",
+        "5626868",
+        "90105379",
+        "187681511",
+        "133290719",
+        "11762897",
+        "242987123",
+        "150162093",
+        "43397749",
+        "140634343",
+        "218510998",
+        "201839549",
+        "20643074",
+        "70157040",
+        "105724279",
+        "89085064",
+        "240826593",
+        "44612759",
+        "25162582",
+        "244377164",
+        "89658671",
+        "79975927",
+        "130057374",
+        "52625662",
+        "38773809",
+        "192420740",
+        "149528741",
+        "159805816",
+        "248261879"
+      ]
+    },
+    {
+      "name": "Riddim - Deep Dub",
+      "tracks": [
+        "90910452",
+        "249674249",
+        "192642527",
+        "19518118",
+        "16179398",
+        "109199993",
+        "214024746",
+        "263232752",
+        "162514154",
+        "221480511",
+        "87517619",
+        "221947323",
+        "187776419",
+        "145464759",
+        "236868799",
+        "118533618",
+        "150162093",
+        "142146051",
+        "46986403",
+        "171177786",
+        "14804109",
+        "189660938",
+        "145839502",
+        "256638395",
+        "86808032",
+        "192696188",
+        "83991868",
+        "15077006",
+        "127443889",
+        "258848455",
+        "250523390",
+        "60782808",
+        "258611122",
+        "256830391",
+        "190495987",
+        "192420740",
+        "131495474",
+        "214795744",
+        "104577855",
+        "248261879",
+        "243786898"
+      ]
+    },
     {
       "name": "Riddim - Vocals",
       "tracks": [
@@ -13818,7 +17101,23 @@
         "20239486",
         "152437368",
         "178390459",
-        "18146056"
+        "18146056",
+        "234734607",
+        "115917529",
+        "242823274",
+        "150714592",
+        "122517770",
+        "23112437",
+        "223688932",
+        "208893483",
+        "125394990",
+        "102072430",
+        "265173464",
+        "30140586",
+        "42213997",
+        "78251042",
+        "174100691",
+        "57748380"
       ]
     },
     {
@@ -13937,7 +17236,33 @@
         "24121204",
         "86591509",
         "57330127",
-        "78678988"
+        "78678988",
+        "158679645",
+        "4291295",
+        "196953008",
+        "240335646",
+        "185935038",
+        "214497045",
+        "241933792",
+        "117361962",
+        "224979418",
+        "21290906",
+        "51902779",
+        "156746377",
+        "187349313",
+        "123057735",
+        "172345826",
+        "122517770",
+        "76603533",
+        "248595783",
+        "208893483",
+        "185995132",
+        "140700521",
+        "241629810",
+        "30140586",
+        "219765217",
+        "64714628",
+        "214795744"
       ]
     },
     {
@@ -14001,7 +17326,9 @@
         "73267063",
         "219632125",
         "86591509",
-        "57330127"
+        "57330127",
+        "158679645",
+        "241933792"
       ]
     },
     {
@@ -14062,7 +17389,14 @@
         "167789676",
         "103084022",
         "236322802",
-        "102166177"
+        "102166177",
+        "164849754",
+        "131495474",
+        "77779875",
+        "214795744",
+        "262164856",
+        "194107445",
+        "72288821"
       ]
     },
     {
@@ -14316,7 +17650,45 @@
         "258252672",
         "178390459",
         "89645134",
-        "18146056"
+        "18146056",
+        "4291295",
+        "59140277",
+        "234734607",
+        "221055290",
+        "142007105",
+        "177649003",
+        "10244707",
+        "1803219",
+        "201041082",
+        "115917529",
+        "242823274",
+        "227119729",
+        "211811233",
+        "67633730",
+        "150714592",
+        "183751171",
+        "122517770",
+        "23112437",
+        "223688932",
+        "208893483",
+        "234325046",
+        "125394990",
+        "243868375",
+        "146242676",
+        "110836361",
+        "102072430",
+        "135688903",
+        "265173464",
+        "30140586",
+        "42213997",
+        "78251042",
+        "174100691",
+        "57748380",
+        "228728410",
+        "47442352",
+        "194107445",
+        "86900017",
+        "72288821"
       ]
     },
     {
@@ -14433,7 +17805,33 @@
         "20770002",
         "177545249",
         "86591509",
-        "5927272"
+        "5927272",
+        "240335646",
+        "185935038",
+        "241933792",
+        "117361962",
+        "224979418",
+        "21290906",
+        "51902779",
+        "156746377",
+        "187349313",
+        "123057735",
+        "253762286",
+        "17708678",
+        "67633730",
+        "183751171",
+        "122517770",
+        "76603533",
+        "248595783",
+        "199403614",
+        "6627794",
+        "172507611",
+        "110836361",
+        "30140586",
+        "219765217",
+        "78251042",
+        "228728410",
+        "72288821"
       ]
     },
     {
@@ -14513,7 +17911,9 @@
         "62459100",
         "222058898",
         "257975365",
-        "189038791"
+        "189038791",
+        "150714592",
+        "57748380"
       ]
     },
     {
@@ -14563,7 +17963,20 @@
         "20239486",
         "15436294",
         "194211640",
-        "258252672"
+        "258252672",
+        "240335646",
+        "59140277",
+        "221055290",
+        "10244707",
+        "1803219",
+        "201041082",
+        "253762286",
+        "17708678",
+        "23112437",
+        "243868375",
+        "146242676",
+        "228728410",
+        "47442352"
       ]
     },
     {
@@ -14583,7 +17996,43 @@
         "233596150",
         "208448099",
         "20761801",
-        "15436294"
+        "15436294",
+        "142007105",
+        "201041082",
+        "67633730",
+        "125394990",
+        "77779875"
+      ]
+    },
+    {
+      "name": "Clubstep",
+      "tracks": [
+        "125162156",
+        "206593434",
+        "81352605",
+        "26697003",
+        "93079537",
+        "157322990",
+        "121033756",
+        "83991868",
+        "15077006",
+        "177653749",
+        "121928452",
+        "173797402",
+        "14089486",
+        "122054785",
+        "93036604",
+        "132734729",
+        "91985353",
+        "51882593",
+        "201115576",
+        "178367469",
+        "1074865",
+        "110363126",
+        "38921719",
+        "226546170",
+        "214795744",
+        "262164856"
       ]
     },
     {
@@ -14865,7 +18314,42 @@
         "107669753",
         "95350353",
         "18146056",
-        "4635222"
+        "4635222",
+        "4291295",
+        "219173585",
+        "214497045",
+        "8897788",
+        "172345826",
+        "29669394",
+        "93473585",
+        "199403614",
+        "6627794",
+        "172507611",
+        "69276450",
+        "55678116",
+        "113468740",
+        "110836361",
+        "214361752",
+        "248985234",
+        "149020737",
+        "153626924",
+        "17356394",
+        "102150064",
+        "112555401",
+        "252979695",
+        "133633773",
+        "68241313",
+        "196229584",
+        "175481157",
+        "250479591",
+        "2315121",
+        "178367469",
+        "110363126",
+        "222512314",
+        "226546170",
+        "38208663",
+        "196563174",
+        "72288821"
       ]
     },
     {
@@ -14978,7 +18462,23 @@
         "34314126",
         "109200796",
         "138042674",
-        "162493683"
+        "162493683",
+        "140766837",
+        "196953008",
+        "219173585",
+        "1562776",
+        "146324707",
+        "12333280",
+        "23720201",
+        "91985353",
+        "103151751",
+        "196229584",
+        "2315121",
+        "110363126",
+        "222512314",
+        "38921719",
+        "237881896",
+        "185177063"
       ]
     },
     {
@@ -15147,7 +18647,12 @@
         "168415872",
         "267317800",
         "197669078",
-        "152437368"
+        "152437368",
+        "170484510",
+        "110836361",
+        "132943508",
+        "161562535",
+        "72288821"
       ]
     },
     {
@@ -15238,7 +18743,24 @@
         "131901102",
         "138042674",
         "241012832",
-        "89645134"
+        "89645134",
+        "194754255",
+        "4291295",
+        "219173585",
+        "214497045",
+        "8897788",
+        "172345826",
+        "55678116",
+        "149020737",
+        "91985353",
+        "249050871",
+        "144013086",
+        "222512314",
+        "38208663",
+        "237881896",
+        "228728410",
+        "196563174",
+        "185177063"
       ]
     },
     {
@@ -15299,7 +18821,10 @@
         "187598037",
         "222058898",
         "257975365",
-        "107669753"
+        "107669753",
+        "178367469",
+        "209569449",
+        "131632632"
       ]
     },
     {
@@ -15565,7 +19090,53 @@
         "135068462",
         "102166177",
         "212777206",
-        "143406495"
+        "143406495",
+        "194754255",
+        "181641394",
+        "56032327",
+        "152820738",
+        "167953442",
+        "241933792",
+        "83991868",
+        "15077006",
+        "177653749",
+        "121928452",
+        "172345826",
+        "248360982",
+        "41228154",
+        "261716332",
+        "229333866",
+        "194378583",
+        "173797402",
+        "61308264",
+        "88913920",
+        "16023461",
+        "69276450",
+        "8808328",
+        "177118884",
+        "146324707",
+        "140700521",
+        "248985234",
+        "203146078",
+        "149020737",
+        "38302876",
+        "5059140",
+        "153297225",
+        "109787118",
+        "65607289",
+        "51882593",
+        "201115576",
+        "252979695",
+        "175691061",
+        "46524995",
+        "1074865",
+        "222512314",
+        "38921719",
+        "214795744",
+        "262164856",
+        "186912238",
+        "196563174",
+        "80861309"
       ]
     }
   ]
