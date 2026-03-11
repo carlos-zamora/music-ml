@@ -2,6 +2,34 @@
 
 Use this workflow from `D:\projects\music-ml` when you add new Rekordbox music.
 
+## 0) One-Time Project Setup
+
+### Install the package
+
+```powershell
+pip install -e .
+```
+
+### Configure environment
+
+Create a `.env` file in the project root (optional — defaults shown):
+
+```
+DATABASE_PATH=./data/music.db
+DEBUG=false
+```
+
+- `DATABASE_PATH`: path to the SQLite database file. The `data/` directory is created automatically.
+- `DEBUG`: set to `true` to enable SQLAlchemy query logging.
+
+### Initialize the database
+
+```powershell
+python scripts/init_db.py
+```
+
+This creates the SQLite database and all tables (e.g. `tracks`). Only needs to be run once, or after schema changes.
+
 ## 1) Export or Update Rekordbox XML
 - In Rekordbox, make sure your latest collection/playlists are included in your XML export.
 - Confirm the XML file path used in `src/parse_rekordbox.py` (`rekordboxXMLPath`) is correct.
