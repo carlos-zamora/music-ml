@@ -17,10 +17,14 @@ Create a `.env` file in the project root (optional — defaults shown):
 ```
 DATABASE_PATH=./data/music.db
 DEBUG=false
+REKORDBOX_XML_PATH=C:/Users/carlo/Music/rekordbox/rekordbox.xml
+ALLOWED_FOLDERS=Dubstep,Riddim
 ```
 
 - `DATABASE_PATH`: path to the SQLite database file. The `data/` directory is created automatically.
 - `DEBUG`: set to `true` to enable SQLAlchemy query logging.
+- `REKORDBOX_XML_PATH`: path to your Rekordbox XML export file.
+- `ALLOWED_FOLDERS`: comma-separated list of top-level Rekordbox folder names to import (e.g. `Dubstep,Riddim`).
 
 ### Initialize the database
 
