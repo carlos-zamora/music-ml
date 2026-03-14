@@ -1,16 +1,18 @@
-src/__pycache__
-src/db/__pycache__/
-out/eval/20260217_194206/
-out/eval/20260217_111628_single/
-data/*.db
-data/artifacts/
+# Python
+**/__pycache__/
+*.egg-info/
+dist/
+build/
 
-# Environment variables
+# Environment
 .env
 .env.local
 .env*.local
 
-# Python packaging
-*.egg-info/
-dist/
-build/
+# Data
+data/*.db
+data/artifacts/
+
+# Evaluation runs
+out/eval/20260217_194206/
+out/eval/20260217_111628_single/

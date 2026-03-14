@@ -1,0 +1,25 @@
+{
+  "$version": "1",
+  "snippets": [
+    {
+      "name": "Alembic: autogenerate migration",
+      "description": "Compares your SQLAlchemy models against the live DB and generates a new migration file. Replace \u0027description\u0027 with a short summary of what changed.",
+      "input": "alembic revision --autogenerate -m \u0022description\u0022"
+    },
+    {
+      "name": "Alembic: upgrade to head",
+      "description": "Applies all pending migrations to bring the database schema up to date.",
+      "input": "alembic upgrade head\r"
+    },
+    {
+      "name": "Alembic: show current revision",
+      "description": "Shows which migration revision the database is currently at.",
+      "input": "alembic current\r"
+    },
+    {
+      "name": "Alembic: show migration history",
+      "description": "Lists all migrations in order, showing which have been applied.",
+      "input": "alembic history --verbose\r"
+    }
+  ]
+}
