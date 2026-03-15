@@ -23,7 +23,7 @@ def parse_featured_artists(title: str) -> list:
 
     # remix/edit/rework: "(Name Remix)", "[Name Edit]"
     rework_pattern = re.compile(
-        r'[\(\[]\s*(.+?)\s+(?:remix|edit|rework)\s*[\)\]]',
+        r'[\(\[]\s*(.+?)\s+(?:remix|edit|rework|flip)\s*[\)\]]',
         re.IGNORECASE,
     )
     for match in rework_pattern.finditer(title):
