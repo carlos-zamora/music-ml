@@ -107,7 +107,7 @@ class EvalConfig:
     threshold_max: float = 0.95
     threshold_step: float = 0.01
     recall_guard_min: float = 0.65
-    report_dir: str = "out/eval"
+    report_dir: str = "out/runs"
 
 
 # Converts threshold input into an array of shape (num_classes,).

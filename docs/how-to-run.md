@@ -59,24 +59,23 @@ python -c "from src.db.session import SessionLocal; from src.db.models import Tr
 - Run:
 
 ```powershell
-python src/SimpleAudioCNN.py train
+python scripts/run.py train
 ```
 
 - Options (all optional):
   - `--epochs` (default: `20`)
   - `--batch-size` (default: `16`)
-  - `--report-dir` (default: `out/eval`)
-- Outputs:
-  - Model file in `out\` (`model.pth`, `model_1.pth`, etc.)
-  - Evaluation reports in `out\eval\<timestamp>_single\`
-    - `summary.json`
-    - `per_playlist_metrics.csv` (includes TP/FP/TN/FN per playlist)
+  - `--report-dir` (default: `out/runs`)
+- Outputs in `out\runs\<timestamp>_single\`:
+  - `model.pth`
+  - `summary.json`
+  - `per_playlist_metrics.csv` (includes TP/FP/TN/FN per playlist)
 
 ## 5) Optional: K-Fold Evaluation
 - Run:
 
 ```powershell
-python src/SimpleAudioCNN.py kfold
+python scripts/run.py kfold
 ```
 
 - Options (all optional):
@@ -84,18 +83,18 @@ python src/SimpleAudioCNN.py kfold
 | Option | Default | Description |
 |---|---|---|
 | `--epochs` | `5` | Training epochs per fold |
-| `--n-splits` | `3` | Number of CV folds |
+| `--folds` | `3` | Number of CV folds |
 | `--batch-size` | `16` | Dataloader batch size |
-| `--learning-rate` | `1e-3` | Optimizer learning rate |
-| `--random-seed` | `42` | Seed for deterministic splits |
-| `--recall-guard-min` | `0.65` | Minimum recall for guarded playlists |
-| `--report-dir` | `out/eval` | Output directory for reports |
+| `--lr` | `1e-3` | Optimizer learning rate |
+| `--seed` | `42` | Seed for deterministic splits |
+| `--recall-min` | `0.65` | Minimum recall for guarded playlists |
+| `--report-dir` | `out/runs` | Output directory for reports |
 
-- K-fold outputs go to `out\eval\<timestamp>\`.
+- K-fold outputs go to `out\runs\<timestamp>\`.
 
 ## 5a) Understanding Evaluation Output
 
-Both single-split and k-fold runs write evaluation artifacts under `out\eval\...`.
+Both single-split and k-fold runs write evaluation artifacts under `out\runs\...`.
 
 ### `summary.json`
 
@@ -183,15 +182,15 @@ How to use it:
 - Run:
 
 ```powershell
-python src/SimpleAudioCNN.py predict --model-path out/model.pth --track-filter "Riddim"
+python scripts/run.py predict --model out/model.pth --filter "Riddim"
 ```
 
-- `--model-path`: path to a saved `.pth` model file (required)
-- `--track-filter`: regex string matched against track names (required)
+- `--model`: path to a saved `.pth` model file (required)
+- `--filter`: regex string matched against track names (required)
 
 ## 7) Typical Update Cycle
 1. Export Rekordbox XML.
 2. Run `scripts/import_rekordbox.py`.
 3. Train/evaluate.
-4. Compare `out\eval` reports to prior runs.
-5. Keep best model in `out\` and track notes in GitHub issues.
+4. Compare `out\runs` reports to prior runs.
+5. Keep best model in its run directory under `out\runs\` and track notes in GitHub issues.

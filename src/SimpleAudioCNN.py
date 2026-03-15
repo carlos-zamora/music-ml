@@ -1,4 +1,3 @@
-import argparse
 from PlaylistDataset import PlaylistDataset
 from evaluation import (
     EvalConfig,
@@ -13,7 +12,6 @@ from evaluation import (
 from torch.utils.data import DataLoader, random_split
 from datetime import datetime
 from pathlib import Path
-import os
 import time
 import torch
 import torch.nn as nn
@@ -74,48 +72,22 @@ def print_results_table(track, results):
         print(f"{playlist:<30} {prob:<12.3f}")
     print("=" * 50)
 
-# Save the model with automatic filename fallback - model.pth, model_1.pth, model2.pth, etc.
+# Saves the model to out_dir/model.pth.
 # In:
 # - model: trained model to save.
-# - base_path: output directory.
-# - filename: preferred output filename.
-# Out:
-# - the filename
-def save(model, base_path='D:\\projects\\music-ml\\out', filename='model.pth'):
-    # Extract name and extension
-    name, ext = os.path.splitext(filename)
-    
-    # Try the original filename first
-    full_path = os.path.join(base_path, filename)
-    if not os.path.exists(full_path):
-        torch.save(model, full_path)
-        print(f"Model saved as: {filename}")
-        return filename
-    
-    # Try numbered versions
-    counter = 1
-    while True:
-        numbered_filename = f"{name}_{counter}{ext}"
-        full_path = os.path.join(base_path, numbered_filename)
-        
-        if not os.path.exists(full_path):
-            torch.save(model, full_path)
-            print(f"Model saved as: {numbered_filename}")
-            return numbered_filename
-        counter += 1
+# - out_dir: directory to save the model into (must already exist).
+def save(model, out_dir: Path):
+    path = out_dir / "model.pth"
+    torch.save(model, path)
+    print(f"Model saved as: {path}")
 
 # Writes evaluation artifacts for a single split run.
 # In:
 # - labels: ordered playlist names.
 # - val_details: validation detailed evaluation payload.
 # - test_details: test detailed evaluation payload.
-# - out_root: output root folder path.
-# Out:
-# - path to report directory.
-def write_single_split_reports(labels, val_details, test_details, out_root='D:\\projects\\music-ml\\out\\eval'):
-    run_id = datetime.now().strftime("%Y%m%d_%H%M%S_single")
-    out_dir = Path(out_root) / run_id
-    out_dir.mkdir(parents=True, exist_ok=True)
+# - out_dir: pre-created output directory.
+def write_single_split_reports(labels, val_details, test_details, out_dir: Path):
     write_eval_schema_json(out_dir / "summary.schema.json")
 
     summary = {
@@ -144,7 +116,6 @@ def write_single_split_reports(labels, val_details, test_details, out_root='D:\\
         csv_row["fold"] = "test"
         rows.append(csv_row)
     write_per_playlist_csv(out_dir / "per_playlist_metrics.csv", rows)
-    return str(out_dir)
 
 
 # Splits dataset, trains model, evaluates test set, then saves model.
@@ -153,7 +124,7 @@ def write_single_split_reports(labels, val_details, test_details, out_root='D:\\
 # - epochs: number of training epochs.
 # - batch_size: dataloader batch size.
 # - report_dir: output directory for evaluation artifacts.
-def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int=16, report_dir:str='out/eval'):
+def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int=16, report_dir:str='out/runs'):
     # Train: 80%
     # Validate: 10%
     # Test: 10%
@@ -228,12 +199,15 @@ def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int
     test_time = time.time() - test_start_time
     print(f"Test Loss: {test_loss:.4f}, Test Micro F1: {test_f1:.4f}, Test Macro F1: {test_macro_f1:.4f} | Test Time: {test_time:.2f}s")
 
-    reports_dir = write_single_split_reports(labels, val_details, test_details, out_root=report_dir)
-    print(f"Evaluation reports saved to: {reports_dir}")
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S_single")
+    out_dir = Path(report_dir) / run_id
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Save the trained model
-    saved_filename = save(model)
-    print(f"Training complete! Model saved as: {saved_filename}")
+    write_single_split_reports(labels, val_details, test_details, out_dir)
+    print(f"Evaluation reports saved to: {out_dir}")
+
+    save(model, out_dir)
+    print(f"Model saved to: {out_dir / 'model.pth'}")
 
 # Runs prediction for tracks matching a regex filter.
 # In:
@@ -247,61 +221,3 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
         result = predict(track, model, ds.playlists())
         print_results_table(track, result)
 
-if __name__ == "__main__":
-    parent = argparse.ArgumentParser(add_help=False)
-    parent.add_argument("--db-path", default="./data/music.db")
-    parent.add_argument("--num-partitions", type=int, default=5)
-    parent.add_argument("--partition-length", type=int, default=10)
-
-    parser = argparse.ArgumentParser(parents=[parent])
-    sub = parser.add_subparsers(dest="subcommand", required=True)
-
-    p_kfold = sub.add_parser("kfold", parents=[parent])
-    p_kfold.add_argument("--epochs", type=int, default=5)
-    p_kfold.add_argument("--n-splits", type=int, default=3)
-    p_kfold.add_argument("--batch-size", type=int, default=16)
-    p_kfold.add_argument("--learning-rate", type=float, default=1e-3)
-    p_kfold.add_argument("--random-seed", type=int, default=42)
-    p_kfold.add_argument("--recall-guard-min", type=float, default=0.65)
-    p_kfold.add_argument("--report-dir", default="out/eval")
-
-    p_train = sub.add_parser("train", parents=[parent])
-    p_train.add_argument("--epochs", type=int, default=20)
-    p_train.add_argument("--batch-size", type=int, default=16)
-    p_train.add_argument("--report-dir", default="out/eval")
-
-    p_pred = sub.add_parser("predict", parents=[parent])
-    p_pred.add_argument("--model-path", required=True)
-    p_pred.add_argument("--track-filter", required=True)
-
-    args = parser.parse_args()
-
-    ds = PlaylistDataset.from_db(args.db_path)
-    ds.setPartitionConfig(num_of_partitions=args.num_partitions,
-                          partition_length=args.partition_length)
-
-    if args.subcommand == "kfold":
-        config = EvalConfig(
-            epochs=args.epochs,
-            n_splits=args.n_splits,
-            batch_size=args.batch_size,
-            learning_rate=args.learning_rate,
-            random_seed=args.random_seed,
-            recall_guard_min=args.recall_guard_min,
-            report_dir=args.report_dir,
-        )
-        run_kfold_evaluation(
-            model_factory=lambda num_classes: SimpleAudioCNN(num_classes),
-            ds=ds,
-            config=config,
-            device=torch.device("cpu"),
-        )
-    elif args.subcommand == "train":
-        train_eval_test_save_model(
-            ds,
-            epochs=args.epochs,
-            batch_size=args.batch_size,
-            report_dir=args.report_dir,
-        )
-    elif args.subcommand == "predict":
-        predict_tracks(args.model_path, ds, args.track_filter)
