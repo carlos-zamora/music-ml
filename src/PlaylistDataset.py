@@ -1,4 +1,5 @@
 from load_mel import generate_partitions, load_mels
+from terminal import print_track_row
 from torch.utils.data import Dataset
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
@@ -100,8 +101,6 @@ class PlaylistDataset(Dataset):
         trackInfo = self.trackList[i]
         trackPlaylists = set(p.name for p in trackInfo.playlists)
 
-        print(f"\t[{self.getCount}] {trackInfo.title}", end='')
-
         # load and cache track's mel spectograms
         wasCached = True
         mels = self.mels[i]
@@ -127,8 +126,5 @@ class PlaylistDataset(Dataset):
         artist_indices = self.vocab.encode_all(trackInfo.artist, trackInfo.title)
 
         time_span = time.time() - start_time
-        if wasCached:
-            print(f"\t\t{time_span:.2f} seconds (cached)")
-        else:
-            print(f"\t\t{time_span:.2f} seconds")
+        print_track_row(self.getCount, len(self.trackList), trackInfo.title, time_span, wasCached)
         return stacked_mels, artist_indices, label

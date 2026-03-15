@@ -4,6 +4,7 @@ from pathlib import Path
 from torch.utils.data import DataLoader, Subset
 from sklearn.metrics import f1_score, precision_score, recall_score
 from sklearn.model_selection import KFold
+from terminal import TrainingMonitor, print_fold_epoch_row, print_metric_legend, print_section
 import csv
 import json
 import numpy as np
@@ -143,9 +144,10 @@ def _reshape_partition_batch(x):
 # - optimizer: optimizer for parameter updates.
 # - criterion: loss function.
 # - device: torch device for execution.
+# - on_batch: optional callable invoked after each batch (e.g. a progress bar advance fn).
 # Out:
-# - average training loss.
-def train_epoch(model, loader, optimizer, criterion, device=None):
+# - average training loss over all batches.
+def train_epoch(model, loader, optimizer, criterion, device=None, on_batch=None):
     if device is None:
         device = torch.device("cpu")
 
@@ -165,6 +167,8 @@ def train_epoch(model, loader, optimizer, criterion, device=None):
         optimizer.step()
 
         total_loss += loss.item()
+        if on_batch:
+            on_batch()
 
     return total_loss / len(loader)
 
@@ -598,6 +602,7 @@ def check_recall_guard(per_playlist_rows, guarded_playlists, recall_min):
 # - config: EvalConfig object.
 # - device: torch device for execution.
 # - collate_fn: optional DataLoader collate function (e.g. from ArtistVocab.make_collate_fn).
+# - fold_index: 1-based fold number used for display output.
 # Out:
 # - dictionary containing best state, thresholds, and validation metrics.
 def train_one_fold(
@@ -610,6 +615,7 @@ def train_one_fold(
     config,
     device=None,
     collate_fn=None,
+    fold_index: int = 1,
 ):
     if device is None:
         device = torch.device("cpu")
@@ -624,9 +630,11 @@ def train_one_fold(
     best_state_dict = None
     best_thresholds = [config.default_threshold for _ in labels]
     best_result = None
+    monitor = TrainingMonitor(config.epochs)
 
     for epoch in range(config.epochs):
-        train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device)
+        with monitor.epoch(epoch + 1, len(train_loader), f"Fold {fold_index} · Epoch {epoch + 1}/{config.epochs}") as advance:
+            train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device, on_batch=advance)
 
         val_loss, val_true, val_prob = collect_outputs(
             model, val_loader, criterion, device=device
@@ -659,7 +667,12 @@ def train_one_fold(
             "guard_satisfied": guard_satisfied,
             "guard_recalls": guard_recalls,
         }
-        print(candidate)
+        monitor.log_fold_epoch(
+            fold_index, epoch + 1,
+            float(train_loss), float(val_loss),
+            val_metrics["micro_f1"], val_metrics["macro_f1"],
+            guard_satisfied,
+        )
 
         # Selection: guard-satisfying candidates first, then macro F1.
         if best_result is None:
@@ -721,6 +734,8 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn
     out_dir = Path(config.report_dir) / run_id
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    print_metric_legend(include_guard=True)
+
     for fold_index, (train_val_idx, test_idx) in enumerate(kfold.split(indices), start=1):
         train_idx, val_idx = split_train_val_indices(
             train_val_idx,
@@ -728,6 +743,7 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn
             seed=config.random_seed + fold_index,
         )
 
+        print_section(f"Fold {fold_index} / {config.n_splits}")
         fold_train = train_one_fold(
             model_factory=model_factory,
             ds=ds,
@@ -738,6 +754,7 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn
             config=config,
             device=device,
             collate_fn=collate_fn,
+            fold_index=fold_index,
         )
 
         criterion = nn.BCEWithLogitsLoss()

@@ -9,6 +9,16 @@ from evaluation import (
     write_eval_summary_json,
     write_per_playlist_csv,
 )
+from terminal import (
+    TrainingMonitor,
+    print_artifact_path,
+    print_batch_info,
+    print_metric_legend,
+    print_prediction_table,
+    print_section,
+    print_split_sizes,
+    print_test_results,
+)
 from torch.utils.data import DataLoader, random_split
 from datetime import datetime
 from pathlib import Path
@@ -91,19 +101,6 @@ def predict(track, model, labels, vocab):
     results = [(labels[i], float(p)) for i, p in enumerate(probs)]
     return sorted(results, key=lambda x: -x[1])
 
-# Prints prediction scores in a simple table.
-# In:
-# - track: Track ORM object used for title/artist.
-# - results: list of (playlist, probability) tuples.
-def print_results_table(track, results):
-    print(f"\nPrediction Results for: {track.title}")
-    print(f"\tBy: {track.artist}")
-    print("=" * 50)
-    print(f"{'Playlist':<30} {'Probability':<12}")
-    print("-" * 50)
-    for playlist, prob in results:
-        print(f"{playlist:<30} {prob:<12.3f}")
-    print("=" * 50)
 
 # Saves the model to out_dir/model.pth.
 # In:
@@ -112,7 +109,6 @@ def print_results_table(track, results):
 def save(model, out_dir: Path):
     path = out_dir / "model.pth"
     torch.save(model, path)
-    print(f"Model saved as: {path}")
 
 # Writes evaluation artifacts for a single split run.
 # In:
@@ -166,9 +162,6 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
     val_size = int(0.1 * len(ds))
     test_size = len(ds) - train_size - val_size
     train_ds, val_ds, test_ds = random_split(ds, [train_size, val_size, test_size])
-    print(f"Train Size: {train_size} | "
-          f"Val Size: {val_size} | "
-          f"Test Size: {test_size}")
 
     collate_fn = vocab.make_collate_fn()
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
@@ -183,14 +176,16 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     # training
-    print("Starting training...")
-    training_start_time = time.time()
+    print_section("Training")
+    print_split_sizes(train_size, val_size, test_size)
+    print_batch_info(len(train_loader), len(val_loader), batch_size)
+    print_metric_legend()
+    monitor = TrainingMonitor(epochs)
     val_details = None
 
     for epoch in range(epochs):
-        epoch_start_time = time.time()
-
-        train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device)
+        with monitor.epoch(epoch + 1, len(train_loader)) as advance:
+            train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device, on_batch=advance)
         val_details = evaluate(
             model,
             val_loader,
@@ -203,21 +198,13 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
         val_loss = val_details["loss"]
         val_f1 = val_details["metrics"]["micro_f1"]
         val_macro_f1 = val_details["metrics"]["macro_f1"]
-
-        epoch_time = time.time() - epoch_start_time
         ds.resetCount()
+        monitor.log_epoch(epoch + 1, train_loss, val_loss, val_f1, val_macro_f1)
 
-        print(f"Epoch {epoch+1}/{epochs} | "
-              f"Train Loss: {train_loss:.4f} | "
-              f"Val Loss: {val_loss:.4f} | "
-              f"Val Micro F1: {val_f1:.4f} | "
-              f"Val Macro F1: {val_macro_f1:.4f} | "
-              f"Time: {epoch_time:.2f}s")
+    monitor.complete()
 
-    total_training_time = time.time() - training_start_time
-    print(f"\nTraining completed in {total_training_time:.2f} seconds ({total_training_time/60:.2f} minutes)")
-
-    print("\nEvaluating on test set...")
+    print_section("Test Evaluation")
+    print_metric_legend()
     test_start_time = time.time()
     test_details = evaluate(
         model,
@@ -232,17 +219,17 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
     test_f1 = test_details["metrics"]["micro_f1"]
     test_macro_f1 = test_details["metrics"]["macro_f1"]
     test_time = time.time() - test_start_time
-    print(f"Test Loss: {test_loss:.4f}, Test Micro F1: {test_f1:.4f}, Test Macro F1: {test_macro_f1:.4f} | Test Time: {test_time:.2f}s")
+    print_test_results(test_loss, test_f1, test_macro_f1, test_time)
 
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S_single")
     out_dir = Path(report_dir) / run_id
     out_dir.mkdir(parents=True, exist_ok=True)
 
     write_single_split_reports(labels, val_details, test_details, out_dir)
-    print(f"Evaluation reports saved to: {out_dir}")
+    print_artifact_path("Reports", out_dir)
 
     save(model, out_dir)
-    print(f"Model saved to: {out_dir / 'model.pth'}")
+    print_artifact_path("Model", out_dir / "model.pth")
 
 # Runs prediction for tracks matching a regex filter.
 # In:
@@ -254,4 +241,4 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     model = torch.load(model_path, weights_only=False)
     for track in tracksDB:
         result = predict(track, model, ds.playlists(), ds.vocab)
-        print_results_table(track, result)
+        print_prediction_table(track.title, track.artist, result)

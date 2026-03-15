@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from sqlalchemy import select
 from src.db.models import Track, Playlist
 from src.db.session import SessionLocal
+from src.terminal import print_import_summary
 
 
 def normalize_filepath(path: str):
@@ -132,7 +133,7 @@ def main():
             track.playlists = [playlist_map[n] for n in td["playlist_names"]]
 
         session.commit()
-        print(f"Imported {len(tracks_data)} tracks, {len(playlists_data)} playlists.")
+        print_import_summary(len(tracks_data), len(playlists_data))
 
 
 if __name__ == "__main__":
