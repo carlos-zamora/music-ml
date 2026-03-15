@@ -18,43 +18,76 @@ import torch.nn as nn
 from load_mel import load_mel
 
 class SimpleAudioCNN(nn.Module):
-    # Defines a simple CNN for mel-spectrogram multi-label classification.
+    # Defines a CNN for mel-spectrogram multi-label classification with artist embedding.
     # In:
     # - num_classes: number of playlist labels to predict.
-    def __init__(self, num_classes):
+    # - num_artists: artist vocab size (including OOV at index 0).
+    # - artist_embed_dim: dimensionality of the artist embedding.
+    def __init__(self, num_classes, num_artists, artist_embed_dim=32):
         super().__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(1,32,3,padding=1), nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),
             nn.Conv2d(32,64,3,padding=1), nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),
             nn.Conv2d(64,128,3,padding=1), nn.BatchNorm2d(128), nn.ReLU(), nn.AdaptiveAvgPool2d((1,1))
         )
-        self.head = nn.Sequential(nn.Flatten(), nn.Dropout(0.3), nn.Linear(128, num_classes))
-    
-    # Runs a forward pass through the network.
+        self.artist_embed = nn.Embedding(num_artists, artist_embed_dim, padding_idx=0)
+        self.dropout = nn.Dropout(0.3)
+        self.classifier = nn.Linear(128 + artist_embed_dim, num_classes)
+
+    # Encodes audio through the CNN backbone.
     # In:
     # - x: tensor shaped (batch, 1, mel_height, mel_width).
     # Out:
+    # - audio features shaped (batch, 128).
+    def encode_audio(self, x):
+        return self.conv(x).flatten(1)
+
+    # Fuses audio features with artist embedding(s) and returns logits.
+    # In:
+    # - audio_feat: tensor (batch, 128).
+    # - artist_idx: tensor shaped (batch, max_artists); use (batch, 1) for single-artist.
+    # - artist_mask: bool tensor (batch, max_artists) or None when artist_idx is (batch, 1).
+    # Out:
     # - logits shaped (batch, num_classes).
-    def forward(self,x):
-        return self.head(self.conv(x))
-    
+    def classify(self, audio_feat, artist_idx, artist_mask=None):
+        emb = self.artist_embed(artist_idx)          # (batch, max_artists, 32) or (batch, 32)
+        if artist_mask is not None:
+            emb = emb * artist_mask.unsqueeze(-1).float()
+            counts = artist_mask.sum(dim=1, keepdim=True).clamp(min=1).float()
+            emb = emb.sum(dim=1) / counts            # masked mean → (batch, 32)
+        else:
+            emb = emb.squeeze(1)                     # (batch, 1, 32) → (batch, 32)
+        fused = torch.cat([audio_feat, emb], dim=1)
+        return self.classifier(self.dropout(fused))
+
+    # Runs a forward pass for the single-partition predict path.
+    # In:
+    # - x: tensor shaped (batch, 1, mel_height, mel_width).
+    # - artist_idx: tensor shaped (batch,).
+    # Out:
+    # - logits shaped (batch, num_classes).
+    def forward(self, x, artist_idx):
+        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1))
+
 
 # Predicts playlist probabilities for one track.
 # In:
 # - track: Track ORM object.
 # - model: trained model instance.
 # - labels: ordered playlist labels.
+# - vocab: ArtistVocab instance for artist encoding.
 # Out:
 # - sorted list of (playlist, probability), descending by probability.
-def predict(track, model, labels):
+def predict(track, model, labels, vocab):
     model.eval()
     mel = load_mel(track)
     x = torch.tensor(mel).unsqueeze(0).unsqueeze(0).to(torch.device("cpu"))
+    artist_idx = torch.tensor([vocab.encode(track.artist)], dtype=torch.long)
 
     with torch.no_grad():
-        logits = model(x)
+        logits = model(x, artist_idx)
         probs = torch.sigmoid(logits).cpu().numpy()[0]
-    
+
     results = [(labels[i], float(p)) for i, p in enumerate(probs)]
     return sorted(results, key=lambda x: -x[1])
 
@@ -121,10 +154,11 @@ def write_single_split_reports(labels, val_details, test_details, out_dir: Path)
 # Splits dataset, trains model, evaluates test set, then saves model.
 # In:
 # - ds: dataset of track features and playlist labels.
+# - vocab: ArtistVocab instance for artist encoding.
 # - epochs: number of training epochs.
 # - batch_size: dataloader batch size.
 # - report_dir: output directory for evaluation artifacts.
-def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int=16, report_dir:str='out/runs'):
+def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_size:int=16, report_dir:str='out/runs'):
     # Train: 80%
     # Validate: 10%
     # Test: 10%
@@ -136,14 +170,15 @@ def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int
           f"Val Size: {val_size} | "
           f"Test Size: {test_size}")
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_ds, batch_size=batch_size)
-    test_loader = DataLoader(test_ds, batch_size=batch_size)
+    collate_fn = vocab.make_collate_fn()
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    val_loader = DataLoader(val_ds, batch_size=batch_size, collate_fn=collate_fn)
+    test_loader = DataLoader(test_ds, batch_size=batch_size, collate_fn=collate_fn)
 
     # prep model
     device = torch.device("cpu")
     labels = ds.playlists()
-    model = SimpleAudioCNN(len(labels)).to(device)
+    model = SimpleAudioCNN(len(labels), vocab.size()).to(device)
     criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
@@ -218,6 +253,5 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     tracksDB = ds.find_tracks(track_filter)
     model = torch.load(model_path, weights_only=False)
     for track in tracksDB:
-        result = predict(track, model, ds.playlists())
+        result = predict(track, model, ds.playlists(), ds.vocab)
         print_results_table(track, result)
-

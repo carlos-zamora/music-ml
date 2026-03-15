@@ -182,7 +182,7 @@ How to use it:
 - Run:
 
 ```powershell
-python scripts/run.py predict --model out/model.pth --filter "Riddim"
+python scripts/run.py predict --model out/runs/<timestamp>_single/model.pth --filter "Riddim"
 ```
 
 - `--model`: path to a saved `.pth` model file (required)

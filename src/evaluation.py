@@ -151,13 +151,14 @@ def train_epoch(model, loader, optimizer, criterion, device=None):
 
     model.train()
     total_loss = 0.0
-    for x, y in loader:
+    for x, artist_idx, artist_mask, y in loader:
         x, batch_size, num_partitions = _reshape_partition_batch(x)
-        x, y = x.to(device), y.to(device)
+        x, artist_idx, artist_mask, y = x.to(device), artist_idx.to(device), artist_mask.to(device), y.to(device)
 
         optimizer.zero_grad()
-        logits = model(x)
-        logits = logits.view(batch_size, num_partitions, -1).mean(dim=1)
+        audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
+        audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
+        logits = model.classify(audio_feat, artist_idx, artist_mask)
 
         loss = criterion(logits, y)
         loss.backward()
@@ -184,12 +185,13 @@ def collect_outputs(model, loader, criterion, device=None):
     total_loss = 0.0
     all_probs, all_labels = [], []
     with torch.no_grad():
-        for x, y in loader:
+        for x, artist_idx, artist_mask, y in loader:
             x, batch_size, num_partitions = _reshape_partition_batch(x)
-            x, y = x.to(device), y.to(device)
+            x, artist_idx, artist_mask, y = x.to(device), artist_idx.to(device), artist_mask.to(device), y.to(device)
 
-            logits = model(x)
-            logits = logits.view(batch_size, num_partitions, -1).mean(dim=1)
+            audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
+            audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
+            logits = model.classify(audio_feat, artist_idx, artist_mask)
             loss = criterion(logits, y)
             total_loss += loss.item()
 
@@ -595,6 +597,7 @@ def check_recall_guard(per_playlist_rows, guarded_playlists, recall_min):
 # - guarded_playlists: playlists used for recall guard checks.
 # - config: EvalConfig object.
 # - device: torch device for execution.
+# - collate_fn: optional DataLoader collate function (e.g. from ArtistVocab.make_collate_fn).
 # Out:
 # - dictionary containing best state, thresholds, and validation metrics.
 def train_one_fold(
@@ -606,12 +609,13 @@ def train_one_fold(
     guarded_playlists,
     config,
     device=None,
+    collate_fn=None,
 ):
     if device is None:
         device = torch.device("cpu")
 
-    train_loader = DataLoader(Subset(ds, train_indices), batch_size=config.batch_size, shuffle=True)
-    val_loader = DataLoader(Subset(ds, val_indices), batch_size=config.batch_size)
+    train_loader = DataLoader(Subset(ds, train_indices), batch_size=config.batch_size, shuffle=True, collate_fn=collate_fn)
+    val_loader = DataLoader(Subset(ds, val_indices), batch_size=config.batch_size, collate_fn=collate_fn)
 
     model = model_factory(len(labels)).to(device)
     criterion = nn.BCEWithLogitsLoss()
@@ -689,13 +693,17 @@ def train_one_fold(
 # - ds: PlaylistDataset instance.
 # - config: EvalConfig with CV and metric settings.
 # - device: torch device for execution.
+# - collate_fn: optional DataLoader collate function; auto-built from ds.vocab if omitted.
 # Out:
 # - summary dictionary containing fold and aggregate metrics.
-def run_kfold_evaluation(model_factory, ds, config=None, device=None):
+def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn=None):
     if config is None:
         config = EvalConfig()
     if device is None:
         device = torch.device("cpu")
+
+    if collate_fn is None and hasattr(ds, 'vocab') and ds.vocab is not None:
+        collate_fn = ds.vocab.make_collate_fn()
 
     labels = ds.playlists()
     indices = np.arange(len(ds))
@@ -729,10 +737,11 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None):
             guarded_playlists=guarded_playlists,
             config=config,
             device=device,
+            collate_fn=collate_fn,
         )
 
         criterion = nn.BCEWithLogitsLoss()
-        test_loader = DataLoader(Subset(ds, test_idx), batch_size=config.batch_size)
+        test_loader = DataLoader(Subset(ds, test_idx), batch_size=config.batch_size, collate_fn=collate_fn)
         test_eval = evaluate(
             fold_train["model"],
             test_loader,

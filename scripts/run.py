@@ -11,21 +11,24 @@ import torch
 from PlaylistDataset import PlaylistDataset
 from SimpleAudioCNN import SimpleAudioCNN, train_eval_test_save_model, predict_tracks
 from evaluation import EvalConfig, run_kfold_evaluation
+from artist_vocab import ArtistVocab
 
 
-def _load_dataset(args) -> PlaylistDataset:
+def _load_dataset(args):
     ds = PlaylistDataset.from_db(args.db)
     ds.setPartitionConfig(num_of_partitions=args.parts, partition_length=args.part_len)
-    return ds
+    vocab = ArtistVocab(ds.trackList)
+    ds.vocab = vocab
+    return ds, vocab
 
 
 def cmd_train(args) -> None:
-    ds = _load_dataset(args)
-    train_eval_test_save_model(ds, epochs=args.epochs, batch_size=args.batch_size, report_dir=args.report_dir)
+    ds, vocab = _load_dataset(args)
+    train_eval_test_save_model(ds, vocab, epochs=args.epochs, batch_size=args.batch_size, report_dir=args.report_dir)
 
 
 def cmd_kfold(args) -> None:
-    ds = _load_dataset(args)
+    ds, vocab = _load_dataset(args)
     config = EvalConfig(
         epochs=args.epochs,
         n_splits=args.folds,
@@ -36,7 +39,7 @@ def cmd_kfold(args) -> None:
         report_dir=args.report_dir,
     )
     run_kfold_evaluation(
-        model_factory=lambda num_classes: SimpleAudioCNN(num_classes),
+        model_factory=lambda num_classes: SimpleAudioCNN(num_classes, vocab.size()),
         ds=ds,
         config=config,
         device=torch.device("cpu"),
@@ -44,7 +47,7 @@ def cmd_kfold(args) -> None:
 
 
 def cmd_predict(args) -> None:
-    ds = _load_dataset(args)
+    ds, vocab = _load_dataset(args)
     predict_tracks(args.model, ds, args.filter)
 
 

@@ -13,13 +13,15 @@ class PlaylistDataset(Dataset):
     # In:
     # - trackList: list of Track ORM objects (with playlists eagerly loaded).
     # - playlistList: ordered list of playlist name strings.
-    def __init__(self, trackList, playlistList):
+    # - vocab: ArtistVocab instance (or None; can be assigned later via ds.vocab).
+    def __init__(self, trackList, playlistList, vocab=None):
         self.trackList = trackList
 
         # cache of track mel spectograms, maps 1:1 to trackList
         self.mels = [None] * len(self.trackList)
 
         self.playlistList = playlistList
+        self.vocab = vocab
 
         # how many items have been retrieved
         # used for debugging
@@ -90,7 +92,7 @@ class PlaylistDataset(Dataset):
     # In:
     # - i: track index in the dataset.
     # Out:
-    # - tuple(stacked_mels, label) for model training/evaluation.
+    # - tuple(stacked_mels, artist_indices, label) for model training/evaluation.
     def __getitem__(self, i):
         self.getCount += 1
         start_time = time.time()
@@ -122,9 +124,11 @@ class PlaylistDataset(Dataset):
             if playlistName in trackPlaylists:
                 label[self._getPlaylistId(playlistName)] = 1.0
 
+        artist_indices = self.vocab.encode_all(trackInfo.artist, trackInfo.title)
+
         time_span = time.time() - start_time
         if wasCached:
             print(f"\t\t{time_span:.2f} seconds (cached)")
         else:
             print(f"\t\t{time_span:.2f} seconds")
-        return stacked_mels, label
+        return stacked_mels, artist_indices, label
