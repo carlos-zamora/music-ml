@@ -1,0 +1,39 @@
+playlist,support,threshold,precision,recall,f1,tp,fp,tn,fn,fold
+Riddim - High Hat,6,0.5,1.0,0.5,0.6666666666666666,3,0,117,3,validation
+Riddim - Deep Dub,4,0.5,0.0,0.0,0.0,0,1,118,4,validation
+Riddim - Vocals,9,0.5,0.0,0.0,0.0,0,0,114,9,validation
+Riddim - Chill,14,0.5,0.0,0.0,0.0,0,0,109,14,validation
+Riddim - GWN/BT Style,9,0.5,0.0,0.0,0.0,0,0,114,9,validation
+Riddim - Wubz,10,0.5,0.0,0.0,0.0,0,0,113,10,validation
+Riddim - Medium,28,0.5,1.0,0.03571428571428571,0.0689655172413793,1,0,95,27,validation
+Riddim - Womps,12,0.5,0.0,0.0,0.0,0,0,111,12,validation
+Riddim - Heavy,6,0.5,0.0,0.0,0.0,0,0,117,6,validation
+Riddim - 4s,4,0.5,0.0,0.0,0.0,0,0,119,4,validation
+Riddim - 8s,1,0.5,0.0,0.0,0.0,0,0,122,1,validation
+Clubstep,1,0.5,0.0,0.0,0.0,0,0,122,1,validation
+Deadly Dubstep,5,0.5,0.0,0.0,0.0,0,0,118,5,validation
+Dubstep,20,0.5,0.0,0.0,0.0,0,0,103,20,validation
+Funkstep,10,0.5,0.0,0.0,0.0,0,0,113,10,validation
+Headbanger,17,0.5,0.0,0.0,0.0,0,0,106,17,validation
+Jazzstep,12,0.5,0.0,0.0,0.0,0,0,111,12,validation
+Metalstep,9,0.5,0.0,0.0,0.0,0,0,114,9,validation
+Wubzstep,37,0.5,0.4603174603174603,0.7837837837837838,0.58,29,34,52,8,validation
+Riddim - High Hat,4,0.5,0.0,0.0,0.0,0,1,119,4,test
+Riddim - Deep Dub,2,0.5,0.0,0.0,0.0,0,0,122,2,test
+Riddim - Vocals,6,0.5,0.0,0.0,0.0,0,0,118,6,test
+Riddim - Chill,20,0.5,0.0,0.0,0.0,0,0,104,20,test
+Riddim - GWN/BT Style,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Riddim - Wubz,2,0.5,0.0,0.0,0.0,0,0,122,2,test
+Riddim - Medium,31,0.5,0.0,0.0,0.0,0,0,93,31,test
+Riddim - Womps,10,0.5,0.0,0.0,0.0,0,0,114,10,test
+Riddim - Heavy,7,0.5,0.0,0.0,0.0,0,0,117,7,test
+Riddim - 4s,8,0.5,0.0,0.0,0.0,0,0,116,8,test
+Riddim - 8s,1,0.5,0.0,0.0,0.0,0,0,123,1,test
+Clubstep,1,0.5,0.0,0.0,0.0,0,0,123,1,test
+Deadly Dubstep,8,0.5,0.0,0.0,0.0,0,0,116,8,test
+Dubstep,19,0.5,1.0,0.05263157894736842,0.1,1,0,105,18,test
+Funkstep,12,0.5,0.0,0.0,0.0,0,0,112,12,test
+Headbanger,16,0.5,0.0,0.0,0.0,0,0,108,16,test
+Jazzstep,13,0.5,0.0,0.0,0.0,0,0,111,13,test
+Metalstep,4,0.5,0.0,0.0,0.0,0,0,120,4,test
+Wubzstep,32,0.5,0.45,0.84375,0.5869565217391305,27,33,59,5,test
