@@ -557,7 +557,7 @@ def get_top_playlists_by_support(ds, top_k=5):
     for playlist in ds.playlists():
         counts[playlist] = 0
     for track in ds.trackList:
-        for playlist in track["playlists"]:
+        for playlist in (p.name for p in track.playlists):
             if playlist in counts:
                 counts[playlist] += 1
     sorted_items = sorted(counts.items(), key=lambda x: x[1], reverse=True)

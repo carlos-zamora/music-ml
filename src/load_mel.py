@@ -1,4 +1,3 @@
-import json
 import librosa, numpy as np
 
 DEFAULT_TARGET_WIDTH = 938
@@ -22,7 +21,7 @@ class Partition:
 # - partitions: list of partitions of the given track
 def generate_partitions(track, num_of_partitions, partition_length):
     partitions = []
-    trackLength = int(track["length"])
+    trackLength = track.length
     
     # figure out step size from usable amount of the track
     # we don't want the partition to extend past the end of the track
@@ -35,7 +34,7 @@ def generate_partitions(track, num_of_partitions, partition_length):
 
 # Calculates the mel spectogram of several partitions of an audio file
 # In:
-# - track: loaded JSON from tracks.json
+# - track: Track ORM object
 # - partitions: list of Partition objects denoting which segments of the track to load
 # - target_width: desired width of the mel spectogram
 # Out:
@@ -51,14 +50,14 @@ def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH):
 
 # Calculate the mel spectrogram of an audio file
 # In:
-# - track: loaded JSON from tracks.json
+# - track: Track ORM object
 # - offset: start time of the segment in seconds.
 # - duration: segment length in seconds.
 # - target_width: desired width of the mel spectrogram
 def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DEFAULT_TARGET_WIDTH):
     # load 10 second segment of audio track at offset calculated above
-    y, sr = librosa.load(path=track["path"],
-                         sr=float(track["sampleRate"]),
+    y, sr = librosa.load(path=track.path,
+                         sr=float(track.sample_rate),
                          offset=offset,
                          duration=duration)
     
@@ -82,15 +81,3 @@ def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DE
         mel_normalized = mel_normalized[:, :target_width]
     
     return mel_normalized
-
-if __name__ == "__main__":
-    with open('D:\\projects\\music-ml\\out\\tracks.json', 'r') as f:
-        library = json.load(f)
-        count = 0
-        for track in library["tracks"]:
-            print("name: " + track["name"])
-            print("mel: " + str(load_mel(track)))
-            print('\n')
-            count += 1
-            if count > 10:
-                break

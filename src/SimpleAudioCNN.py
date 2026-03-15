@@ -43,14 +43,14 @@ class SimpleAudioCNN(nn.Module):
 
 # Predicts playlist probabilities for one track.
 # In:
-# - trackJson: single track JSON object from tracks.json.
+# - track: Track ORM object.
 # - model: trained model instance.
 # - labels: ordered playlist labels.
 # Out:
 # - sorted list of (playlist, probability), descending by probability.
-def predict(trackJson, model, labels):
+def predict(track, model, labels):
     model.eval()
-    mel = load_mel(trackJson)
+    mel = load_mel(track)
     x = torch.tensor(mel).unsqueeze(0).unsqueeze(0).to(torch.device("cpu"))
 
     with torch.no_grad():
@@ -62,11 +62,11 @@ def predict(trackJson, model, labels):
 
 # Prints prediction scores in a simple table.
 # In:
-# - trackJSON: track metadata used for title/artist.
+# - track: Track ORM object used for title/artist.
 # - results: list of (playlist, probability) tuples.
-def print_results_table(trackJSON, results):
-    print(f"\nPrediction Results for: {trackJSON['name']}")
-    print(f"\tBy: {trackJSON['artist']}")
+def print_results_table(track, results):
+    print(f"\nPrediction Results for: {track.title}")
+    print(f"\tBy: {track.artist}")
     print("=" * 50)
     print(f"{'Playlist':<30} {'Probability':<12}")
     print("-" * 50)
@@ -243,13 +243,13 @@ def train_eval_test_save_model(ds:PlaylistDataset, epochs:int=20, batch_size:int
 def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     tracksDB = ds.find_tracks(track_filter)
     model = torch.load(model_path, weights_only=False)
-    for trackJSON in tracksDB:
-        result = predict(trackJSON, model, ds.playlists())
-        print_results_table(trackJSON, result)
+    for track in tracksDB:
+        result = predict(track, model, ds.playlists())
+        print_results_table(track, result)
 
 if __name__ == "__main__":
     parent = argparse.ArgumentParser(add_help=False)
-    parent.add_argument("--tracks", default="out/tracks.json")
+    parent.add_argument("--db-path", default="./data/music.db")
     parent.add_argument("--num-partitions", type=int, default=5)
     parent.add_argument("--partition-length", type=int, default=10)
 
@@ -276,7 +276,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    ds = PlaylistDataset.from_json(args.tracks)
+    ds = PlaylistDataset.from_db(args.db_path)
     ds.setPartitionConfig(num_of_partitions=args.num_partitions,
                           partition_length=args.partition_length)
 

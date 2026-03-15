@@ -36,26 +36,23 @@ This creates the SQLite database and all tables (e.g. `tracks`). Only needs to b
 
 ## 1) Export or Update Rekordbox XML
 - In Rekordbox, make sure your latest collection/playlists are included in your XML export.
-- Confirm the XML file path used in `src/parse_rekordbox.py` (`rekordboxXMLPath`) is correct.
+- Confirm `REKORDBOX_XML_PATH` in your `.env` points to the exported file.
 
 ## 2) Register New Music Into This Project
-- In `src/parse_rekordbox.py`, check:
-  - `rekordboxXMLPath`
-  - `outJSONPath`
-  - `allowedFolders` (which top-level folders to import)
 - Run:
 
 ```powershell
-python src\parse_rekordbox.py
+python scripts\import_rekordbox.py
 ```
 
-- This regenerates `out/tracks.json` with updated tracks and playlist memberships.
+- This upserts tracks and playlists from the XML into the SQLite database. Existing records are updated in place; new ones are inserted.
+- `ALLOWED_FOLDERS` in `.env` controls which top-level Rekordbox folders are imported.
 
 ## 3) Quick Dataset Sanity Check
 - Optional: check number of tracks and playlists
 
 ```powershell
-python -c "import json; j=json.load(open('out/tracks.json','r',encoding='utf-8')); print('tracks=',len(j['tracks']),'playlists=',len(j['playlists']))"
+python -c "from src.db.session import SessionLocal; from src.db.models import Track, Playlist; s=SessionLocal(); print('tracks=',s.query(Track).count(),'playlists=',s.query(Playlist).count()); s.close()"
 ```
 
 ## 4) Train Model (Single Split Default Path)
@@ -194,7 +191,7 @@ python src/SimpleAudioCNN.py predict --model-path out/model.pth --track-filter "
 
 ## 7) Typical Update Cycle
 1. Export Rekordbox XML.
-2. Run `parse_rekordbox.py`.
+2. Run `scripts/import_rekordbox.py`.
 3. Train/evaluate.
 4. Compare `out\eval` reports to prior runs.
 5. Keep best model in `out\` and track notes in GitHub issues.

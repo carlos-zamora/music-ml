@@ -1,62 +1,69 @@
 from load_mel import generate_partitions, load_mels
 from torch.utils.data import Dataset
+from sqlalchemy import create_engine, select
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import selectinload
+from db.models import Track, Playlist
 import re
 import time
-import torch, json
+import torch
 
 class PlaylistDataset(Dataset):
-    # Initializes dataset state from parsed library JSON.
+    # Initializes dataset state from pre-loaded lists of Track ORM objects and playlist names.
     # In:
-    # - libraryJson: JSON object loaded from tracks.json.
-    def __init__(self, libraryJson):
-        # idx: simple track ID
-        # val: track info JSON
-        self.trackList = libraryJson['tracks']
+    # - trackList: list of Track ORM objects (with playlists eagerly loaded).
+    # - playlistList: ordered list of playlist name strings.
+    def __init__(self, trackList, playlistList):
+        self.trackList = trackList
 
         # cache of track mel spectograms, maps 1:1 to trackList
         self.mels = [None] * len(self.trackList)
 
-        # idx: simple playlist ID
-        # val: playlist name
-        self.playlistList = []
-        for playlist in libraryJson['playlists']:
-            self.playlistList.append(playlist["name"])
-        
+        self.playlistList = playlistList
+
         # how many items have been retrieved
         # used for debugging
         self.getCount = 0
-    
-    # Loads tracks JSON from disk and constructs a PlaylistDataset.
+
+    # Loads tracks from a SQLite database and constructs a PlaylistDataset.
     # In:
-    # - jsonPath: path to tracks.json.
+    # - db_path: path to the SQLite database file.
     # Out:
     # - PlaylistDataset instance.
     @classmethod
-    def from_json(cls, jsonPath: str):
-        with open(jsonPath, 'r') as f:
-            library = json.load(f)
-        return cls(library)
-    
-    # Finds tracks whose names match a regex.
+    def from_db(cls, db_path: str):
+        engine = create_engine(f"sqlite:///{db_path}", future=True)
+        Session = sessionmaker(bind=engine)
+        with Session() as session:
+            tracks = session.execute(
+                select(Track).options(selectinload(Track.playlists))
+            ).scalars().all()
+            playlists = session.execute(
+                select(Playlist).order_by(Playlist.id)
+            ).scalars().all()
+            playlist_names = [p.name for p in playlists]
+        return cls(list(tracks), playlist_names)
+
+    # Finds tracks whose titles match a regex.
     # In:
-    # - trackNameRegex: regex pattern applied to each track name.
+    # - trackNameRegex: regex pattern applied to each track title.
     # Out:
-    # - list of matching track JSON objects.
+    # - list of matching Track ORM objects.
     def find_tracks(self, trackNameRegex: str):
         results = []
         for track in self.trackList:
-            if re.search(trackNameRegex, track['name']):
+            if re.search(trackNameRegex, track.title):
                 results.append(track)
         return results
 
     # Returns the number of tracks in the dataset.
     def __len__(self):
         return len(self.trackList)
-    
+
     # Returns playlist names where index is the label ID.
     def playlists(self):
         return self.playlistList
-    
+
     # Gets a playlist ID from its name.
     # In:
     # - playlistName: playlist name to look up.
@@ -66,7 +73,7 @@ class PlaylistDataset(Dataset):
         for i in range(0, len(self.playlistList)):
             if playlistName == self.playlistList[i]:
                 return i
-    
+
     # Configures partition sampling for each track.
     # In:
     # - num_of_partitions: number of partitions per track.
@@ -74,11 +81,11 @@ class PlaylistDataset(Dataset):
     def setPartitionConfig(self, num_of_partitions, partition_length):
         self.num_of_partitions = num_of_partitions
         self.partition_length = partition_length
-    
+
     # Resets the getCount tracker to 0.
     def resetCount(self):
         self.getCount = 0
-    
+
     # Loads features and labels for one track index.
     # In:
     # - i: track index in the dataset.
@@ -89,9 +96,9 @@ class PlaylistDataset(Dataset):
         start_time = time.time()
 
         trackInfo = self.trackList[i]
-        trackPlaylists = set(trackInfo['playlists'])
+        trackPlaylists = set(p.name for p in trackInfo.playlists)
 
-        print(f"\t[{self.getCount}] {trackInfo['name']}", end='')
+        print(f"\t[{self.getCount}] {trackInfo.title}", end='')
 
         # load and cache track's mel spectograms
         wasCached = True
@@ -121,7 +128,3 @@ class PlaylistDataset(Dataset):
         else:
             print(f"\t\t{time_span:.2f} seconds")
         return stacked_mels, label
-
-if __name__ == "__main__":
-    ds = PlaylistDataset.from_json('D:\\projects\\music-ml\\out\\tracks.json')
-    print(ds[0])

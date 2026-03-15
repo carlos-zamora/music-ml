@@ -1,10 +1,16 @@
 import os
 import xml.etree.ElementTree as ET
+from urllib.parse import unquote
 from dotenv import load_dotenv
 from sqlalchemy import select
 from src.db.models import Track, Playlist
 from src.db.session import SessionLocal
-from src.parse_rekordbox import normalize_filepath
+
+
+def normalize_filepath(path: str):
+    if path.startswith("file://localhost/"):
+        path = path.removeprefix("file://localhost/")
+    return unquote(path)
 
 load_dotenv()
 
