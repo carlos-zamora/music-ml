@@ -9,8 +9,19 @@ import csv
 import json
 import numpy as np
 import random
+import subprocess
 import torch
 import torch.nn as nn
+
+
+# Returns the current git commit hash, or None if unavailable.
+def get_git_commit() -> str | None:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL
+        ).decode().strip()
+    except Exception:
+        return None
 
 METRIC_DEFINITIONS = {
     "loss": {
@@ -108,7 +119,7 @@ class EvalConfig:
     threshold_max: float = 0.95
     threshold_step: float = 0.01
     recall_guard_min: float = 0.65
-    report_dir: str = "out/runs"
+    report_dir: str = "out"
 
 
 # Converts threshold input into an array of shape (num_classes,).
@@ -823,6 +834,7 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn
 
     summary = {
         "$schema": "./summary.schema.json",
+        "git_commit": get_git_commit(),
         "config": {
             "n_splits": config.n_splits,
             "random_seed": config.random_seed,

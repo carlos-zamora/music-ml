@@ -67,7 +67,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p_train = sub.add_parser("train", parents=[shared])
     p_train.add_argument("--epochs",     type=int,   default=20)
     p_train.add_argument("--batch-size", type=int,   default=16)
-    p_train.add_argument("--report-dir", default="out/runs")
+    p_train.add_argument("--report-dir", default="out")
     p_train.set_defaults(func=cmd_train)
 
     p_kfold = sub.add_parser("kfold", parents=[shared])
@@ -77,7 +77,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p_kfold.add_argument("--lr",         type=float, default=1e-3)
     p_kfold.add_argument("--seed",       type=int,   default=42)
     p_kfold.add_argument("--recall-min", type=float, default=0.65)
-    p_kfold.add_argument("--report-dir", default="out/runs")
+    p_kfold.add_argument("--report-dir", default="out")
     p_kfold.set_defaults(func=cmd_kfold)
 
     p_pred = sub.add_parser("predict", parents=[shared])

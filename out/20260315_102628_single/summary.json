@@ -1,5 +1,6 @@
 {
   "$schema": "./summary.schema.json",
+  "git_commit": "8519e5bdb55555aed8bbfced835941798a8e08f5",
   "mode": "single_split",
   "labels": [
     "Riddim - High Hat",
@@ -90,25 +91,25 @@
     }
   },
   "validation": {
-    "loss": 0.26267007924616337,
+    "loss": 0.21705839037895203,
     "metrics": {
-      "micro_f1": 0.23404255319148937,
-      "macro_f1": 0.06924379915305505,
-      "micro_precision": 0.4852941176470588,
-      "macro_precision": 0.1294903926482874,
-      "micro_recall": 0.1542056074766355,
-      "macro_recall": 0.06944726681568786
+      "micro_f1": 0.25196850393700787,
+      "macro_f1": 0.16359883154405538,
+      "micro_precision": 0.5614035087719298,
+      "macro_precision": 0.4137426900584795,
+      "micro_recall": 0.16243654822335024,
+      "macro_recall": 0.1213800696072164
     }
   },
   "test": {
-    "loss": 0.2504691034555435,
+    "loss": 0.2432506401091814,
     "metrics": {
       "micro_f1": 0.20973782771535582,
-      "macro_f1": 0.036155606407322655,
-      "micro_precision": 0.45161290322580644,
-      "macro_precision": 0.07631578947368421,
-      "micro_recall": 0.13658536585365855,
-      "macro_recall": 0.047177977839335174
+      "macro_f1": 0.09183719723212891,
+      "micro_precision": 0.5185185185185185,
+      "macro_precision": 0.22169059011164274,
+      "micro_recall": 0.13145539906103287,
+      "macro_recall": 0.0672267747732144
     }
   }
 }

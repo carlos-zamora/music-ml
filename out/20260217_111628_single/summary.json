@@ -1,0 +1,47 @@
+{
+  "git_commit": "c37ae3bb67d83f3e4ae9d1e52769ad505ec6639c",
+  "mode": "single_split",
+  "labels": [
+    "Riddim - High Hat",
+    "Riddim - Deep Dub",
+    "Riddim - Vocals",
+    "Riddim - Chill",
+    "Riddim - GWN/BT Style",
+    "Riddim - Wubz",
+    "Riddim - Medium",
+    "Riddim - Womps",
+    "Riddim - Heavy",
+    "Riddim - 4s",
+    "Riddim - 8s",
+    "Clubstep",
+    "Deadly Dubstep",
+    "Dubstep",
+    "Funkstep",
+    "Headbanger",
+    "Jazzstep",
+    "Metalstep",
+    "Wubzstep"
+  ],
+  "validation": {
+    "loss": 0.24658546037971973,
+    "metrics": {
+      "micro_f1": 0.09606986899563319,
+      "macro_f1": 0.03508771929824561,
+      "micro_precision": 0.4583333333333333,
+      "macro_precision": 0.06001846722068329,
+      "micro_recall": 0.05365853658536585,
+      "macro_recall": 0.025229741019214703
+    }
+  },
+  "test": {
+    "loss": 0.2582712545990944,
+    "metrics": {
+      "micro_f1": 0.14049586776859505,
+      "macro_f1": 0.030701754385964914,
+      "micro_precision": 0.6296296296296297,
+      "macro_precision": 0.08771929824561403,
+      "micro_recall": 0.07906976744186046,
+      "macro_recall": 0.02334096109839817
+    }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "$schema": "./summary.schema.json",
+  "git_commit": "c37ae3bb67d83f3e4ae9d1e52769ad505ec6639c",
   "config": {
     "n_splits": 3,
     "random_seed": 42,

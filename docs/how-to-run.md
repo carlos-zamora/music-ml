@@ -65,8 +65,8 @@ python scripts/run.py train
 - Options (all optional):
   - `--epochs` (default: `20`)
   - `--batch-size` (default: `16`)
-  - `--report-dir` (default: `out/runs`)
-- Outputs in `out\runs\<timestamp>_single\`:
+  - `--report-dir` (default: `out`)
+- Outputs in `out\<timestamp>_single\`:
   - `model.pth`
   - `summary.json`
   - `per_playlist_metrics.csv` (includes TP/FP/TN/FN per playlist)
@@ -88,13 +88,13 @@ python scripts/run.py kfold
 | `--lr` | `1e-3` | Optimizer learning rate |
 | `--seed` | `42` | Seed for deterministic splits |
 | `--recall-min` | `0.65` | Minimum recall for guarded playlists |
-| `--report-dir` | `out/runs` | Output directory for reports |
+| `--report-dir` | `out` | Output directory for reports |
 
-- K-fold outputs go to `out\runs\<timestamp>\`.
+- K-fold outputs go to `out\<timestamp>\`.
 
 ## 5a) Understanding Evaluation Output
 
-Both single-split and k-fold runs write evaluation artifacts under `out\runs\...`.
+Both single-split and k-fold runs write evaluation artifacts under `out\...`.
 
 ### `summary.json`
 
@@ -182,7 +182,7 @@ How to use it:
 - Run:
 
 ```powershell
-python scripts/run.py predict --model out/runs/<timestamp>_single/model.pth --filter "Riddim"
+python scripts/run.py predict --model out/<timestamp>_single/model.pth --filter "Riddim"
 ```
 
 - `--model`: path to a saved `.pth` model file (required)
@@ -192,5 +192,5 @@ python scripts/run.py predict --model out/runs/<timestamp>_single/model.pth --fi
 1. Export Rekordbox XML.
 2. Run `scripts/import_rekordbox.py`.
 3. Train/evaluate.
-4. Compare `out\runs` reports to prior runs.
-5. Keep best model in its run directory under `out\runs\` and track notes in GitHub issues.
+4. Compare `out\` reports to prior runs.
+5. Keep best model in its run directory under `out\` and track notes in GitHub issues.

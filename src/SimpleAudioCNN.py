@@ -2,6 +2,7 @@ from PlaylistDataset import PlaylistDataset
 from evaluation import (
     EvalConfig,
     evaluate,
+    get_git_commit,
     get_metric_definitions,
     run_kfold_evaluation,
     train_epoch,
@@ -22,6 +23,7 @@ from terminal import (
 from torch.utils.data import DataLoader, random_split
 from datetime import datetime
 from pathlib import Path
+import csv
 import time
 import torch
 import torch.nn as nn
@@ -121,6 +123,7 @@ def write_single_split_reports(labels, val_details, test_details, out_dir: Path)
 
     summary = {
         "$schema": "./summary.schema.json",
+        "git_commit": get_git_commit(),
         "mode": "single_split",
         "labels": labels,
         "metric_definitions": get_metric_definitions(),

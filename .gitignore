@@ -12,7 +12,3 @@ build/
 # Data
 data/*.db
 data/artifacts/
-
-# Evaluation runs
-out/eval/20260217_194206/
-out/eval/20260217_111628_single/

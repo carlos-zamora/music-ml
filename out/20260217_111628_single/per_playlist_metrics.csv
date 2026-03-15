@@ -1,0 +1,39 @@
+playlist,support,threshold,precision,recall,f1,tp,fp,tn,fn,fold
+Riddim - High Hat,9,0.5,0.6666666666666666,0.2222222222222222,0.3333333333333333,2,1,113,7,validation
+Riddim - Deep Dub,6,0.5,0.0,0.0,0.0,0,1,116,6,validation
+Riddim - Vocals,6,0.5,0.0,0.0,0.0,0,0,117,6,validation
+Riddim - Chill,10,0.5,0.0,0.0,0.0,0,0,113,10,validation
+Riddim - GWN/BT Style,9,0.5,0.0,0.0,0.0,0,0,114,9,validation
+Riddim - Wubz,1,0.5,0.0,0.0,0.0,0,0,122,1,validation
+Riddim - Medium,24,0.5,0.0,0.0,0.0,0,0,99,24,validation
+Riddim - Womps,11,0.5,0.0,0.0,0.0,0,0,112,11,validation
+Riddim - Heavy,9,0.5,0.0,0.0,0.0,0,0,114,9,validation
+Riddim - 4s,8,0.5,0.0,0.0,0.0,0,0,115,8,validation
+Riddim - 8s,1,0.5,0.0,0.0,0.0,0,0,122,1,validation
+Clubstep,3,0.5,0.0,0.0,0.0,0,0,120,3,validation
+Deadly Dubstep,6,0.5,0.0,0.0,0.0,0,0,117,6,validation
+Dubstep,22,0.5,0.0,0.0,0.0,0,0,101,22,validation
+Funkstep,10,0.5,0.0,0.0,0.0,0,0,113,10,validation
+Headbanger,19,0.5,0.0,0.0,0.0,0,0,104,19,validation
+Jazzstep,8,0.5,0.0,0.0,0.0,0,1,114,8,validation
+Metalstep,8,0.5,0.0,0.0,0.0,0,0,115,8,validation
+Wubzstep,35,0.5,0.47368421052631576,0.2571428571428571,0.3333333333333333,9,10,78,26,validation
+Riddim - High Hat,2,0.5,0.0,0.0,0.0,0,1,121,2,test
+Riddim - Deep Dub,4,0.5,0.0,0.0,0.0,0,0,120,4,test
+Riddim - Vocals,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Riddim - Chill,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Riddim - GWN/BT Style,6,0.5,0.0,0.0,0.0,0,0,118,6,test
+Riddim - Wubz,8,0.5,0.0,0.0,0.0,0,0,116,8,test
+Riddim - Medium,34,0.5,0.0,0.0,0.0,0,0,90,34,test
+Riddim - Womps,14,0.5,0.0,0.0,0.0,0,0,110,14,test
+Riddim - Heavy,6,0.5,0.0,0.0,0.0,0,0,118,6,test
+Riddim - 4s,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Riddim - 8s,4,0.5,0.0,0.0,0.0,0,0,120,4,test
+Clubstep,2,0.5,0.0,0.0,0.0,0,0,122,2,test
+Deadly Dubstep,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Dubstep,23,0.5,1.0,0.043478260869565216,0.08333333333333333,1,0,101,22,test
+Funkstep,9,0.5,0.0,0.0,0.0,0,0,115,9,test
+Headbanger,16,0.5,0.0,0.0,0.0,0,1,107,16,test
+Jazzstep,6,0.5,0.0,0.0,0.0,0,0,118,6,test
+Metalstep,5,0.5,0.0,0.0,0.0,0,0,119,5,test
+Wubzstep,40,0.5,0.6666666666666666,0.4,0.5,16,8,76,24,test
