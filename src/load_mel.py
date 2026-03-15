@@ -26,7 +26,7 @@ def generate_partitions(track, num_of_partitions, partition_length):
     # figure out step size from usable amount of the track
     # we don't want the partition to extend past the end of the track
     usable_length = trackLength - partition_length
-    step_size = usable_length / (num_of_partitions - 1)
+    step_size = usable_length / (num_of_partitions - 1) if num_of_partitions > 1 else 0
     for i in range(num_of_partitions):
         pos = i * step_size
         partitions.append(Partition(pos, partition_length))

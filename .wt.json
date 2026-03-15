@@ -20,6 +20,21 @@
       "name": "Alembic: show migration history",
       "description": "Lists all migrations in order, showing which have been applied.",
       "input": "alembic history --verbose\r"
+    },
+    {
+      "name": "pytest: run all tests",
+      "description": "Runs the full test suite.",
+      "input": "pytest\r"
+    },
+    {
+      "name": "pytest: run with coverage",
+      "description": "Runs all tests and prints a line-by-line coverage report for src/.",
+      "input": "pytest --cov=src --cov-report=term-missing\r"
+    },
+    {
+      "name": "pytest: run one file",
+      "description": "Runs a single test file. Replace the filename as needed.",
+      "input": "pytest tests/test_artist_vocab.py"
     }
   ]
 }
