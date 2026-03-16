@@ -5,7 +5,7 @@ from unittest.mock import patch
 from PlaylistDataset import PlaylistDataset
 
 
-def make_track(title, artist, playlists=None):
+def make_track(title, artist, playlists=None, bpm=140.0, musical_key="7A"):
     playlist_ns = [types.SimpleNamespace(name=p) for p in (playlists or [])]
     return types.SimpleNamespace(
         title=title,
@@ -13,7 +13,10 @@ def make_track(title, artist, playlists=None):
         path="/fake/audio.mp3",
         length=180,
         sample_rate=44100,
+        bpm=bpm,
+        musical_key=musical_key,
         playlists=playlist_ns,
+        markers=[],
     )
 
 
@@ -48,7 +51,7 @@ def test_label_tensor_encodes_membership(sample_dataset):
     sample_dataset.setPartitionConfig(5, 10)
     with patch("load_mel.librosa.load", return_value=(np.zeros(44100 * 10), 44100)):
         with patch("terminal.print_track_row"):
-            mels, artist_idx, label = sample_dataset[0]
+            mels, artist_idx, bpm, key_idx, label = sample_dataset[0]
 
     rock_idx = sample_dataset.playlists().index("Rock")
     jazz_idx = sample_dataset.playlists().index("Jazz")

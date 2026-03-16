@@ -85,14 +85,29 @@ def epoch_progress(total_batches: int, label: str = "Training"):
 # In:
 # - count: current item count (1-based).
 # - total: total items in the dataset.
-# - title: track title (truncated to 45 chars with ellipsis if longer).
+# - title: track title (truncated to 32 chars with ellipsis if longer).
+# - artist: track artist (truncated to 18 chars with ellipsis if longer).
+# - bpm: track BPM (float or None).
+# - key: Camelot key string (e.g. "7A") or None.
 # - elapsed: load time in seconds; ignored when cached is True.
 # - cached: whether the mel was served from the in-memory cache.
-def print_track_row(count: int, total: int, title: str, elapsed: float, cached: bool) -> None:
-    truncated = (title[:44] + "…") if len(title) > 45 else title
-    time_str = "    --" if cached else f"{elapsed:>6.2f}s"
-    cache_str = "  [dim]cached[/dim]" if cached else ""
-    _console.print(f"[{count:>3}/{total:>3}] {truncated:<46}{time_str}{cache_str}")
+def print_track_row(count: int, total: int, title: str, artist: str,
+                    bpm: float | None, key: str | None,
+                    elapsed: float, cached: bool) -> None:
+    title_str  = (title[:31]  + "…") if len(title)  > 32 else title
+    artist_str = (artist[:17] + "…") if len(artist) > 18 else artist
+    bpm_str    = f"{int(round(bpm)):>3}" if bpm else "---"
+    key_str    = f"{key:<3}" if key else " --"
+    time_str   = "    --" if cached else f"{elapsed:>6.2f}s"
+    cache_str  = "  [dim]cached[/dim]" if cached else ""
+    _console.print(
+        f"[dim][{count:>{len(str(total))}}/{total}][/dim]"
+        f"  ♪ {title_str:<32}"
+        f"  [cyan]{artist_str:<18}[/cyan]"
+        f"  ♩ [yellow]{bpm_str}[/yellow]"
+        f"  [magenta]{key_str}[/magenta]"
+        f"  {time_str}{cache_str}"
+    )
 
 
 # Prints one training epoch summary row and sets a terminal mark.

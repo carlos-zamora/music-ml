@@ -44,3 +44,47 @@ def test_single_partition_no_crash(track):
     result = generate_partitions(track, num_of_partitions=1, partition_length=10)
     assert len(result) == 1
     assert result[0].position == 0.0
+
+
+# --- marker-based partitions ---
+
+def test_markers_used_when_sufficient(track):
+    markers = [10.0, 50.0, 90.0, 130.0, 160.0]
+    result = generate_partitions(track, num_of_partitions=5, partition_length=10, marker_positions=markers)
+    positions = [p.position for p in result]
+    assert positions == pytest.approx(sorted(markers))
+
+
+def test_markers_sorted_before_selection(track):
+    # Unsorted markers — function should sort and take first N
+    markers = [160.0, 10.0, 90.0, 50.0, 130.0]
+    result = generate_partitions(track, num_of_partitions=3, partition_length=10, marker_positions=markers)
+    assert result[0].position == pytest.approx(10.0)
+    assert result[1].position == pytest.approx(50.0)
+    assert result[2].position == pytest.approx(90.0)
+
+
+def test_marker_clamped_when_past_track_end(track):
+    # Marker at 175s with partition_length=10 → max_start = 170
+    markers = [175.0, 50.0, 90.0, 130.0, 10.0]
+    result = generate_partitions(track, num_of_partitions=5, partition_length=10, marker_positions=markers)
+    for p in result:
+        assert p.position + p.length <= track.length
+
+
+def test_markers_ignored_when_fewer_than_requested(track):
+    # Only 3 markers but 5 partitions requested → equidistant fallback
+    markers = [10.0, 50.0, 90.0]
+    result = generate_partitions(track, num_of_partitions=5, partition_length=10, marker_positions=markers)
+    # Equidistant: usable=170, step=42.5
+    assert result[0].position == pytest.approx(0.0)
+    assert result[1].position == pytest.approx(42.5)
+
+
+def test_empty_markers_uses_equidistant(track):
+    result_no_markers  = generate_partitions(track, num_of_partitions=5, partition_length=10)
+    result_empty_list  = generate_partitions(track, num_of_partitions=5, partition_length=10, marker_positions=[])
+    result_none        = generate_partitions(track, num_of_partitions=5, partition_length=10, marker_positions=None)
+    for a, b, c in zip(result_no_markers, result_empty_list, result_none):
+        assert a.position == pytest.approx(b.position)
+        assert a.position == pytest.approx(c.position)

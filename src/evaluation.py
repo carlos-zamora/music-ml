@@ -164,14 +164,14 @@ def train_epoch(model, loader, optimizer, criterion, device=None, on_batch=None)
 
     model.train()
     total_loss = 0.0
-    for x, artist_idx, artist_mask, y in loader:
+    for x, artist_idx, artist_mask, bpm, key_idx, y in loader:
         x, batch_size, num_partitions = _reshape_partition_batch(x)
-        x, artist_idx, artist_mask, y = x.to(device), artist_idx.to(device), artist_mask.to(device), y.to(device)
+        x, artist_idx, artist_mask, bpm, key_idx, y = x.to(device), artist_idx.to(device), artist_mask.to(device), bpm.to(device), key_idx.to(device), y.to(device)
 
         optimizer.zero_grad()
         audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
         audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
-        logits = model.classify(audio_feat, artist_idx, artist_mask)
+        logits = model.classify(audio_feat, artist_idx, bpm, key_idx, artist_mask)
 
         loss = criterion(logits, y)
         loss.backward()
@@ -200,13 +200,13 @@ def collect_outputs(model, loader, criterion, device=None):
     total_loss = 0.0
     all_probs, all_labels = [], []
     with torch.no_grad():
-        for x, artist_idx, artist_mask, y in loader:
+        for x, artist_idx, artist_mask, bpm, key_idx, y in loader:
             x, batch_size, num_partitions = _reshape_partition_batch(x)
-            x, artist_idx, artist_mask, y = x.to(device), artist_idx.to(device), artist_mask.to(device), y.to(device)
+            x, artist_idx, artist_mask, bpm, key_idx, y = x.to(device), artist_idx.to(device), artist_mask.to(device), bpm.to(device), key_idx.to(device), y.to(device)
 
             audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
             audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
-            logits = model.classify(audio_feat, artist_idx, artist_mask)
+            logits = model.classify(audio_feat, artist_idx, bpm, key_idx, artist_mask)
             loss = criterion(logits, y)
             total_loss += loss.item()
 
