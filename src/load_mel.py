@@ -13,24 +13,28 @@ class Partition:
         self.position = position
         self.length = length
 
-# Generates a list of Parititions for the given track
+# Generates a list of Partitions for the given track.
+# Uses marker positions when enough are available, otherwise falls back to
+# equidistant partitions.
 # In:
 # - num_of_partitions: how many partitions we want
-# - partition_length: the length of each partition
+# - partition_length: the length of each partition in seconds
+# - marker_positions: optional list of marker positions in seconds; if at least
+#   num_of_partitions markers are provided they are used instead of equidistant spacing
 # Out:
 # - partitions: list of partitions of the given track
-def generate_partitions(track, num_of_partitions, partition_length):
-    partitions = []
+def generate_partitions(track, num_of_partitions, partition_length, marker_positions=None):
     trackLength = track.length
-    
-    # figure out step size from usable amount of the track
-    # we don't want the partition to extend past the end of the track
+    max_start = trackLength - partition_length
+
+    if marker_positions and len(marker_positions) >= num_of_partitions:
+        sorted_positions = sorted(marker_positions)[:num_of_partitions]
+        return [Partition(max(0.0, min(pos, max_start)), partition_length) for pos in sorted_positions]
+
+    # Equidistant fallback
     usable_length = trackLength - partition_length
     step_size = usable_length / (num_of_partitions - 1) if num_of_partitions > 1 else 0
-    for i in range(num_of_partitions):
-        pos = i * step_size
-        partitions.append(Partition(pos, partition_length))
-    return partitions
+    return [Partition(i * step_size, partition_length) for i in range(num_of_partitions)]
 
 # Calculates the mel spectogram of several partitions of an audio file
 # In:

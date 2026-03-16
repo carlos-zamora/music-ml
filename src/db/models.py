@@ -26,6 +26,9 @@ class Track(Base):
     playlists: Mapped[list["Playlist"]] = relationship(
         secondary=track_playlists, back_populates="tracks"
     )
+    markers: Mapped[list["TrackMarker"]] = relationship(
+        "TrackMarker", back_populates="track", cascade="all, delete-orphan"
+    )
 
 class Playlist(Base):
     __tablename__ = "playlists"
@@ -35,3 +38,12 @@ class Playlist(Base):
     tracks: Mapped[list["Track"]] = relationship(
         secondary=track_playlists, back_populates="playlists"
     )
+
+class TrackMarker(Base):
+    __tablename__ = "track_markers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    track_id: Mapped[int] = mapped_column(Integer, ForeignKey("tracks.id"), nullable=False)
+    position_seconds: Mapped[float] = mapped_column(Float, nullable=False)
+    name: Mapped[str | None] = mapped_column(String, nullable=True)
+    track: Mapped["Track"] = relationship(back_populates="markers")

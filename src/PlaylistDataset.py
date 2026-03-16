@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import selectinload
-from db.models import Track, Playlist
+from db.models import Track, Playlist, TrackMarker
 import re
 import time
 import torch
@@ -39,7 +39,10 @@ class PlaylistDataset(Dataset):
         Session = sessionmaker(bind=engine)
         with Session() as session:
             tracks = session.execute(
-                select(Track).options(selectinload(Track.playlists))
+                select(Track).options(
+                    selectinload(Track.playlists),
+                    selectinload(Track.markers),
+                )
             ).scalars().all()
             playlists = session.execute(
                 select(Playlist).order_by(Playlist.id)
@@ -105,7 +108,8 @@ class PlaylistDataset(Dataset):
         wasCached = True
         mels = self.mels[i]
         if mels is None:
-            partitions = generate_partitions(trackInfo, self.num_of_partitions, self.partition_length)
+            marker_positions = [m.position_seconds for m in trackInfo.markers] or None
+            partitions = generate_partitions(trackInfo, self.num_of_partitions, self.partition_length, marker_positions)
             mels = load_mels(trackInfo, partitions)
             self.mels[i] = mels
             wasCached = False

@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from urllib.parse import unquote
 from dotenv import load_dotenv
 from sqlalchemy import select
-from src.db.models import Track, Playlist
+from src.db.models import Track, Playlist, TrackMarker
 from src.db.session import SessionLocal
 from src.terminal import print_import_summary
 
@@ -69,6 +69,17 @@ def parse_xml(xml_path, allowed_folders):
         loc = t.get("Location")
         if loc.endswith(".m4a"):
             continue
+        seen_positions = set()
+        markers = []
+        for pm in t.findall("POSITION_MARK"):
+            start = pm.get("Start")
+            if start is None:
+                continue
+            pos = float(start)
+            if pos not in seen_positions:
+                seen_positions.add(pos)
+                markers.append({"position_seconds": pos, "name": pm.get("Name")})
+
         tracks_data.append({
             "rekordbox_id": tid,
             "title": t.get("Name"),
@@ -79,6 +90,7 @@ def parse_xml(xml_path, allowed_folders):
             "length": int(t.get("TotalTime")),
             "sample_rate": int(t.get("SampleRate")),
             "playlist_names": track_id_to_playlists[tid],
+            "markers": markers,
         })
 
     return tracks_data, playlists_data
@@ -97,9 +109,9 @@ def upsert_track(session, data):
     if track is None:
         track = Track()
         session.add(track)
-    # Set all scalar fields; playlist_names is handled separately via the relationship.
+    # Set all scalar fields; playlist_names and markers are handled separately.
     for k, v in data.items():
-        if k != "playlist_names":
+        if k not in ("playlist_names", "markers"):
             setattr(track, k, v)
     return track
 
@@ -118,6 +130,23 @@ def upsert_playlist(session, name):
     return pl
 
 
+# Replaces all markers for a track with the provided list.
+# In:
+# - session: active SQLAlchemy session.
+# - track: Track ORM object (must have id assigned).
+# - marker_list: list of dicts with "position_seconds" and "name" keys.
+def upsert_markers(session, track, marker_list):
+    for existing in track.markers:
+        session.delete(existing)
+    session.flush()
+    for m in marker_list:
+        session.add(TrackMarker(
+            track_id=track.id,
+            position_seconds=m["position_seconds"],
+            name=m["name"],
+        ))
+
+
 def main():
     tracks_data, playlists_data = parse_xml(XML_PATH, ALLOWED_FOLDERS)
 
@@ -131,6 +160,7 @@ def main():
             # write to the track_playlists join table.
             session.flush()
             track.playlists = [playlist_map[n] for n in td["playlist_names"]]
+            upsert_markers(session, track, td["markers"])
 
         session.commit()
         print_import_summary(len(tracks_data), len(playlists_data))
