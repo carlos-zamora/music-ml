@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install librosa sqlalchemy scikit-learn pytest pytest-cov
+          pip install librosa sqlalchemy scikit-learn rich pytest pytest-cov
 
       - name: Run tests
         run: pytest

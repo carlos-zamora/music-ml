@@ -35,6 +35,31 @@
       "name": "pytest: run one file",
       "description": "Runs a single test file. Replace the filename as needed.",
       "input": "pytest tests/test_artist_vocab.py"
+    },
+    {
+      "name": "run: train",
+      "description": "Single-split training run. Trains for 20 epochs and saves model \u002B eval artifacts to out/.",
+      "input": "python scripts/run.py train\r"
+    },
+    {
+      "name": "run: kfold",
+      "description": "K-fold cross-validation (3 folds, 5 epochs each). Writes eval artifacts to out/.",
+      "input": "python scripts/run.py kfold\r"
+    },
+    {
+      "name": "run: predict",
+      "description": "Run inference on tracks matching a regex. Replace the model path and filter as needed.",
+      "input": "python scripts/run.py predict --model out/\u003Crun\u003E/model.pth --filter \u0022track title\u0022"
+    },
+    {
+      "name": "run: import rekordbox",
+      "description": "Parses rekordbox.xml and upserts tracks, playlists, and markers into the database.",
+      "input": "python scripts/import_rekordbox.py\r"
+    },
+    {
+      "name": "run: init db",
+      "description": "Creates (or updates) the SQLite schema. Safe to re-run \u2014 only adds missing tables.",
+      "input": "python scripts/init_db.py\r"
     }
   ]
 }
