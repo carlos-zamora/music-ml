@@ -1,4 +1,7 @@
-BPM_MAX = 250.0
+import math
+
+BPM_MIN = 100.0
+BPM_RANGE = 100.0  # covers 100–200 BPM
 CAMELOT_SIZE = 24  # 1A-12A = 1-12, 1B-12B = 13-24, 0 = unknown
 
 # Standard pitch notation to Camelot string.
@@ -78,12 +81,32 @@ def encode_camelot_key(key: str | None) -> int:
     return 0
 
 
-# Normalizes a BPM value to [0, 1].
+# Encodes BPM as a 2-float vector [normalized_bpm, bpm_known].
+# Normalizes against the 100–200 BPM range typical of this genre.
 # In:
 # - bpm: BPM float or None.
 # Out:
-# - normalized float in [0, 1]; 0.0 for unknown.
-def normalize_bpm(bpm: float | None) -> float:
+# - [normalized, known]: normalized in [0, 1], known is 1.0 if bpm is present else 0.0.
+def normalize_bpm(bpm: float | None) -> list[float]:
     if bpm is None:
-        return 0.0
-    return min(float(bpm) / BPM_MAX, 1.0)
+        return [0.0, 0.0]
+    normalized = max(0.0, min((float(bpm) - BPM_MIN) / BPM_RANGE, 1.0))
+    return [normalized, 1.0]
+
+
+# Encodes a musical key as a 4-float circular vector [sin, cos, mode, known].
+# The Camelot number (1–12) is mapped onto a unit circle so that adjacent positions
+# are geometrically close, including the wrap-around from 12 back to 1.
+# In:
+# - key: key string (Camelot or standard pitch notation) or None.
+# Out:
+# - [sin, cos, mode, known]: mode is 0.0 for minor (A), 1.0 for major (B);
+#   known is 1.0 if the key was parsed successfully, 0.0 otherwise.
+def encode_key_circular(key: str | None) -> list[float]:
+    idx = encode_camelot_key(key)
+    if idx == 0:
+        return [0.0, 0.0, 0.0, 0.0]
+    num = idx if idx <= 12 else idx - 12   # 1..12 (Camelot position)
+    mode = 0.0 if idx <= 12 else 1.0       # 0 = minor/A, 1 = major/B
+    angle = 2 * math.pi * (num - 1) / 12
+    return [math.sin(angle), math.cos(angle), mode, 1.0]

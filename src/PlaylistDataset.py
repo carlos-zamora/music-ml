@@ -1,6 +1,6 @@
 from load_mel import generate_partitions, load_mels
 from terminal import print_track_row
-from track_features import encode_camelot_key, normalize_bpm
+from track_features import encode_key_circular, normalize_bpm
 from torch.utils.data import Dataset
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
@@ -129,10 +129,10 @@ class PlaylistDataset(Dataset):
                 label[self._getPlaylistId(playlistName)] = 1.0
 
         artist_indices = self.vocab.encode_all(trackInfo.artist, trackInfo.title)
-        bpm = torch.tensor([normalize_bpm(trackInfo.bpm)], dtype=torch.float32)
-        key_idx = torch.tensor(encode_camelot_key(trackInfo.musical_key), dtype=torch.long)
+        bpm = torch.tensor(normalize_bpm(trackInfo.bpm), dtype=torch.float32)
+        key_feat = torch.tensor(encode_key_circular(trackInfo.musical_key), dtype=torch.float32)
 
         time_span = time.time() - start_time
         print_track_row(self.getCount, len(self.trackList), trackInfo.title, trackInfo.artist,
                         trackInfo.bpm, trackInfo.musical_key, time_span, wasCached)
-        return stacked_mels, artist_indices, bpm, key_idx, label
+        return stacked_mels, artist_indices, bpm, key_feat, label

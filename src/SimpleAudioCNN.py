@@ -28,7 +28,7 @@ import time
 import torch
 import torch.nn as nn
 from load_mel import load_mel
-from track_features import encode_camelot_key, normalize_bpm
+from track_features import encode_key_circular, normalize_bpm
 
 class SimpleAudioCNN(nn.Module):
     # Defines a CNN for mel-spectrogram multi-label classification with artist, key, and BPM features.
@@ -36,8 +36,7 @@ class SimpleAudioCNN(nn.Module):
     # - num_classes: number of playlist labels to predict.
     # - num_artists: artist vocab size (including OOV at index 0).
     # - artist_embed_dim: dimensionality of the artist embedding.
-    # - key_embed_dim: dimensionality of the Camelot key embedding.
-    def __init__(self, num_classes, num_artists, artist_embed_dim=32, key_embed_dim=8):
+    def __init__(self, num_classes, num_artists, artist_embed_dim=32):
         super().__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(1,32,3,padding=1), nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),
@@ -45,9 +44,9 @@ class SimpleAudioCNN(nn.Module):
             nn.Conv2d(64,128,3,padding=1), nn.BatchNorm2d(128), nn.ReLU(), nn.AdaptiveAvgPool2d((1,1))
         )
         self.artist_embed = nn.Embedding(num_artists, artist_embed_dim, padding_idx=0)
-        self.key_embed = nn.Embedding(25, key_embed_dim, padding_idx=0)  # 0=unknown, 1-24=camelot
         self.dropout = nn.Dropout(0.3)
-        self.classifier = nn.Linear(128 + artist_embed_dim + key_embed_dim + 1, num_classes)
+        # 128 audio + 32 artist + 4 key (sin, cos, mode, known) + 2 bpm (normalized, known)
+        self.classifier = nn.Linear(128 + artist_embed_dim + 4 + 2, num_classes)
 
     # Encodes audio through the CNN backbone.
     # In:
@@ -57,16 +56,16 @@ class SimpleAudioCNN(nn.Module):
     def encode_audio(self, x):
         return self.conv(x).flatten(1)
 
-    # Fuses audio features with artist embedding, Camelot key embedding, and BPM.
+    # Fuses audio features with artist embedding, circular key encoding, and BPM.
     # In:
     # - audio_feat: tensor (batch, 128).
     # - artist_idx: tensor shaped (batch, max_artists); use (batch, 1) for single-artist.
-    # - bpm: float tensor shaped (batch, 1) with normalized BPM values.
-    # - key_idx: long tensor shaped (batch,) with Camelot key indices (0=unknown).
+    # - bpm: float tensor shaped (batch, 2) with [normalized_bpm, bpm_known].
+    # - key_feat: float tensor shaped (batch, 4) with [sin, cos, mode, known].
     # - artist_mask: bool tensor (batch, max_artists) or None when artist_idx is (batch, 1).
     # Out:
     # - logits shaped (batch, num_classes).
-    def classify(self, audio_feat, artist_idx, bpm, key_idx, artist_mask=None):
+    def classify(self, audio_feat, artist_idx, bpm, key_feat, artist_mask=None):
         emb = self.artist_embed(artist_idx)          # (batch, max_artists, 32) or (batch, 32)
         if artist_mask is not None:
             emb = emb * artist_mask.unsqueeze(-1).float()
@@ -74,20 +73,19 @@ class SimpleAudioCNN(nn.Module):
             emb = emb.sum(dim=1) / counts            # masked mean → (batch, 32)
         else:
             emb = emb.squeeze(1)                     # (batch, 1, 32) → (batch, 32)
-        key_emb = self.key_embed(key_idx)            # (batch, 8)
-        fused = torch.cat([audio_feat, emb, bpm, key_emb], dim=1)
+        fused = torch.cat([audio_feat, emb, bpm, key_feat], dim=1)
         return self.classifier(self.dropout(fused))
 
     # Runs a forward pass for the single-partition predict path.
     # In:
     # - x: tensor shaped (batch, 1, mel_height, mel_width).
     # - artist_idx: tensor shaped (batch,).
-    # - bpm: float tensor shaped (batch, 1).
-    # - key_idx: long tensor shaped (batch,).
+    # - bpm: float tensor shaped (batch, 2).
+    # - key_feat: float tensor shaped (batch, 4).
     # Out:
     # - logits shaped (batch, num_classes).
-    def forward(self, x, artist_idx, bpm, key_idx):
-        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1), bpm, key_idx)
+    def forward(self, x, artist_idx, bpm, key_feat):
+        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1), bpm, key_feat)
 
 
 # Predicts playlist probabilities for one track.
@@ -103,11 +101,11 @@ def predict(track, model, labels, vocab):
     mel = load_mel(track)
     x = torch.tensor(mel).unsqueeze(0).unsqueeze(0).to(torch.device("cpu"))
     artist_idx = torch.tensor([vocab.encode(track.artist)], dtype=torch.long)
-    bpm = torch.tensor([[normalize_bpm(track.bpm)]], dtype=torch.float32)
-    key_idx = torch.tensor([encode_camelot_key(track.musical_key)], dtype=torch.long)
+    bpm = torch.tensor([normalize_bpm(track.bpm)], dtype=torch.float32)
+    key_feat = torch.tensor([encode_key_circular(track.musical_key)], dtype=torch.float32)
 
     with torch.no_grad():
-        logits = model(x, artist_idx, bpm, key_idx)
+        logits = model(x, artist_idx, bpm, key_feat)
         probs = torch.sigmoid(logits).cpu().numpy()[0]
 
     results = [(labels[i], float(p)) for i, p in enumerate(probs)]

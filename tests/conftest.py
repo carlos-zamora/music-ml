@@ -47,6 +47,6 @@ def tiny_model_inputs():
     return {
         "x":          torch.randn(4, 1, 128, 938),
         "artist_idx": torch.zeros(4, dtype=torch.long),
-        "bpm":        torch.tensor([[0.6], [0.5], [0.7], [0.4]]),
-        "key_idx":    torch.tensor([7, 12, 0, 3], dtype=torch.long),
+        "bpm":        torch.tensor([[0.6, 1.0], [0.5, 1.0], [0.7, 1.0], [0.0, 0.0]]),
+        "key_feat":   torch.tensor([[0.0, 1.0, 0.0, 1.0], [0.5, 0.866, 1.0, 1.0], [0.0, 0.0, 0.0, 0.0], [0.866, 0.5, 0.0, 1.0]]),
     }
