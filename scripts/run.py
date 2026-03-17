@@ -74,7 +74,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p_train.set_defaults(func=cmd_train)
 
     p_kfold = sub.add_parser("kfold", parents=[shared])
-    p_kfold.add_argument("--epochs",     type=int,   default=5)
+    p_kfold.add_argument("--epochs",     type=int,   default=15)
     p_kfold.add_argument("--folds",      type=int,   default=3)
     p_kfold.add_argument("--batch-size", type=int,   default=16)
     p_kfold.add_argument("--lr",         type=float, default=1e-3)

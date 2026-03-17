@@ -111,7 +111,7 @@ class EvalConfig:
     n_splits: int = 3
     random_seed: int = 42
     batch_size: int = 16
-    epochs: int = 5
+    epochs: int = 15
     learning_rate: float = 1e-3
     val_fraction_within_fold: float = 0.1
     default_threshold: float = 0.5
