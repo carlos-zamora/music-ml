@@ -24,6 +24,7 @@ class PlaylistDataset(Dataset):
 
         self.playlistList = playlistList
         self.vocab = vocab
+        self.cache_dir = None
 
         # how many items have been retrieved
         # used for debugging
@@ -111,7 +112,7 @@ class PlaylistDataset(Dataset):
         if mels is None:
             marker_positions = [m.position_seconds for m in trackInfo.markers] or None
             partitions = generate_partitions(trackInfo, self.num_of_partitions, self.partition_length, marker_positions)
-            mels = load_mels(trackInfo, partitions)
+            mels = load_mels(trackInfo, partitions, cache_dir=self.cache_dir)
             self.mels[i] = mels
             wasCached = False
 

@@ -1,4 +1,5 @@
 import librosa, numpy as np
+from pathlib import Path
 
 DEFAULT_TARGET_WIDTH = 938
 DEFAULT_PARTITION_DURATION = 10
@@ -41,24 +42,36 @@ def generate_partitions(track, num_of_partitions, partition_length, marker_posit
 # - track: Track ORM object
 # - partitions: list of Partition objects denoting which segments of the track to load
 # - target_width: desired width of the mel spectogram
+# - cache_dir: optional path to a directory for persisted .npy mel cache files
 # Out:
 # - mels: list of calculated mel spectograms (maps 1:1 to partitions)
-def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH):
+def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH, cache_dir=None):
     mels = []
     for partition in partitions:
         mels.append(load_mel(track,
                              partition.position,
                              partition.length,
-                             target_width))
+                             target_width,
+                             cache_dir=cache_dir))
     return mels
 
-# Calculate the mel spectrogram of an audio file
+# Calculate the mel spectrogram of an audio file.
+# When cache_dir is provided, reads from a persisted .npy file if one exists for this
+# track+offset, and writes one after computing if not. Cache files are keyed by
+# {track.id}_{offset_ms}.npy — offset in integer milliseconds avoids float filename issues.
 # In:
 # - track: Track ORM object
 # - offset: start time of the segment in seconds.
 # - duration: segment length in seconds.
 # - target_width: desired width of the mel spectrogram
-def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DEFAULT_TARGET_WIDTH):
+# - cache_dir: optional path to a directory for persisted .npy mel cache files
+def load_mel(track, offset=0, duration=DEFAULT_PARTITION_DURATION, target_width=DEFAULT_TARGET_WIDTH, cache_dir=None):
+    if cache_dir is not None:
+        offset_ms = int(round(offset * 1000))
+        cache_path = Path(cache_dir) / f"{track.id}_{offset_ms}.npy"
+        if cache_path.exists():
+            return np.load(cache_path)
+
     # load 10 second segment of audio track at offset calculated above
     y, sr = librosa.load(path=track.path,
                          sr=float(track.sample_rate),
@@ -73,7 +86,7 @@ def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DE
                                          hop_length=512)
     mel_db = librosa.power_to_db(mel, ref=np.max)
     mel_normalized = (mel_db - mel_db.mean()) / (mel_db.std() + 1e-9)
-    
+
     # Ensure consistent width by padding or truncating
     current_width = mel_normalized.shape[1]
     if current_width < target_width:
@@ -83,5 +96,9 @@ def load_mel(track, offset, duration=DEFAULT_PARTITION_DURATION, target_width=DE
     elif current_width > target_width:
         # Truncate to target width
         mel_normalized = mel_normalized[:, :target_width]
-    
+
+    if cache_dir is not None:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        np.save(cache_path, mel_normalized)
+
     return mel_normalized

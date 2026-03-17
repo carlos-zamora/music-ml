@@ -94,11 +94,12 @@ class SimpleAudioCNN(nn.Module):
 # - model: trained model instance.
 # - labels: ordered playlist labels.
 # - vocab: ArtistVocab instance for artist encoding.
+# - cache_dir: optional mel cache directory (passed through to load_mel).
 # Out:
 # - sorted list of (playlist, probability), descending by probability.
-def predict(track, model, labels, vocab):
+def predict(track, model, labels, vocab, cache_dir=None):
     model.eval()
-    mel = load_mel(track)
+    mel = load_mel(track, cache_dir=cache_dir)
     x = torch.tensor(mel).unsqueeze(0).unsqueeze(0).to(torch.device("cpu"))
     artist_idx = torch.tensor([vocab.encode(track.artist)], dtype=torch.long)
     bpm = torch.tensor([normalize_bpm(track.bpm)], dtype=torch.float32)
@@ -251,5 +252,5 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     tracksDB = ds.find_tracks(track_filter)
     model = torch.load(model_path, weights_only=False)
     for track in tracksDB:
-        result = predict(track, model, ds.playlists(), ds.vocab)
+        result = predict(track, model, ds.playlists(), ds.vocab, cache_dir=ds.cache_dir)
         print_prediction_table(track.title, track.artist, result)

@@ -17,6 +17,7 @@ from artist_vocab import ArtistVocab
 def _load_dataset(args):
     ds = PlaylistDataset.from_db(args.db)
     ds.setPartitionConfig(num_of_partitions=args.parts, partition_length=args.part_len)
+    ds.cache_dir = args.mel_cache or None
     vocab = ArtistVocab(ds.trackList)
     ds.vocab = vocab
     return ds, vocab
@@ -53,9 +54,11 @@ def cmd_predict(args) -> None:
 
 def _build_parser() -> argparse.ArgumentParser:
     shared = argparse.ArgumentParser(add_help=False)
-    shared.add_argument("--db",       default="./data/music.db")
-    shared.add_argument("--parts",    type=int, default=5)
-    shared.add_argument("--part-len", type=int, default=10)
+    shared.add_argument("--db",        default="./data/music.db")
+    shared.add_argument("--parts",     type=int, default=5)
+    shared.add_argument("--part-len",  type=int, default=10)
+    shared.add_argument("--mel-cache", default="./data/mel_cache",
+                        help="Directory for persisted mel spectrogram .npy files. Pass empty string to disable.")
 
     parser = argparse.ArgumentParser(
         prog="run.py",
