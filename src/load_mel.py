@@ -58,7 +58,9 @@ def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH, cache_dir=No
 # Calculate the mel spectrogram of an audio file.
 # When cache_dir is provided, reads from a persisted .npy file if one exists for this
 # track+offset, and writes one after computing if not. Cache files are keyed by
-# {track.id}_{offset_ms}.npy — offset in integer milliseconds avoids float filename issues.
+# {track.rekordbox_id}_{offset_ms}.npy — rekordbox_id is stable across DB rebuilds
+# (unlike the autoincrement primary key), so caches survive re-importing the library.
+# Offset in integer milliseconds avoids float filename issues.
 # In:
 # - track: Track ORM object
 # - offset: start time of the segment in seconds.
@@ -68,7 +70,7 @@ def load_mels(track, partitions, target_width=DEFAULT_TARGET_WIDTH, cache_dir=No
 def load_mel(track, offset=0, duration=DEFAULT_PARTITION_DURATION, target_width=DEFAULT_TARGET_WIDTH, cache_dir=None):
     if cache_dir is not None:
         offset_ms = int(round(offset * 1000))
-        cache_path = Path(cache_dir) / f"{track.id}_{offset_ms}.npy"
+        cache_path = Path(cache_dir) / f"{track.rekordbox_id}_{offset_ms}.npy"
         if cache_path.exists():
             return np.load(cache_path)
 

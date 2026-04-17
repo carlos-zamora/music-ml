@@ -13,11 +13,15 @@ from SimpleAudioCNN import SimpleAudioCNN, train_eval_test_save_model, predict_t
 from evaluation import EvalConfig, run_kfold_evaluation
 from artist_vocab import ArtistVocab
 
+# compute_panns is imported lazily inside cmd_panns so that `run.py predict` etc.
+# do not incur the panns_inference import cost.
+
 
 def _load_dataset(args):
     ds = PlaylistDataset.from_db(args.db)
     ds.setPartitionConfig(num_of_partitions=args.parts, partition_length=args.part_len)
     ds.cache_dir = args.mel_cache or None
+    ds.panns_cache_dir = args.panns_cache or None
     vocab = ArtistVocab(ds.trackList)
     ds.vocab = vocab
     return ds, vocab
@@ -52,6 +56,11 @@ def cmd_predict(args) -> None:
     predict_tracks(args.model, ds, args.filter)
 
 
+def cmd_panns(args) -> None:
+    from compute_panns import compute_all
+    compute_all(args.db, args.panns_cache)
+
+
 def _build_parser() -> argparse.ArgumentParser:
     shared = argparse.ArgumentParser(add_help=False)
     shared.add_argument("--db",        default="./data/music.db")
@@ -59,6 +68,8 @@ def _build_parser() -> argparse.ArgumentParser:
     shared.add_argument("--part-len",  type=int, default=10)
     shared.add_argument("--mel-cache", default="./data/mel_cache",
                         help="Directory for persisted mel spectrogram .npy files. Pass empty string to disable.")
+    shared.add_argument("--panns-cache", default="./data/panns_cache",
+                        help="Directory for persisted PANNs tag .npy files. Pass empty string to disable.")
 
     parser = argparse.ArgumentParser(
         prog="run.py",
@@ -87,6 +98,10 @@ def _build_parser() -> argparse.ArgumentParser:
     p_pred.add_argument("--model",  required=True)
     p_pred.add_argument("--filter", required=True)
     p_pred.set_defaults(func=cmd_predict)
+
+    p_panns = sub.add_parser("panns", parents=[shared],
+                             help="Precompute and cache PANNs AudioSet tag vectors for every track.")
+    p_panns.set_defaults(func=cmd_panns)
 
     return parser
 

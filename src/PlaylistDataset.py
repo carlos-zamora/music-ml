@@ -1,4 +1,5 @@
 from load_mel import generate_partitions, load_mels
+from panns_features import encode_tags, extract_tags
 from terminal import print_track_row
 from track_features import encode_key_circular, normalize_bpm
 from torch.utils.data import Dataset
@@ -25,6 +26,7 @@ class PlaylistDataset(Dataset):
         self.playlistList = playlistList
         self.vocab = vocab
         self.cache_dir = None
+        self.panns_cache_dir = None
 
         # how many items have been retrieved
         # used for debugging
@@ -132,8 +134,10 @@ class PlaylistDataset(Dataset):
         artist_indices = self.vocab.encode_all(trackInfo.artist, trackInfo.title)
         bpm = torch.tensor(normalize_bpm(trackInfo.bpm), dtype=torch.float32)
         key_feat = torch.tensor(encode_key_circular(trackInfo.musical_key), dtype=torch.float32)
+        panns_vec = extract_tags(trackInfo, cache_dir=self.panns_cache_dir)
+        panns_feat = torch.tensor(encode_tags(panns_vec), dtype=torch.float32)
 
         time_span = time.time() - start_time
         print_track_row(self.getCount, len(self.trackList), trackInfo.title, trackInfo.artist,
                         trackInfo.bpm, trackInfo.musical_key, time_span, wasCached)
-        return stacked_mels, artist_indices, bpm, key_feat, label
+        return stacked_mels, artist_indices, bpm, key_feat, panns_feat, label

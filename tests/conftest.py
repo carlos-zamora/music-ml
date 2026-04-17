@@ -9,6 +9,7 @@ def fake_track():
     return types.SimpleNamespace(
         artist="Test Artist",
         title="Test Song (feat. Guest)",
+        rekordbox_id="99999",
         length=180,
         path="/fake/audio.mp3",
         sample_rate=44100,
@@ -44,9 +45,11 @@ def tiny_model():
 def tiny_model_inputs():
     """Canonical inputs matching tiny_model (batch=4, 3 classes, 5 artists)."""
     import torch
+    from panns_features import PANNS_DIM
     return {
         "x":          torch.randn(4, 1, 128, 938),
         "artist_idx": torch.zeros(4, dtype=torch.long),
         "bpm":        torch.tensor([[0.6, 1.0], [0.5, 1.0], [0.7, 1.0], [0.0, 0.0]]),
         "key_feat":   torch.tensor([[0.0, 1.0, 0.0, 1.0], [0.5, 0.866, 1.0, 1.0], [0.0, 0.0, 0.0, 0.0], [0.866, 0.5, 0.0, 1.0]]),
+        "panns_feat": torch.rand(4, PANNS_DIM + 1),
     }

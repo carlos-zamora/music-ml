@@ -28,7 +28,10 @@ import time
 import torch
 import torch.nn as nn
 from load_mel import load_mel
+from panns_features import PANNS_DIM, PANNS_VERSION, encode_tags, extract_tags
 from track_features import encode_key_circular, normalize_bpm
+
+PANNS_PROJ_DIM = 64
 
 class SimpleAudioCNN(nn.Module):
     # Defines a CNN for mel-spectrogram multi-label classification with artist, key, and BPM features.
@@ -45,8 +48,15 @@ class SimpleAudioCNN(nn.Module):
         )
         self.artist_embed = nn.Embedding(num_artists, artist_embed_dim, padding_idx=0)
         self.dropout = nn.Dropout(0.3)
-        # 128 audio + 32 artist + 4 key (sin, cos, mode, known) + 2 bpm (normalized, known)
-        self.classifier = nn.Linear(128 + artist_embed_dim + 4 + 2, num_classes)
+        # PANNs AudioSet tags (527 + known flag) projected to a balanced fusion width
+        # so the 128-dim mel-CNN branch is not drowned out.
+        self.panns_proj = nn.Sequential(
+            nn.Linear(PANNS_DIM + 1, PANNS_PROJ_DIM),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+        )
+        # 128 audio + 32 artist + 4 key (sin, cos, mode, known) + 2 bpm (normalized, known) + 64 panns
+        self.classifier = nn.Linear(128 + artist_embed_dim + 4 + 2 + PANNS_PROJ_DIM, num_classes)
 
     # Encodes audio through the CNN backbone.
     # In:
@@ -56,16 +66,17 @@ class SimpleAudioCNN(nn.Module):
     def encode_audio(self, x):
         return self.conv(x).flatten(1)
 
-    # Fuses audio features with artist embedding, circular key encoding, and BPM.
+    # Fuses audio features with artist embedding, circular key encoding, BPM, and PANNs tags.
     # In:
     # - audio_feat: tensor (batch, 128).
     # - artist_idx: tensor shaped (batch, max_artists); use (batch, 1) for single-artist.
     # - bpm: float tensor shaped (batch, 2) with [normalized_bpm, bpm_known].
     # - key_feat: float tensor shaped (batch, 4) with [sin, cos, mode, known].
+    # - panns_feat: float tensor shaped (batch, PANNS_DIM + 1) with [...tag_probs, known].
     # - artist_mask: bool tensor (batch, max_artists) or None when artist_idx is (batch, 1).
     # Out:
     # - logits shaped (batch, num_classes).
-    def classify(self, audio_feat, artist_idx, bpm, key_feat, artist_mask=None):
+    def classify(self, audio_feat, artist_idx, bpm, key_feat, panns_feat, artist_mask=None):
         emb = self.artist_embed(artist_idx)          # (batch, max_artists, 32) or (batch, 32)
         if artist_mask is not None:
             emb = emb * artist_mask.unsqueeze(-1).float()
@@ -73,7 +84,8 @@ class SimpleAudioCNN(nn.Module):
             emb = emb.sum(dim=1) / counts            # masked mean → (batch, 32)
         else:
             emb = emb.squeeze(1)                     # (batch, 1, 32) → (batch, 32)
-        fused = torch.cat([audio_feat, emb, bpm, key_feat], dim=1)
+        panns_proj = self.panns_proj(panns_feat)     # (batch, PANNS_PROJ_DIM)
+        fused = torch.cat([audio_feat, emb, bpm, key_feat, panns_proj], dim=1)
         return self.classifier(self.dropout(fused))
 
     # Runs a forward pass for the single-partition predict path.
@@ -82,10 +94,11 @@ class SimpleAudioCNN(nn.Module):
     # - artist_idx: tensor shaped (batch,).
     # - bpm: float tensor shaped (batch, 2).
     # - key_feat: float tensor shaped (batch, 4).
+    # - panns_feat: float tensor shaped (batch, PANNS_DIM + 1).
     # Out:
     # - logits shaped (batch, num_classes).
-    def forward(self, x, artist_idx, bpm, key_feat):
-        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1), bpm, key_feat)
+    def forward(self, x, artist_idx, bpm, key_feat, panns_feat):
+        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1), bpm, key_feat, panns_feat)
 
 
 # Predicts playlist probabilities for one track.
@@ -97,16 +110,18 @@ class SimpleAudioCNN(nn.Module):
 # - cache_dir: optional mel cache directory (passed through to load_mel).
 # Out:
 # - sorted list of (playlist, probability), descending by probability.
-def predict(track, model, labels, vocab, cache_dir=None):
+def predict(track, model, labels, vocab, cache_dir=None, panns_cache_dir=None):
     model.eval()
     mel = load_mel(track, cache_dir=cache_dir)
     x = torch.tensor(mel).unsqueeze(0).unsqueeze(0).to(torch.device("cpu"))
     artist_idx = torch.tensor([vocab.encode(track.artist)], dtype=torch.long)
     bpm = torch.tensor([normalize_bpm(track.bpm)], dtype=torch.float32)
     key_feat = torch.tensor([encode_key_circular(track.musical_key)], dtype=torch.float32)
+    panns_vec = extract_tags(track, cache_dir=panns_cache_dir)
+    panns_feat = torch.tensor([encode_tags(panns_vec)], dtype=torch.float32)
 
     with torch.no_grad():
-        logits = model(x, artist_idx, bpm, key_feat)
+        logits = model(x, artist_idx, bpm, key_feat, panns_feat)
         probs = torch.sigmoid(logits).cpu().numpy()[0]
 
     results = [(labels[i], float(p)) for i, p in enumerate(probs)]
@@ -133,6 +148,7 @@ def write_single_split_reports(labels, val_details, test_details, out_dir: Path)
     summary = {
         "$schema": "./summary.schema.json",
         "git_commit": get_git_commit(),
+        "panns_version": PANNS_VERSION,
         "mode": "single_split",
         "labels": labels,
         "metric_definitions": get_metric_definitions(),
@@ -252,5 +268,7 @@ def predict_tracks(model_path:str, ds:PlaylistDataset, track_filter:str):
     tracksDB = ds.find_tracks(track_filter)
     model = torch.load(model_path, weights_only=False)
     for track in tracksDB:
-        result = predict(track, model, ds.playlists(), ds.vocab, cache_dir=ds.cache_dir)
+        result = predict(track, model, ds.playlists(), ds.vocab,
+                         cache_dir=ds.cache_dir,
+                         panns_cache_dir=ds.panns_cache_dir)
         print_prediction_table(track.title, track.artist, result)

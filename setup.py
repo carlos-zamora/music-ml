@@ -9,5 +9,6 @@ setup(
     install_requires=[
         "python-dotenv",
         "rich",
+        "panns_inference",
     ],
 )

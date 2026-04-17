@@ -23,6 +23,7 @@ class Track(Base):
     path: Mapped[str]
     length: Mapped[int]
     sample_rate: Mapped[int]
+    panns_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
     playlists: Mapped[list["Playlist"]] = relationship(
         secondary=track_playlists, back_populates="tracks"
     )

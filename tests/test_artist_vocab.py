@@ -65,27 +65,30 @@ def test_encode_all_fallback_to_oov(small_vocab):
 
 def test_collate_fn_shapes(small_vocab):
     import torch
+    from panns_features import PANNS_DIM
 
     collate = small_vocab.make_collate_fn()
 
     mel     = torch.zeros(1, 1, 128, 938)
     bpm     = torch.tensor([0.6])
     key_idx = torch.tensor(7, dtype=torch.long)
+    panns   = torch.zeros(PANNS_DIM + 1)
     label   = torch.zeros(3)
 
     # Three items with 1, 2, and 3 artists respectively → max_len = 3
     batch = [
-        (mel, [1],       bpm, key_idx, label),
-        (mel, [1, 2],    bpm, key_idx, label),
-        (mel, [1, 2, 3], bpm, key_idx, label),
+        (mel, [1],       bpm, key_idx, panns, label),
+        (mel, [1, 2],    bpm, key_idx, panns, label),
+        (mel, [1, 2, 3], bpm, key_idx, panns, label),
     ]
 
-    mels_out, padded, mask, bpms_out, key_idxs_out, labels_out = collate(batch)
+    mels_out, padded, mask, bpms_out, key_idxs_out, panns_out, labels_out = collate(batch)
 
     assert padded.shape == (3, 3)
     assert mask.shape == (3, 3)
     assert bpms_out.shape == (3, 1)
     assert key_idxs_out.shape == (3,)
+    assert panns_out.shape == (3, PANNS_DIM + 1)
     # First row: only position 0 is valid
     assert mask[0, 0].item() is True
     assert mask[0, 1].item() is False

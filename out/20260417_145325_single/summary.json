@@ -1,0 +1,116 @@
+{
+  "$schema": "./summary.schema.json",
+  "git_commit": "6a1038a39913520a7a5e7bd89d945cfda6e7209f",
+  "panns_version": 1,
+  "mode": "single_split",
+  "labels": [
+    "Riddim - High Hat",
+    "Riddim - Deep Dub",
+    "Riddim - Vocals",
+    "Riddim - Chill",
+    "Riddim - GWN/BT Style",
+    "Riddim - Wubz",
+    "Riddim - Medium",
+    "Riddim - Womps",
+    "Riddim - Heavy",
+    "Riddim - 4s",
+    "Riddim - 8s",
+    "Clubstep",
+    "Deadly Dubstep",
+    "Dubstep",
+    "Funkstep",
+    "Headbanger",
+    "Jazzstep",
+    "Metalstep",
+    "Wubzstep"
+  ],
+  "metric_definitions": {
+    "loss": {
+      "description": "Model error from the loss function.",
+      "range": ">= 0",
+      "direction": "lower_is_better"
+    },
+    "micro_f1": {
+      "description": "F1 across all label decisions pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_f1": {
+      "description": "Average F1 across playlists, weighting each playlist equally.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "micro_precision": {
+      "description": "Fraction of predicted positives that were correct across all labels pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_precision": {
+      "description": "Average precision across playlists.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "micro_recall": {
+      "description": "Fraction of true positives found across all labels pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_recall": {
+      "description": "Average recall across playlists.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "threshold": {
+      "description": "Decision threshold used for a playlist. Lower predicts more often; higher predicts more conservatively.",
+      "range": "typically 0..1",
+      "direction": "context_dependent"
+    },
+    "support": {
+      "description": "Number of ground-truth positive tracks for a playlist in the evaluated split.",
+      "range": "integer >= 0",
+      "direction": "informational"
+    },
+    "tp": {
+      "description": "True positives: correct positive predictions.",
+      "range": "integer >= 0",
+      "direction": "higher_is_better"
+    },
+    "fp": {
+      "description": "False positives: songs incorrectly predicted into the playlist.",
+      "range": "integer >= 0",
+      "direction": "lower_is_better"
+    },
+    "tn": {
+      "description": "True negatives: correct negative predictions.",
+      "range": "integer >= 0",
+      "direction": "higher_is_better_but_less_important_for_imbalanced_classes"
+    },
+    "fn": {
+      "description": "False negatives: songs that belonged in the playlist but were missed.",
+      "range": "integer >= 0",
+      "direction": "lower_is_better"
+    }
+  },
+  "validation": {
+    "loss": 0.21735893189907074,
+    "metrics": {
+      "micro_f1": 0.3517915309446254,
+      "macro_f1": 0.18738491704998883,
+      "micro_precision": 0.5294117647058824,
+      "macro_precision": 0.43742879927090456,
+      "micro_recall": 0.2634146341463415,
+      "macro_recall": 0.16152882205513783
+    }
+  },
+  "test": {
+    "loss": 0.31298864384492237,
+    "metrics": {
+      "micro_f1": 0.1907514450867052,
+      "macro_f1": 0.13242095251229288,
+      "micro_precision": 0.3707865168539326,
+      "macro_precision": 0.3583010556694767,
+      "micro_recall": 0.12840466926070038,
+      "macro_recall": 0.11640825745854338
+    }
+  }
+}

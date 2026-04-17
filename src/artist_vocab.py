@@ -65,11 +65,11 @@ class ArtistVocab:
         return indices if indices else [0]
 
     # Returns a DataLoader collate_fn that pads variable-length artist index lists.
-    # Batch items: (stacked_mels, artist_indices_list, bpm, key_feat, label).
-    # Output batch: (mels, padded_artist_idx, artist_mask, bpms, key_feats, labels).
+    # Batch items: (stacked_mels, artist_indices_list, bpm, key_feat, panns_feat, label).
+    # Output batch: (mels, padded_artist_idx, artist_mask, bpms, key_feats, panns_feats, labels).
     def make_collate_fn(self):
         def collate(batch):
-            mels, artist_lists, bpms, key_feats, labels = zip(*batch)
+            mels, artist_lists, bpms, key_feats, panns_feats, labels = zip(*batch)
             max_len = max(len(a) for a in artist_lists)
             padded = torch.zeros(len(batch), max_len, dtype=torch.long)
             mask = torch.zeros(len(batch), max_len, dtype=torch.bool)
@@ -82,6 +82,7 @@ class ArtistVocab:
                 mask,
                 torch.stack(bpms),
                 torch.stack(key_feats),
+                torch.stack(panns_feats),
                 torch.stack(labels),
             )
         return collate

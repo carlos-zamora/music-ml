@@ -55,6 +55,19 @@ python scripts\import_rekordbox.py
 python -c "from src.db.session import SessionLocal; from src.db.models import Track, Playlist; s=SessionLocal(); print('tracks=',s.query(Track).count(),'playlists=',s.query(Playlist).count()); s.close()"
 ```
 
+## 3a) Precompute PANNs AudioSet Tags (one-time per new track)
+
+Training now fuses in 527 AudioSet tag probabilities per track (genres, moods, instruments) from the pretrained [PANNs CNN14](https://github.com/qiuqiangkong/panns_inference) model. These are expensive to compute (a few seconds per track on CPU) so they are cached to `.npy` files on disk and stamped on the track row.
+
+```powershell
+python scripts/run.py panns
+```
+
+- First run downloads the CNN14 checkpoint (~320MB) into the `panns_inference` user cache.
+- Options: `--db` (default: `./data/music.db`), `--panns-cache` (default: `./data/panns_cache`).
+- Idempotent: tracks already at the current `panns_version` with a cache file present are skipped.
+- After adding new tracks via `import_rekordbox.py`, re-run this step to process the new rows only.
+
 ## 4) Train Model (Single Split Default Path)
 - Run:
 
