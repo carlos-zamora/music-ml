@@ -1,0 +1,687 @@
+{
+  "$schema": "./summary.schema.json",
+  "git_commit": "4a7f22c692109d660ed21efa5dbb404299e6fac5",
+  "panns_version": 1,
+  "config": {
+    "n_splits": 2,
+    "random_seed": 42,
+    "batch_size": 16,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "val_fraction_within_fold": 0.1,
+    "default_threshold": 0.5,
+    "threshold_min": 0.05,
+    "threshold_max": 0.95,
+    "threshold_step": 0.01,
+    "recall_guard_min": 0.65,
+    "report_dir": "out\\20260417_215126"
+  },
+  "metric_definitions": {
+    "loss": {
+      "description": "Model error from the loss function.",
+      "range": ">= 0",
+      "direction": "lower_is_better"
+    },
+    "micro_f1": {
+      "description": "F1 across all label decisions pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_f1": {
+      "description": "Average F1 across playlists, weighting each playlist equally.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "micro_precision": {
+      "description": "Fraction of predicted positives that were correct across all labels pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_precision": {
+      "description": "Average precision across playlists.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "micro_recall": {
+      "description": "Fraction of true positives found across all labels pooled together.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "macro_recall": {
+      "description": "Average recall across playlists.",
+      "range": "0..1",
+      "direction": "higher_is_better"
+    },
+    "threshold": {
+      "description": "Decision threshold used for a playlist. Lower predicts more often; higher predicts more conservatively.",
+      "range": "typically 0..1",
+      "direction": "context_dependent"
+    },
+    "support": {
+      "description": "Number of ground-truth positive tracks for a playlist in the evaluated split.",
+      "range": "integer >= 0",
+      "direction": "informational"
+    },
+    "tp": {
+      "description": "True positives: correct positive predictions.",
+      "range": "integer >= 0",
+      "direction": "higher_is_better"
+    },
+    "fp": {
+      "description": "False positives: songs incorrectly predicted into the playlist.",
+      "range": "integer >= 0",
+      "direction": "lower_is_better"
+    },
+    "tn": {
+      "description": "True negatives: correct negative predictions.",
+      "range": "integer >= 0",
+      "direction": "higher_is_better_but_less_important_for_imbalanced_classes"
+    },
+    "fn": {
+      "description": "False negatives: songs that belonged in the playlist but were missed.",
+      "range": "integer >= 0",
+      "direction": "lower_is_better"
+    }
+  },
+  "guarded_playlists": [
+    "Wubzstep",
+    "Riddim - Medium",
+    "Dubstep",
+    "Headbanger",
+    "Riddim - Womps"
+  ],
+  "folds": [
+    {
+      "fold": 1,
+      "train_size": 600,
+      "val_size": 66,
+      "test_size": 667,
+      "thresholds": [
+        0.6000000000000002,
+        0.5300000000000001,
+        0.45000000000000007,
+        0.5400000000000001,
+        0.5600000000000002,
+        0.5400000000000001,
+        0.4700000000000001,
+        0.4800000000000001,
+        0.42000000000000004,
+        0.49000000000000005,
+        0.45000000000000007,
+        0.49000000000000005,
+        0.4800000000000001,
+        0.4800000000000001,
+        0.5200000000000001,
+        0.4700000000000001,
+        0.5600000000000002,
+        0.5,
+        0.5000000000000001
+      ],
+      "validation": {
+        "epoch": 1,
+        "train_loss": 1.2629371536405463,
+        "val_loss": 0.6640678167343139,
+        "metrics": {
+          "micro_f1": 0.2523961661341853,
+          "macro_f1": 0.23560632516090516,
+          "micro_precision": 0.15163147792706333,
+          "macro_precision": 0.17086117922412591,
+          "micro_recall": 0.7523809523809524,
+          "macro_recall": 0.7492372234935164
+        },
+        "per_playlist": [
+          {
+            "playlist": "Riddim - High Hat",
+            "support": 1,
+            "threshold": 0.6000000238418579,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.33333333333333337,
+            "tp": 1,
+            "fp": 4,
+            "tn": 61,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Deep Dub",
+            "support": 1,
+            "threshold": 0.5299999713897705,
+            "precision": 0.05555555555555555,
+            "recall": 1.0,
+            "f1": 0.10526315789473684,
+            "tp": 1,
+            "fp": 17,
+            "tn": 48,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Vocals",
+            "support": 3,
+            "threshold": 0.44999998807907104,
+            "precision": 0.061224489795918366,
+            "recall": 1.0,
+            "f1": 0.11538461538461538,
+            "tp": 3,
+            "fp": 46,
+            "tn": 17,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Chill",
+            "support": 6,
+            "threshold": 0.5400000214576721,
+            "precision": 0.2,
+            "recall": 0.5,
+            "f1": 0.28571428571428575,
+            "tp": 3,
+            "fp": 12,
+            "tn": 48,
+            "fn": 3
+          },
+          {
+            "playlist": "Riddim - GWN/BT Style",
+            "support": 5,
+            "threshold": 0.5600000023841858,
+            "precision": 0.3333333333333333,
+            "recall": 0.4,
+            "f1": 0.3636363636363636,
+            "tp": 2,
+            "fp": 4,
+            "tn": 57,
+            "fn": 3
+          },
+          {
+            "playlist": "Riddim - Wubz",
+            "support": 2,
+            "threshold": 0.5400000214576721,
+            "precision": 0.25,
+            "recall": 0.5,
+            "f1": 0.3333333333333333,
+            "tp": 1,
+            "fp": 3,
+            "tn": 61,
+            "fn": 1
+          },
+          {
+            "playlist": "Riddim - Medium",
+            "support": 12,
+            "threshold": 0.4699999988079071,
+            "precision": 0.20408163265306123,
+            "recall": 0.8333333333333334,
+            "f1": 0.3278688524590165,
+            "tp": 10,
+            "fp": 39,
+            "tn": 15,
+            "fn": 2
+          },
+          {
+            "playlist": "Riddim - Womps",
+            "support": 8,
+            "threshold": 0.47999998927116394,
+            "precision": 0.15384615384615385,
+            "recall": 1.0,
+            "f1": 0.2666666666666667,
+            "tp": 8,
+            "fp": 44,
+            "tn": 14,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Heavy",
+            "support": 4,
+            "threshold": 0.41999998688697815,
+            "precision": 0.06896551724137931,
+            "recall": 1.0,
+            "f1": 0.12903225806451613,
+            "tp": 4,
+            "fp": 54,
+            "tn": 8,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - 4s",
+            "support": 1,
+            "threshold": 0.49000000953674316,
+            "precision": 0.038461538461538464,
+            "recall": 1.0,
+            "f1": 0.07407407407407407,
+            "tp": 1,
+            "fp": 25,
+            "tn": 40,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - 8s",
+            "support": 1,
+            "threshold": 0.44999998807907104,
+            "precision": 0.05263157894736842,
+            "recall": 1.0,
+            "f1": 0.1,
+            "tp": 1,
+            "fp": 18,
+            "tn": 47,
+            "fn": 0
+          },
+          {
+            "playlist": "Clubstep",
+            "support": 2,
+            "threshold": 0.49000000953674316,
+            "precision": 0.06451612903225806,
+            "recall": 1.0,
+            "f1": 0.12121212121212122,
+            "tp": 2,
+            "fp": 29,
+            "tn": 35,
+            "fn": 0
+          },
+          {
+            "playlist": "Deadly Dubstep",
+            "support": 2,
+            "threshold": 0.47999998927116394,
+            "precision": 0.046511627906976744,
+            "recall": 1.0,
+            "f1": 0.08888888888888888,
+            "tp": 2,
+            "fp": 41,
+            "tn": 23,
+            "fn": 0
+          },
+          {
+            "playlist": "Dubstep",
+            "support": 20,
+            "threshold": 0.47999998927116394,
+            "precision": 0.45,
+            "recall": 0.9,
+            "f1": 0.6,
+            "tp": 18,
+            "fp": 22,
+            "tn": 24,
+            "fn": 2
+          },
+          {
+            "playlist": "Funkstep",
+            "support": 5,
+            "threshold": 0.5199999809265137,
+            "precision": 0.18181818181818182,
+            "recall": 0.4,
+            "f1": 0.25000000000000006,
+            "tp": 2,
+            "fp": 9,
+            "tn": 52,
+            "fn": 3
+          },
+          {
+            "playlist": "Headbanger",
+            "support": 5,
+            "threshold": 0.4699999988079071,
+            "precision": 0.08333333333333333,
+            "recall": 0.8,
+            "f1": 0.1509433962264151,
+            "tp": 4,
+            "fp": 44,
+            "tn": 17,
+            "fn": 1
+          },
+          {
+            "playlist": "Jazzstep",
+            "support": 4,
+            "threshold": 0.5600000023841858,
+            "precision": 0.3333333333333333,
+            "recall": 0.25,
+            "f1": 0.28571428571428575,
+            "tp": 1,
+            "fp": 2,
+            "tn": 60,
+            "fn": 3
+          },
+          {
+            "playlist": "Metalstep",
+            "support": 0,
+            "threshold": 0.5,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "tp": 0,
+            "fp": 12,
+            "tn": 54,
+            "fn": 0
+          },
+          {
+            "playlist": "Wubzstep",
+            "support": 23,
+            "threshold": 0.5,
+            "precision": 0.46875,
+            "recall": 0.6521739130434783,
+            "f1": 0.5454545454545454,
+            "tp": 15,
+            "fp": 17,
+            "tn": 26,
+            "fn": 8
+          }
+        ],
+        "guard_satisfied": true,
+        "guard_recalls": {
+          "Riddim - Medium": 0.8333333333333334,
+          "Riddim - Womps": 1.0,
+          "Dubstep": 0.9,
+          "Headbanger": 0.8,
+          "Wubzstep": 0.6521739130434783
+        }
+      },
+      "test": {
+        "loss": 0.666551201116471,
+        "metrics": {
+          "micro_f1": 0.20459952418715305,
+          "macro_f1": 0.188040610818733,
+          "micro_precision": 0.12475822050290135,
+          "macro_precision": 0.14259911856526145,
+          "micro_recall": 0.5682819383259912,
+          "macro_recall": 0.5040512291046585
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "train_size": 601,
+      "val_size": 66,
+      "test_size": 666,
+      "thresholds": [
+        0.5800000000000002,
+        0.5,
+        0.43000000000000005,
+        0.45000000000000007,
+        0.49000000000000005,
+        0.4800000000000001,
+        0.5100000000000001,
+        0.5400000000000001,
+        0.4700000000000001,
+        0.5900000000000002,
+        0.4600000000000001,
+        0.43000000000000005,
+        0.5800000000000002,
+        0.43000000000000005,
+        0.5000000000000001,
+        0.49000000000000005,
+        0.45000000000000007,
+        0.4800000000000001,
+        0.4800000000000001
+      ],
+      "validation": {
+        "epoch": 1,
+        "train_loss": 1.268182767064948,
+        "val_loss": 0.6734562277793884,
+        "metrics": {
+          "micro_f1": 0.2199710564399421,
+          "macro_f1": 0.22755841702390192,
+          "micro_precision": 0.13058419243986255,
+          "macro_precision": 0.19059822004199736,
+          "micro_recall": 0.6972477064220184,
+          "macro_recall": 0.6860934387250177
+        },
+        "per_playlist": [
+          {
+            "playlist": "Riddim - High Hat",
+            "support": 2,
+            "threshold": 0.5799999833106995,
+            "precision": 0.09090909090909091,
+            "recall": 0.5,
+            "f1": 0.15384615384615385,
+            "tp": 1,
+            "fp": 10,
+            "tn": 54,
+            "fn": 1
+          },
+          {
+            "playlist": "Riddim - Deep Dub",
+            "support": 0,
+            "threshold": 0.5,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "tp": 0,
+            "fp": 49,
+            "tn": 17,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Vocals",
+            "support": 1,
+            "threshold": 0.4300000071525574,
+            "precision": 0.021739130434782608,
+            "recall": 1.0,
+            "f1": 0.042553191489361694,
+            "tp": 1,
+            "fp": 45,
+            "tn": 20,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Chill",
+            "support": 4,
+            "threshold": 0.44999998807907104,
+            "precision": 0.06349206349206349,
+            "recall": 1.0,
+            "f1": 0.11940298507462686,
+            "tp": 4,
+            "fp": 59,
+            "tn": 3,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - GWN/BT Style",
+            "support": 2,
+            "threshold": 0.49000000953674316,
+            "precision": 0.0425531914893617,
+            "recall": 1.0,
+            "f1": 0.08163265306122448,
+            "tp": 2,
+            "fp": 45,
+            "tn": 19,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Wubz",
+            "support": 3,
+            "threshold": 0.47999998927116394,
+            "precision": 0.13636363636363635,
+            "recall": 1.0,
+            "f1": 0.24000000000000002,
+            "tp": 3,
+            "fp": 19,
+            "tn": 44,
+            "fn": 0
+          },
+          {
+            "playlist": "Riddim - Medium",
+            "support": 12,
+            "threshold": 0.5099999904632568,
+            "precision": 0.23529411764705882,
+            "recall": 0.6666666666666666,
+            "f1": 0.3478260869565218,
+            "tp": 8,
+            "fp": 26,
+            "tn": 28,
+            "fn": 4
+          },
+          {
+            "playlist": "Riddim - Womps",
+            "support": 9,
+            "threshold": 0.5400000214576721,
+            "precision": 0.3333333333333333,
+            "recall": 0.3333333333333333,
+            "f1": 0.3333333333333333,
+            "tp": 3,
+            "fp": 6,
+            "tn": 51,
+            "fn": 6
+          },
+          {
+            "playlist": "Riddim - Heavy",
+            "support": 8,
+            "threshold": 0.4699999988079071,
+            "precision": 0.15789473684210525,
+            "recall": 0.75,
+            "f1": 0.2608695652173913,
+            "tp": 6,
+            "fp": 32,
+            "tn": 26,
+            "fn": 2
+          },
+          {
+            "playlist": "Riddim - 4s",
+            "support": 3,
+            "threshold": 0.5899999737739563,
+            "precision": 0.125,
+            "recall": 0.3333333333333333,
+            "f1": 0.18181818181818182,
+            "tp": 1,
+            "fp": 7,
+            "tn": 56,
+            "fn": 2
+          },
+          {
+            "playlist": "Riddim - 8s",
+            "support": 2,
+            "threshold": 0.46000000834465027,
+            "precision": 0.05,
+            "recall": 0.5,
+            "f1": 0.09090909090909091,
+            "tp": 1,
+            "fp": 19,
+            "tn": 45,
+            "fn": 1
+          },
+          {
+            "playlist": "Clubstep",
+            "support": 2,
+            "threshold": 0.4300000071525574,
+            "precision": 0.0425531914893617,
+            "recall": 1.0,
+            "f1": 0.08163265306122448,
+            "tp": 2,
+            "fp": 45,
+            "tn": 19,
+            "fn": 0
+          },
+          {
+            "playlist": "Deadly Dubstep",
+            "support": 4,
+            "threshold": 0.5799999833106995,
+            "precision": 1.0,
+            "recall": 0.25,
+            "f1": 0.4,
+            "tp": 1,
+            "fp": 0,
+            "tn": 62,
+            "fn": 3
+          },
+          {
+            "playlist": "Dubstep",
+            "support": 13,
+            "threshold": 0.4300000071525574,
+            "precision": 0.23529411764705882,
+            "recall": 0.9230769230769231,
+            "f1": 0.375,
+            "tp": 12,
+            "fp": 39,
+            "tn": 14,
+            "fn": 1
+          },
+          {
+            "playlist": "Funkstep",
+            "support": 2,
+            "threshold": 0.5,
+            "precision": 0.13333333333333333,
+            "recall": 1.0,
+            "f1": 0.23529411764705882,
+            "tp": 2,
+            "fp": 13,
+            "tn": 51,
+            "fn": 0
+          },
+          {
+            "playlist": "Headbanger",
+            "support": 9,
+            "threshold": 0.49000000953674316,
+            "precision": 0.18518518518518517,
+            "recall": 0.5555555555555556,
+            "f1": 0.2777777777777778,
+            "tp": 5,
+            "fp": 22,
+            "tn": 35,
+            "fn": 4
+          },
+          {
+            "playlist": "Jazzstep",
+            "support": 7,
+            "threshold": 0.44999998807907104,
+            "precision": 0.15,
+            "recall": 0.8571428571428571,
+            "f1": 0.2553191489361702,
+            "tp": 6,
+            "fp": 34,
+            "tn": 25,
+            "fn": 1
+          },
+          {
+            "playlist": "Metalstep",
+            "support": 6,
+            "threshold": 0.47999998927116394,
+            "precision": 0.25,
+            "recall": 0.6666666666666666,
+            "f1": 0.36363636363636365,
+            "tp": 4,
+            "fp": 12,
+            "tn": 48,
+            "fn": 2
+          },
+          {
+            "playlist": "Wubzstep",
+            "support": 20,
+            "threshold": 0.47999998927116394,
+            "precision": 0.3684210526315789,
+            "recall": 0.7,
+            "f1": 0.48275862068965514,
+            "tp": 14,
+            "fp": 24,
+            "tn": 22,
+            "fn": 6
+          }
+        ],
+        "guard_satisfied": false,
+        "guard_recalls": {
+          "Riddim - Medium": 0.6666666666666666,
+          "Riddim - Womps": 0.3333333333333333,
+          "Dubstep": 0.9230769230769231,
+          "Headbanger": 0.5555555555555556,
+          "Wubzstep": 0.7
+        }
+      },
+      "test": {
+        "loss": 0.6742760652587527,
+        "metrics": {
+          "micro_f1": 0.18870601589103292,
+          "macro_f1": 0.17175739365404055,
+          "micro_precision": 0.11257829693583883,
+          "macro_precision": 0.11303284762517085,
+          "micro_recall": 0.5828220858895705,
+          "macro_recall": 0.5601424128017415
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "micro_f1_mean": 0.19665277003909298,
+    "micro_f1_std": 0.007946754148060065,
+    "macro_f1_mean": 0.17989900223638677,
+    "macro_f1_std": 0.008141608582346221,
+    "micro_precision_mean": 0.11866825871937009,
+    "micro_precision_std": 0.006089961783531259,
+    "macro_precision_mean": 0.12781598309521613,
+    "macro_precision_std": 0.014783135470045297,
+    "micro_recall_mean": 0.5755520121077808,
+    "micro_recall_std": 0.0072700737817896766,
+    "macro_recall_mean": 0.5320968209532,
+    "macro_recall_std": 0.028045591848541496
+  }
+}
