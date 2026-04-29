@@ -12,3 +12,5 @@ build/
 # Data
 data/*.db
 data/artifacts/
+data/mel_cache/
+data/panns_cache/

@@ -23,6 +23,26 @@ def get_git_commit() -> str | None:
     except Exception:
         return None
 
+# Maximum per-class pos_weight to avoid ultra-rare classes dominating the gradient.
+POS_WEIGHT_MAX = 50.0
+
+# DataLoader worker count. Disk mel cache + PANNs .npy cache make workers safe;
+# persistent_workers avoids re-spawning on Windows between epochs.
+NUM_WORKERS = 2
+
+
+# Computes per-class pos_weight = neg_count / pos_count for BCEWithLogitsLoss.
+# In:
+# - label_matrix: float tensor (n_samples, n_classes) with 0/1 entries.
+# Out:
+# - float tensor (n_classes,) clamped to [1, POS_WEIGHT_MAX].
+def compute_pos_weight(label_matrix):
+    pos = label_matrix.sum(dim=0)
+    neg = label_matrix.shape[0] - pos
+    pos_safe = pos.clamp(min=1.0)
+    return (neg / pos_safe).clamp(max=POS_WEIGHT_MAX)
+
+
 METRIC_DEFINITIONS = {
     "loss": {
         "description": "Model error from the loss function.",
@@ -172,7 +192,8 @@ def train_epoch(model, loader, optimizer, criterion, device=None, on_batch=None)
 
         optimizer.zero_grad()
         audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
-        audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
+        feats = audio_feat.view(batch_size, num_partitions, -1)                  # (batch, parts, 128)
+        audio_feat = torch.cat([feats.mean(dim=1), feats.std(dim=1)], dim=1)     # (batch, 256)
         logits = model.classify(audio_feat, artist_idx, bpm, key_feat, panns_feat, artist_mask)
 
         loss = criterion(logits, y)
@@ -209,7 +230,8 @@ def collect_outputs(model, loader, criterion, device=None):
                 bpm.to(device), key_feat.to(device), panns_feat.to(device), y.to(device))
 
             audio_feat = model.encode_audio(x)                                       # (batch*parts, 128)
-            audio_feat = audio_feat.view(batch_size, num_partitions, -1).mean(dim=1) # (batch, 128)
+            feats = audio_feat.view(batch_size, num_partitions, -1)                  # (batch, parts, 128)
+            audio_feat = torch.cat([feats.mean(dim=1), feats.std(dim=1)], dim=1)     # (batch, 256)
             logits = model.classify(audio_feat, artist_idx, bpm, key_feat, panns_feat, artist_mask)
             loss = criterion(logits, y)
             total_loss += loss.item()
@@ -635,11 +657,14 @@ def train_one_fold(
     if device is None:
         device = torch.device("cpu")
 
-    train_loader = DataLoader(Subset(ds, train_indices), batch_size=config.batch_size, shuffle=True, collate_fn=collate_fn)
-    val_loader = DataLoader(Subset(ds, val_indices), batch_size=config.batch_size, collate_fn=collate_fn)
+    loader_kwargs = dict(num_workers=NUM_WORKERS, persistent_workers=NUM_WORKERS > 0)
+    train_loader = DataLoader(Subset(ds, train_indices), batch_size=config.batch_size, shuffle=True, collate_fn=collate_fn, **loader_kwargs)
+    val_loader = DataLoader(Subset(ds, val_indices), batch_size=config.batch_size, collate_fn=collate_fn, **loader_kwargs)
 
     model = model_factory(len(labels)).to(device)
-    criterion = nn.BCEWithLogitsLoss()
+    pos_weight = compute_pos_weight(ds.labels_tensor(train_indices)).to(device)
+    train_criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+    eval_criterion = nn.BCEWithLogitsLoss()  # unweighted for reported val/test loss comparability
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
 
     best_state_dict = None
@@ -649,10 +674,10 @@ def train_one_fold(
 
     for epoch in range(config.epochs):
         with monitor.epoch(epoch + 1, len(train_loader), f"Fold {fold_index} · Epoch {epoch + 1}/{config.epochs}") as advance:
-            train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device, on_batch=advance)
+            train_loss = train_epoch(model, train_loader, optimizer, train_criterion, device=device, on_batch=advance)
 
         val_loss, val_true, val_prob = collect_outputs(
-            model, val_loader, criterion, device=device
+            model, val_loader, eval_criterion, device=device
         )
         tuned_thresholds = tune_thresholds(
             val_true,
@@ -773,7 +798,8 @@ def run_kfold_evaluation(model_factory, ds, config=None, device=None, collate_fn
         )
 
         criterion = nn.BCEWithLogitsLoss()
-        test_loader = DataLoader(Subset(ds, test_idx), batch_size=config.batch_size, collate_fn=collate_fn)
+        test_loader = DataLoader(Subset(ds, test_idx), batch_size=config.batch_size, collate_fn=collate_fn,
+                                 num_workers=NUM_WORKERS, persistent_workers=NUM_WORKERS > 0)
         test_eval = evaluate(
             fold_train["model"],
             test_loader,

@@ -84,6 +84,24 @@ class PlaylistDataset(Dataset):
             if playlistName == self.playlistList[i]:
                 return i
 
+    # Builds a multi-hot label matrix without loading mel spectrograms.
+    # In:
+    # - indices: optional iterable of track indices; defaults to all tracks.
+    # Out:
+    # - float tensor shaped (len(indices), num_playlists) with 0/1 entries.
+    def labels_tensor(self, indices=None):
+        if indices is None:
+            indices = range(len(self.trackList))
+        indices = list(indices)
+        out = torch.zeros((len(indices), len(self.playlistList)), dtype=torch.float32)
+        playlist_id = {name: i for i, name in enumerate(self.playlistList)}
+        for row, i in enumerate(indices):
+            for p in self.trackList[i].playlists:
+                pid = playlist_id.get(p.name)
+                if pid is not None:
+                    out[row, pid] = 1.0
+        return out
+
     # Configures partition sampling for each track.
     # In:
     # - num_of_partitions: number of partitions per track.

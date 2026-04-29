@@ -1,6 +1,7 @@
 from PlaylistDataset import PlaylistDataset
 from evaluation import (
     EvalConfig,
+    compute_pos_weight,
     evaluate,
     get_git_commit,
     get_metric_definitions,
@@ -32,6 +33,7 @@ from panns_features import PANNS_DIM, PANNS_VERSION, encode_tags, extract_tags
 from track_features import encode_key_circular, normalize_bpm
 
 PANNS_PROJ_DIM = 64
+NUM_WORKERS = 2
 
 class SimpleAudioCNN(nn.Module):
     # Defines a CNN for mel-spectrogram multi-label classification with artist, key, and BPM features.
@@ -55,8 +57,8 @@ class SimpleAudioCNN(nn.Module):
             nn.ReLU(),
             nn.Dropout(0.3),
         )
-        # 128 audio + 32 artist + 4 key (sin, cos, mode, known) + 2 bpm (normalized, known) + 64 panns
-        self.classifier = nn.Linear(128 + artist_embed_dim + 4 + 2 + PANNS_PROJ_DIM, num_classes)
+        # 256 audio (128 mean + 128 std over partitions) + 32 artist + 4 key (sin, cos, mode, known) + 2 bpm (normalized, known) + 64 panns
+        self.classifier = nn.Linear(256 + artist_embed_dim + 4 + 2 + PANNS_PROJ_DIM, num_classes)
 
     # Encodes audio through the CNN backbone.
     # In:
@@ -68,7 +70,7 @@ class SimpleAudioCNN(nn.Module):
 
     # Fuses audio features with artist embedding, circular key encoding, BPM, and PANNs tags.
     # In:
-    # - audio_feat: tensor (batch, 128).
+    # - audio_feat: tensor (batch, 256) — mean and std of per-partition features concatenated.
     # - artist_idx: tensor shaped (batch, max_artists); use (batch, 1) for single-artist.
     # - bpm: float tensor shaped (batch, 2) with [normalized_bpm, bpm_known].
     # - key_feat: float tensor shaped (batch, 4) with [sin, cos, mode, known].
@@ -89,6 +91,7 @@ class SimpleAudioCNN(nn.Module):
         return self.classifier(self.dropout(fused))
 
     # Runs a forward pass for the single-partition predict path.
+    # The std half of the audio feature is zero since there is only one partition.
     # In:
     # - x: tensor shaped (batch, 1, mel_height, mel_width).
     # - artist_idx: tensor shaped (batch,).
@@ -98,7 +101,9 @@ class SimpleAudioCNN(nn.Module):
     # Out:
     # - logits shaped (batch, num_classes).
     def forward(self, x, artist_idx, bpm, key_feat, panns_feat):
-        return self.classify(self.encode_audio(x), artist_idx.unsqueeze(1), bpm, key_feat, panns_feat)
+        mean_feat = self.encode_audio(x)                                    # (batch, 128)
+        audio_feat = torch.cat([mean_feat, torch.zeros_like(mean_feat)], 1) # (batch, 256)
+        return self.classify(audio_feat, artist_idx.unsqueeze(1), bpm, key_feat, panns_feat)
 
 
 # Predicts playlist probabilities for one track.
@@ -192,15 +197,18 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
     train_ds, val_ds, test_ds = random_split(ds, [train_size, val_size, test_size])
 
     collate_fn = vocab.make_collate_fn()
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, collate_fn=collate_fn)
-    test_loader = DataLoader(test_ds, batch_size=batch_size, collate_fn=collate_fn)
+    loader_kwargs = dict(num_workers=NUM_WORKERS, persistent_workers=NUM_WORKERS > 0)
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn, **loader_kwargs)
+    val_loader = DataLoader(val_ds, batch_size=batch_size, collate_fn=collate_fn, **loader_kwargs)
+    test_loader = DataLoader(test_ds, batch_size=batch_size, collate_fn=collate_fn, **loader_kwargs)
 
     # prep model
     device = torch.device("cpu")
     labels = ds.playlists()
     model = SimpleAudioCNN(len(labels), vocab.size()).to(device)
-    criterion = nn.BCEWithLogitsLoss()
+    pos_weight = compute_pos_weight(ds.labels_tensor(train_ds.indices)).to(device)
+    train_criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+    eval_criterion = nn.BCEWithLogitsLoss()  # unweighted for reported val/test loss comparability
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     # training
@@ -213,11 +221,11 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
 
     for epoch in range(epochs):
         with monitor.epoch(epoch + 1, len(train_loader)) as advance:
-            train_loss = train_epoch(model, train_loader, optimizer, criterion, device=device, on_batch=advance)
+            train_loss = train_epoch(model, train_loader, optimizer, train_criterion, device=device, on_batch=advance)
         val_details = evaluate(
             model,
             val_loader,
-            criterion,
+            eval_criterion,
             labels=labels,
             thresholds=0.5,
             return_details=True,
@@ -237,7 +245,7 @@ def train_eval_test_save_model(ds:PlaylistDataset, vocab, epochs:int=20, batch_s
     test_details = evaluate(
         model,
         test_loader,
-        criterion,
+        eval_criterion,
         labels=labels,
         thresholds=0.5,
         return_details=True,
